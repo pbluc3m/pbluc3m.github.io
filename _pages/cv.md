@@ -9,32 +9,14 @@ redirect_from:
 
 {% include base_path %}
 
-Education
-======
-* B.S. in GitHub, GitHub University, 2012
-* M.S. in Jekyll, GitHub University, 2014
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
+# Short bio
 
-Work experience
-======
-* Summer 2015: Research Assistant
-  * Github University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
+Pablo Serrano got his Telecommunication Engineering degree and his PhD from UC3M in 2002 and 2006, respectively. He has been with the Telematics Department of UC3M since 2002, where he currently holds the position of Associate Professor. He has over [100 peer-reviewed papers]() in international journal and top conferences, including IEEE/ACM Transasctions on Networking, IEEE INFOCOM, ACM CoNEXT, IEEE Transactions on Mobile Computing. He has served on the TPC of many of many conferences (IEEE INFOCOM, IEEE Globecom) and performed editorial activities for IEEE Comm. Letters and Elsevier Computer Networks. He is currently an Associate Editor of the [IEEE Open Journal of the Communications Society](https://www.comsoc.org/publications/journals/ieee-ojcoms). 
 
-* Fall 2015: Research Assistant
-  * Github University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
-  
-Skills
-======
-* Skill 1
-* Skill 2
-  * Sub-skill 2.1
-  * Sub-skill 2.2
-  * Sub-skill 2.3
-* Skill 3
+His work and that from his students has been awarded several times (best paper awards, best Ph.D. Theses), and has been [cited more than 3 000 times, having an H-index of 28](http://scholar.google.com/citations?user=5exVXrIAAAAJ). He has held visiting positions at Univ. Massachusetts Amherst, Univ. of Edinburgh, Trinity College Dublin, Univ. of Rome Tor Vergata, and Telefónica R+D Barcelona, all of them partly funded or completely supported through competitive calls (e.g., José Castillejo, Salvador de Madariaga). He has participated in various research projects (national and European), acting as Principal Investigator (PI) of the current flagship Hexa-X project, and the PI of the past H2020 5G EVE project, the H2020 Flex5Gware project, and the regional Tigre5-CM project.
+
+His research interests lie in the analysis of wireless networks and the design of network protocols and systems. He also enjoys carrying out experimental performance evaluation of protocols and communication systems. He is a Senior Member of the IEEE.
+
 
 Publications
 ======
@@ -54,6 +36,4 @@ Teaching
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
   
-Service and leadership
-======
-* Currently signed in to 43 different slack teams
+
