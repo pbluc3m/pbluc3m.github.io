@@ -1,0 +1,39 @@
+---
+title: "Service"
+---
+
+## University Leadership & Administration
+I currently hold and have held several leadership positions at **Universidad Carlos III de Madrid**:
+
+* **Deputy Director (Subdirector)** of Infrastructure, Sustainability, and Digitization at the School of Engineering (EPS).
+* **Director of the Department** of Telematic Engineering (Past).
+* **Deputy Director for Academic Affairs** (Past).
+* **Director of the Master's Program** in Connected Industry 4.0.
+
+## Editorial Activities
+I serve or have served as an Editor for the following international journals:
+
+* **Editor:** *IEEE Open Journal of the Communications Society*
+* **Editor:** *Elsevier Computer Communications*
+* **Editor:** *The Computer Journal* (Oxford Academic)
+* **Past Editor:** *IEEE Communications Letters*
+* **Guest/Feature Editor:** *Elsevier Computer Networks* and *IEEE Communications Magazine*
+
+## Conference Organization
+I am actively involved in the organization of major networking conferences:
+
+### Organizing Committee (Recent & Selected)
+* **Co-Chair:** 1st Winter School on AI for 6G Communications (2025).
+* **Member of the Organizing Committee** for 14 conferences to date.
+
+### Technical Program Committee (TPC)
+I have served as a TPC member for over 24 different conferences (spanning 70+ editions), including:
+* **IEEE INFOCOM**
+* **IEEE PERCOM**
+* **IEEE GLOBECOM**
+* **ACM CoNEXT**
+
+## Professional Memberships & External Service
+* **Senior Member**, IEEE.
+* **PhD Thesis Committees:** Served on committees at various institutions including University of Palermo, University of Cantabria, and UPC.
+* **Expert Reviewer:** Evaluator for dozens of research projects for national and international funding agencies.

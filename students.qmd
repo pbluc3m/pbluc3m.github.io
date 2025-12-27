@@ -1,0 +1,39 @@
+---
+title: "Students"
+listing:
+  - id: current-phd
+    contents: data/current_phd.yml
+    type: default # Simple vertical list
+    field-links: [title] # This ensures the link is attached to the name
+  - id: current-ug
+    contents: data/current_ug.yml
+    type: default
+    field-links: [title] # This ensures the link is attached to the name
+  - id: past-phd
+    contents: data/past_phd.yml
+    type: default
+    field-links: [title] # This ensures the link is attached to the name
+  - id: past-msc
+    contents: data/past_msc.yml
+    type: default
+    field-links: [title] # This ensures the link is attached to the name
+---
+
+I have the privilege of working with a talented group of researchers and students at UC3M.
+
+## Current PhD Students
+::: {#current-phd}
+:::
+
+## Current Undergrad Students
+::: {#current-ug}
+:::
+
+## Past PhD Students
+::: {#past-phd}
+:::
+
+## Past MsC Students
+::: {#past-msc}
+:::
+

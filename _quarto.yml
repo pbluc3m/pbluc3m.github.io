@@ -1,12 +1,17 @@
 project:
   type: website
+  output-dir: docs
 
 website:
   title: "Pablo Serrano - Universidad Carlos III de Madrid"
   navbar:
+    background: "#002b54" # UC3M Navy
+    type: dark           # Makes text white
     left:
       - href: index.qmd
         text: Home
+      - href: bio.qmd
+        text: Bio
       - href: publications.qmd
         text: Publications
       - href: teaching.qmd
@@ -17,6 +22,8 @@ website:
         text: Students
       - href: service.qmd
         text: Service
+      - href: talks/index.qmd
+        text: Talks
 
 right:
       - icon: google-scholar
@@ -26,11 +33,8 @@ right:
         
 format:
   html:
-    theme:
-      light: cosmo
-      dark: darkly
+    css: styles.css
     toc: true
-
 
 
 

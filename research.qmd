@@ -1,0 +1,37 @@
+---
+title: "Research"
+---
+
+My research focuses on the design, analysis, and performance evaluation of wireless communication systems and networking protocols. I am particularly interested in the intersection of **Machine Learning** and **Network Softwarization** to enable the next generation of mobile networks (6G).
+
+## Key Research Areas
+
+### 1. 6G and Open RAN (O-RAN)
+We are investigating the "cloudification" of the Radio Access Network. Our work focuses on:
+* **Resource Allocation:** Using Deep Reinforcement Learning (DRL) for real-time radio resource management.
+* **Serverless Networking:** Exploring how FaaS (Function-as-a-Service) can be applied to mobile core functions to improve resiliency.
+
+### 2. Applied Machine Learning in Networking
+Bridging the gap between theoretical ML and practical networking constraints:
+* **Digital Twins:** Developing high-fidelity network replicas for testing security and performance without disrupting live traffic.
+* **Data Privacy:** Analyzing MAC address de-anonymization and developing privacy-preserving mobility data models.
+
+### 3. Performance Evaluation of WLAN/5G
+Long-standing expertise in the mathematical modeling and experimental validation of:
+* **IEEE 802.11 (Wi-Fi) Evolution:** Performance limits of high-density WLANs.
+* **Network Slicing:** Efficiently partitioning 5G resources to meet diverse Service Level Agreements (SLAs).
+
+---
+
+## Research Projects
+I lead and participate in several high-impact projects funded by the European Commission and the Spanish National Research Agency.
+
+| Project | Role | Focus |
+| :--- | :--- | :--- |
+| **6G-DATADRIVEN** | PI | AI-native architectures for 6G |
+| **DAEMON** | Investigator | Network Intelligence for 6G |
+| **SEARCHLIGHT** | Investigator | High-visibility networking |
+
+---
+
+> **Join the Lab:** I am always looking for motivated PhD students and Postdocs interested in Wireless Networking and AI. If you are interested in my research, please send me your CV and a brief statement of interest.

@@ -1,7 +1,7 @@
 ---
 title: "Publications"
 listing:
-  contents: "list/*.qmd"
+  contents: "papers/*.qmd"
   type: default
   sort: "date desc"
 ---

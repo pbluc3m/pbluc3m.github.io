@@ -1,0 +1,33 @@
+---
+title: "Talks & Tutorials"
+listing:
+  id: talks-listing
+  contents: talks_list.yml
+  type: default
+  sort: "date desc"
+  categories: true
+  field-display-names:
+    venue: "Venue"
+---
+
+I regularly give talks and tutorials at international conferences and universities. Below is a selection of recent materials.
+
+::: {#talks-listing}
+:::
+
+<style>
+/* Style the PDF link to look like a small UC3M button */
+.listing-description a {
+  display: inline-block;
+  background-color: #004884;
+  color: white !important;
+  padding: 2px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  text-decoration: none;
+  margin-top: 10px;
+}
+.listing-description a:hover {
+  background-color: #002b54;
+}
+</style>
