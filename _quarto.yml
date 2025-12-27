@@ -25,11 +25,14 @@ website:
       - href: talks/index.qmd
         text: Talks
 
-right:
+    right:
       - icon: google-scholar
         href: https://scholar.google.com/citations?user=YOUR_ID
       - icon: github
         href: https://github.com/pbluc3m
+
+  page-footer:
+    center: "Pablo Serrano | Universidad Carlos III de Madrid | Department of Telematic Engineering"
         
 format:
   html:

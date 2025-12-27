@@ -79,3 +79,18 @@ a:hover {
 .about-entity img {
   width: 150px !important;
 }
+
+/* Make the about sidebar a floating card instead of a full-height column */
+.quarto-about-trestles .about-entity {
+    border-right: none !important; /* Remove the vertical line */
+    height: fit-content;           /* Shrink height to fit content */
+    padding: 20px;
+    background: #f8f9fa;           /* Light grey background to make it pop */
+    border-radius: 10px;           /* Rounded corners */
+    margin-bottom: 20px;
+}
+
+/* Optional: Add a subtle shadow to give it depth */
+.quarto-about-trestles .about-entity {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
