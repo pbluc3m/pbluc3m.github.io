@@ -17,7 +17,7 @@ Este sitio contiene el material actualizado del texto *"Una introducción amable
 :::
 
 ::: {#second-column}
-![Portada del libro](images/ejemplo-colas.png){width=80%}
+![Página de ejemplo](images/ejemplo-colas.png){width=80%}
 :::
 :::
 

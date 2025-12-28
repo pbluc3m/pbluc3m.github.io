@@ -39,7 +39,7 @@
     "href": "index.html#awards",
     "title": "Pablo Serrano",
     "section": "Awards",
-    "text": "Awards\n\nDistinguished Member of the 2022 INFOCOM Technical Program Commitee (2022-02-17)\nOne Outstanding Thesis Award in Telematic Engineering (2015/16) goes to Ginés García Avilés (2021-12-02)\nUC3M Excellence Award 2021 in the cathegory of Young Research Excellence Awards 2021 (2021-05-04)\nLanguageCert Level 2 Certificate in ESOL International (Listening, Reading, Writing) (Expert C1): high pass (2021-02-17)\nEvaluación “Excelente+” en el programa DOCENTIA-UC3M en la convocatoria 2019-2020 (2020-06-10)\nDistinguished Member of the 2020 INFOCOM Technical Program Commitee (2020-01-30)\nUC3M Excellence Award 2019 in the cathegory of Young Research Excellence Awards 2019 (2020-05-11)\nThe paper Fair Coexistence of Scheduled and Random Access Wireless Networks: Unlicensed LTE/WiFi among the 50 most popular in IEEE/ACM Transactions on Networking for the 5th month in a row! (2018-07-06)\nOne Outstanding Thesis Award in Telematic Engineering (2015/16) goes to Pablo Salvador (2016-12-13)\nACM WiNTECH 2016 Best Paper Award (2016-10-03)\nElevated to IEEE Senior Member (2015-09-29)\nOne Outstanding Thesis Award in Telematic Engineering (2013/14) goes to Andrés García-Saavedra (2014-11-28)\nOutstanding Thesis Award in Telematic Engineering (2007/08) (2009-01-20)\nJitel 2007 AT4 Wireless Best Paper Award (2007-09-17)"
+    "text": "Awards\n\nOne Outstanding Thesis Award in Telematic Engineering (2023/24) goes to Jesús Pérez Valero (2025-12-15)\nDistinguished Member of the 2022 INFOCOM Technical Program Commitee (2022-02-17)\nOne Outstanding Thesis Award in Telematic Engineering (2015/16) goes to Ginés García Avilés (2021-12-02)\nUC3M Excellence Award 2021 in the cathegory of Young Research Excellence Awards 2021 (2021-05-04)\nLanguageCert Level 2 Certificate in ESOL International (Listening, Reading, Writing) (Expert C1): high pass (2021-02-17)\nEvaluación “Excelente+” en el programa DOCENTIA-UC3M en la convocatoria 2019-2020 (2020-06-10)\nDistinguished Member of the 2020 INFOCOM Technical Program Commitee (2020-01-30)\nUC3M Excellence Award 2019 in the cathegory of Young Research Excellence Awards 2019 (2020-05-11)\nThe paper Fair Coexistence of Scheduled and Random Access Wireless Networks: Unlicensed LTE/WiFi among the 50 most popular in IEEE/ACM Transactions on Networking for the 5th month in a row! (2018-07-06)\nOne Outstanding Thesis Award in Telematic Engineering (2015/16) goes to Pablo Salvador (2016-12-13)\nACM WiNTECH 2016 Best Paper Award (2016-10-03)\nElevated to IEEE Senior Member (2015-09-29)\nOne Outstanding Thesis Award in Telematic Engineering (2013/14) goes to Andrés García-Saavedra (2014-11-28)\nOutstanding Thesis Award in Telematic Engineering (2007/08) (2009-01-20)\nJitel 2007 AT4 Wireless Best Paper Award (2007-09-17)"
   },
   {
     "objectID": "publications/index.html",
@@ -123,7 +123,7 @@
     "href": "contact.html",
     "title": "Contact Information",
     "section": "",
-    "text": "Office Location\nBuilding: Torres Quevedo (Building 4)\nOffice: 4.3.A07\nCampus: Leganés, Madrid\n\n\nMap\n\n\n\n\n\n\nPostal Address\nUniversidad Carlos III de Madrid\nAvenida de la Universidad, 30\n28911 Leganés, Madrid (Spain)\nEmail: pablo [arroba] it.uc3m.es\n(Please replace [arroba] with @)\n\nJoin the Lab: I am always looking for motivated PhD students and Postdocs interested in Wireless Networking and AI. If you are interested in my research, please send me your CV and a brief statement of interest."
+    "text": "Phone\nExtension: 8347\n\n\nLocation\nOffice: 4.1.C08\nBuilding: Torres Quevedo (Building 4)\nCampus: Leganés, Madrid\n\n\nMap\n\n\n\n\n\n\nPostal Address\nUniversidad Carlos III de Madrid\nAvenida de la Universidad, 30\n28911 Leganés, Madrid (Spain)\nEmail: pablo [arroba] it.uc3m.es\n(Please replace [arroba] with @)"
   },
   {
     "objectID": "talks/index.html",
@@ -137,7 +137,7 @@
     "href": "students.html",
     "title": "Students",
     "section": "",
-    "text": "I have the privilege of working with a talented group of researchers and students at UC3M."
+    "text": "Join the Lab: I am always looking for motivated PhD students and Postdocs interested in Wireless Networking and AI. If you are interested in my research, please send me your CV and a brief statement of interest. Do not forget to include my office number in the subject of your email.\nI have the privilege of working with a talented group of researchers and students at UC3M."
   },
   {
     "objectID": "students.html#current-phd-students",
@@ -172,7 +172,7 @@
     "href": "teoria-colas.html",
     "title": "Teoría de Colas",
     "section": "",
-    "text": "Autores: Pablo Serrano y José Alberto Hernández\nEste sitio contiene el material actualizado del texto “Una introducción amable a la teoría de colas”. El objetivo de este trabajo es proporcionar un recurso accesible para estudiantes y profesionales interesados en los fundamentos de los sistemas de espera.\nDescargar Apuntes (PDF)\n(Actualizado: Oct 2024)\nBoletín de problemas (PDF)\n(Versión: Jun 2025)\n\n\n\n\n\nPortada del libro"
+    "text": "Autores: Pablo Serrano y José Alberto Hernández\nEste sitio contiene el material actualizado del texto “Una introducción amable a la teoría de colas”. El objetivo de este trabajo es proporcionar un recurso accesible para estudiantes y profesionales interesados en los fundamentos de los sistemas de espera.\nDescargar Apuntes (PDF)\n(Actualizado: Oct 2024)\nBoletín de problemas (PDF)\n(Versión: Jun 2025)\n\n\n\n\n\nPágina de ejemplo"
   },
   {
     "objectID": "teoria-colas.html#para-docentes",
@@ -187,5 +187,40 @@
     "title": "Teoría de Colas",
     "section": "Licencia",
     "text": "Licencia\n\nEste obra está bajo una licencia de CC Reconocimiento-NoComercial-CompartirIgual 4.0."
+  },
+  {
+    "objectID": "students/index.html",
+    "href": "students/index.html",
+    "title": "Students",
+    "section": "",
+    "text": "Join the Lab: I am always looking for motivated PhD students and Postdocs interested in Wireless Networking and AI. If you are interested in my research, please send me your CV and a brief statement of interest. Do not forget to include my office number in the subject of your email.\nI have the privilege of working with a talented group of researchers and students at UC3M."
+  },
+  {
+    "objectID": "students/index.html#current-phd-students",
+    "href": "students/index.html#current-phd-students",
+    "title": "Students",
+    "section": "Current PhD Students",
+    "text": "Current PhD Students\n\n\n\n\n\nRomina De Lourdes Rodríguez\n\n\nPhD in Telematics Engineering. Research: Machine Learning for Wireless Resource Allocation.\n\n\n\n\n\n\n\n\n\n\nLucía Cabanillas Rodríguez\n\n\nPhD in Telematics Engineering. Research: 6G and Network Virtualization.\n\n\n\n\n\n\n\n\n\n\nJuan Manuel Montes López\n\n\nPhD in Telematics Engineering. Research: Performance Evaluation of 5G/6G Systems.\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "students/index.html#current-undergrad-students",
+    "href": "students/index.html#current-undergrad-students",
+    "title": "Students",
+    "section": "Current Undergrad Students",
+    "text": "Current Undergrad Students\n\n\n\n\n\nRomina De Lourdes Rodríguez\n\n\nPhD in Telematics Engineering. Research: Machine Learning for Wireless Resource Allocation.\n\n\n\n\n\n\n\n\n\n\nLucía Cabanillas Rodríguez\n\n\nPhD in Telematics Engineering. Research: 6G and Network Virtualization.\n\n\n\n\n\n\n\n\n\n\nJuan Manuel Montes López\n\n\nPhD in Telematics Engineering. Research: Performance Evaluation of 5G/6G Systems.\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "students/index.html#past-phd-students",
+    "href": "students/index.html#past-phd-students",
+    "title": "Students",
+    "section": "Past PhD Students",
+    "text": "Past PhD Students\n\n\n\n\n\nJesús Pérez Valero\n\n\nPhD Telematics Engineering. Premio Extraordinario de Doctorado.\n\n\n\n\n\nSep 25, 2024\n\n\nhttps://www.educacion.gob.es/teseo/mostrarRef.do?ref=2255776\n\n\n\n\n\n\n\nGinés García Avilés\n\n\nPhD Telematics Engineering. (co-supervised with M. Gramaglia). Premio Extraordinario de Doctorado.\n\n\n\n\n\nJun 11, 2021\n\n\nhttps://www.educacion.gob.es/teseo/mostrarRef.do?ref=1956426\n\n\n\n\n\n\n\nCarlos Donato Morales\n\n\nPhD Telematics Engineering.\n\n\n\n\n\nNov 7, 2019\n\n\nhttps://www.educacion.gob.es/teseo/mostrarRef.do?ref=1821876\n\n\n\n\n\n\n\nPablo Salvador\n\n\nPhD Telematics Engineering. Premio Extraordinario de Doctorado.\n\n\n\n\n\nApr 8, 2016\n\n\nhttps://www.educacion.gob.es/teseo/mostrarRef.do?ref=1227000\n\n\n\n\n\n\n\nAndrés García Saavedra\n\n\nPhD Telematics Engineering. (co-supervised with A. Banchs). Premio Extraordinario de Doctorado.\n\n\n\n\n\nNov 13, 2013\n\n\nhttps://www.educacion.gob.es/teseo/mostrarRef.do?ref=1045236\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "students/index.html#past-msc-students",
+    "href": "students/index.html#past-msc-students",
+    "title": "Students",
+    "section": "Past MsC Students",
+    "text": "Past MsC Students\n\n\n\n\n\nRomina De Lourdes Rodríguez\n\n\nPhD in Telematics Engineering. Research: Machine Learning for Wireless Resource Allocation.\n\n\n\n\n\n\n\n\n\n\nLucía Cabanillas Rodríguez\n\n\nPhD in Telematics Engineering. Research: 6G and Network Virtualization.\n\n\n\n\n\n\n\n\n\n\nJuan Manuel Montes López\n\n\nPhD in Telematics Engineering. Research: Performance Evaluation of 5G/6G Systems.\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]

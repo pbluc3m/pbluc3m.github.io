@@ -5,9 +5,18 @@ about:
   template: trestles # Options: jolla, trestles, solana, marquee
   image-shape: rounded
   links:
+    - icon: bank
+      text: UC3M Profile
+      href: https://researchportal.uc3m.es/display/inv22404
     - icon: google-scholar
       text: Google Scholar
       href: https://scholar.google.com/citations?user=5exVXrIAAAAJ
+    - icon: orcid
+      text: ORCID
+      href: https://orcid.org/0000-0002-5176-0013
+    - icon: dblp
+      text: DBLP
+      href: https://dblp.uni-trier.de/pid/86/1897-1.html
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/pabloserrano/
@@ -35,6 +44,7 @@ I am a **Full Professor** at the Department of Telematic Engineering of **Univer
 
 ## Awards
 
+* One Outstanding Thesis Award in Telematic Engineering (2023/24) goes to Jesús Pérez Valero (2025-12-15)
 * Distinguished Member of the 2022 INFOCOM Technical Program Commitee (2022-02-17)
 * One Outstanding Thesis Award in Telematic Engineering (2015/16) goes to Ginés García Avilés (2021-12-02)
 * UC3M Excellence Award 2021 in the cathegory of Young Research Excellence Awards 2021 (2021-05-04)

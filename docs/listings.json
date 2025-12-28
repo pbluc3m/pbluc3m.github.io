@@ -12,5 +12,9 @@
   {
     "listing": "/students.html",
     "items": []
+  },
+  {
+    "listing": "/students/index.html",
+    "items": []
   }
 ]

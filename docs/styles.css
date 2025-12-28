@@ -94,3 +94,9 @@ a:hover {
 .quarto-about-trestles .about-entity {
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
+
+
+/* Centra el texto de los pies de foto */
+figcaption, .figure-caption {
+  text-align: center !important;
+}

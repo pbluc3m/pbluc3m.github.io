@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "Pablo Serrano - Universidad Carlos III de Madrid"
+  title: "Pablo Serrano"
   navbar:
     background: "#002b54" # UC3M Navy
     type: dark           # Makes text white
@@ -20,7 +20,7 @@ website:
         text: Teaching
       - href: research.qmd
         text: Research
-      - href: students.qmd
+      - href: students/index.qmd
         text: Students
       - href: service.qmd
         text: Service
@@ -42,3 +42,4 @@ format:
   html:
     css: styles.css
     toc: true
+    include-in-header: header.html

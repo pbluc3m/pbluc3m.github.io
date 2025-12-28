@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Talks &amp; Tutorials – Pablo Serrano</title>
+<title>Students – Pablo Serrano</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -73,20 +73,104 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-talks-listing .list');
+    const listingTargetEl = window.document.querySelector('#listing-current-phd .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-title','listing-venue','listing-date','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-title-sort'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-venue","listing-date","listing-categories"],
+      searchColumns: ["listing-title","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-talks-listing'] = new List('listing-talks-listing', options);
+    window['quarto-listings']['listing-current-phd'] = new List('listing-current-phd', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-current-ug .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-title-sort'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-title","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-current-ug'] = new List('listing-current-ug', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-past-phd .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-description','listing-date','listing-path',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-title","listing-description","listing-date"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-past-phd'] = new List('listing-past-phd', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-past-msc .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-title-sort'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-title","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-past-msc'] = new List('listing-past-msc', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -176,7 +260,7 @@ window.Quarto = {
 <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../students/index.html"> 
+    <a class="nav-link active" href="../students/index.html" aria-current="page"> 
 <span class="menu-text">Students</span></a>
   </li>  
   <li class="nav-item">
@@ -184,7 +268,7 @@ window.Quarto = {
 <span class="menu-text">Service</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../talks/index.html" aria-current="page"> 
+    <a class="nav-link" href="../talks/index.html"> 
 <span class="menu-text">Talks</span></a>
   </li>  
   <li class="nav-item">
@@ -215,14 +299,23 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="NUc=">5G <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QUk=">AI <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q2xvdWQ=">Cloud <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SW52aXRlZCUyMFRhbGs=">Invited Talk <span class="quarto-category-count">(1)</span></div><div class="category" data-category="S2V5bm90ZQ==">Keynote <span class="quarto-category-count">(2)</span></div><div class="category" data-category="TkZW">NFV <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UkFO">RAN <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U2VjdXJpdHk=">Security <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U2VtaW5hcg==">Seminar <span class="quarto-category-count">(2)</span></div><div class="category" data-category="U2VydmVybGVzcw==">Serverless <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U2xpY2luZw==">Slicing <span class="quarto-category-count">(2)</span></div><div class="category" data-category="VHV0b3JpYWw=">Tutorial <span class="quarto-category-count">(1)</span></div><div class="category" data-category="V0xBTg==">WLAN <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#current-phd-students" id="toc-current-phd-students" class="nav-link active" data-scroll-target="#current-phd-students">Current PhD Students</a></li>
+  <li><a href="#current-undergrad-students" id="toc-current-undergrad-students" class="nav-link" data-scroll-target="#current-undergrad-students">Current Undergrad Students</a></li>
+  <li><a href="#past-phd-students" id="toc-past-phd-students" class="nav-link" data-scroll-target="#past-phd-students">Past PhD Students</a></li>
+  <li><a href="#past-msc-students" id="toc-past-msc-students" class="nav-link" data-scroll-target="#past-msc-students">Past MsC Students</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Talks &amp; Tutorials</h1>
+<h1 class="title">Students</h1>
 </div>
 
 
@@ -239,157 +332,210 @@ window.Quarto = {
 </header>
 
 
-<p>I regularly give talks and tutorials at international conferences and universities. Below is a selection of recent materials.</p>
-<div id="listing-talks-listing" class="quarto-listing quarto-listing-container-default">
+<blockquote class="blockquote">
+<p><strong>Join the Lab:</strong> I am always looking for motivated PhD students and Postdocs interested in Wireless Networking and AI. If you are interested in my research, please send me your CV and a brief statement of interest. Do not forget to include my office number in the subject of your email.</p>
+</blockquote>
+<p>I have the privilege of working with a talented group of researchers and students at UC3M.</p>
+<section id="current-phd-students" class="level2">
+<h2 class="anchored" data-anchor-id="current-phd-students">Current PhD Students</h2>
+<div id="listing-current-phd" class="quarto-listing quarto-listing-container-default">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="U2VtaW5hciUyQ1dMQU4=" data-listing-date-sort="1765321200000">
+<div class="quarto-post image-right" data-index="0" data-listing-title-sort="Romina De Lourdes Rodríguez">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="slides/2025_WBA_WLAN.pdf" class="no-external">Optimizing 802.11 WLANs: Key Insights for High-Performance MAC Configurations</a>
+<a href="https://www.linkedin.com/in/romina-rodriguez/" class="no-external">Romina De Lourdes Rodríguez</a>
 </h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('U2VtaW5hcg=='); return false;">Seminar</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('V0xBTg=='); return false;">WLAN</div>
-
-</div>
+<div class="delink listing-description"><a href="https://www.linkedin.com/in/romina-rodriguez/" class="no-external">
+<p>PhD in Telematics Engineering. Research: Machine Learning for Wireless Resource Allocation.</p>
+</a></div>
 </div>
 <div class="metadata">
-<a href="slides/2025_WBA_WLAN.pdf" class="no-external">
-<div class="listing-date">
-Dec 10, 2025
-</div>
-<div class="metadata-value listing-venue">
-Wireless Broadband Alliance (online)
-</div>
+<a href="https://www.linkedin.com/in/romina-rodriguez/" class="no-external">
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="U2VtaW5hciUyQ0FJJTJDU2VjdXJpdHk=" data-listing-date-sort="1760479200000">
+<div class="quarto-post image-right" data-index="1" data-listing-title-sort="Lucía Cabanillas Rodríguez">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="slides/2025_Brescia_Security.pdf" class="no-external">From MAC De-anonymization to Digital Twins: Securing Wireless Mobility Data</a>
+<a href="" class="no-external">Lucía Cabanillas Rodríguez</a>
 </h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('U2VtaW5hcg=='); return false;">Seminar</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('QUk='); return false;">AI</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('U2VjdXJpdHk='); return false;">Security</div>
-
-</div>
-</div>
-<div class="metadata">
-<a href="slides/2025_Brescia_Security.pdf" class="no-external">
-<div class="listing-date">
-Oct 15, 2025
-</div>
-<div class="metadata-value listing-venue">
-Università degli Studi di Brescia
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="S2V5bm90ZSUyQ1JBTiUyQ0Nsb3Vk" data-listing-date-sort="1687471200000">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="slides/2023_ENS_Keynote.pdf" class="no-external">Towards the Efficient and Resilient Cloudification of the Radio Access Network</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('S2V5bm90ZQ=='); return false;">Keynote</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UkFO'); return false;">RAN</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Q2xvdWQ='); return false;">Cloud</div>
-
-</div>
-</div>
-<div class="metadata">
-<a href="slides/2023_ENS_Keynote.pdf" class="no-external">
-<div class="listing-date">
-Jun 23, 2023
-</div>
-<div class="metadata-value listing-venue">
-Keynote Talk, 2nd International Workshop on Edge Network Softwarization (ENS)
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="SW52aXRlZCUyMFRhbGslMkNORlYlMkNTZXJ2ZXJsZXNz" data-listing-date-sort="1678143600000">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="" class="no-external">Is Mobile Networking Ready for the Serverless Revolution?</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('SW52aXRlZCUyMFRhbGs='); return false;">Invited Talk</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TkZW'); return false;">NFV</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('U2VydmVybGVzcw=='); return false;">Serverless</div>
-
-</div>
+<div class="delink listing-description"><a href="" class="no-external">
+<p>PhD in Telematics Engineering. Research: 6G and Network Virtualization.</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="" class="no-external">
-<div class="listing-date">
-Mar 7, 2023
+</a>
 </div>
-<div class="metadata-value listing-venue">
-ETSI NFV Conference, Sophia Antipolis, France
+</div>
+<div class="quarto-post image-right" data-index="2" data-listing-title-sort="Juan Manuel Montes López">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="" class="no-external">Juan Manuel Montes López</a>
+</h3>
+<div class="delink listing-description"><a href="" class="no-external">
+<p>PhD in Telematics Engineering. Research: Performance Evaluation of 5G/6G Systems.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="" class="no-external">
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
+</section>
+<section id="current-undergrad-students" class="level2">
+<h2 class="anchored" data-anchor-id="current-undergrad-students">Current Undergrad Students</h2>
+<div id="listing-current-ug" class="quarto-listing quarto-listing-container-default">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-title-sort="Romina De Lourdes Rodríguez">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="" class="no-external">Romina De Lourdes Rodríguez</a>
+</h3>
+<div class="delink listing-description"><a href="" class="no-external">
+<p>PhD in Telematics Engineering. Research: Machine Learning for Wireless Resource Allocation.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="" class="no-external">
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-title-sort="Lucía Cabanillas Rodríguez">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="" class="no-external">Lucía Cabanillas Rodríguez</a>
+</h3>
+<div class="delink listing-description"><a href="" class="no-external">
+<p>PhD in Telematics Engineering. Research: 6G and Network Virtualization.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="" class="no-external">
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-listing-title-sort="Juan Manuel Montes López">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="" class="no-external">Juan Manuel Montes López</a>
+</h3>
+<div class="delink listing-description"><a href="" class="no-external">
+<p>PhD in Telematics Engineering. Research: Performance Evaluation of 5G/6G Systems.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="" class="no-external">
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
+</section>
+<section id="past-phd-students" class="level2">
+<h2 class="anchored" data-anchor-id="past-phd-students">Past PhD Students</h2>
+<div id="listing-past-phd" class="quarto-listing quarto-listing-container-default">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1727215200000">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=2255776" class="no-external">Jesús Pérez Valero</a>
+</h3>
+<div class="delink listing-description"><a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=2255776" class="no-external">
+<p>PhD Telematics Engineering. Premio Extraordinario de Doctorado.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=2255776" class="no-external">
+<div class="listing-date">
+Sep 25, 2024
+</div>
+<div class="metadata-value listing-path">
+https://www.educacion.gob.es/teseo/mostrarRef.do?ref=2255776
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="S2V5bm90ZSUyQ1NsaWNpbmc=" data-listing-date-sort="1573599600000">
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1623362400000">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="" class="no-external">Realizing network challenges for Network Slicing</a>
+<a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1956426" class="no-external">Ginés García Avilés</a>
 </h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('S2V5bm90ZQ=='); return false;">Keynote</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('U2xpY2luZw=='); return false;">Slicing</div>
-
-</div>
+<div class="delink listing-description"><a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1956426" class="no-external">
+<p>PhD Telematics Engineering. (co-supervised with M. Gramaglia). Premio Extraordinario de Doctorado.</p>
+</a></div>
 </div>
 <div class="metadata">
-<a href="" class="no-external">
+<a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1956426" class="no-external">
 <div class="listing-date">
-Nov 13, 2019
+Jun 11, 2021
 </div>
-<div class="metadata-value listing-venue">
-Keynote Talk, IEEE Latincom, Salvador, Brazil
+<div class="metadata-value listing-path">
+https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1956426
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="VHV0b3JpYWwlMkM1RyUyQ1NsaWNpbmc=" data-listing-date-sort="1537308000000">
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1573081200000">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="" class="no-external">A Primer on 5G Network Slicing: Concepts, Algorithms, and Practice</a>
+<a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1821876" class="no-external">Carlos Donato Morales</a>
 </h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('VHV0b3JpYWw='); return false;">Tutorial</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('NUc='); return false;">5G</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('U2xpY2luZw=='); return false;">Slicing</div>
-
-</div>
+<div class="delink listing-description"><a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1821876" class="no-external">
+<p>PhD Telematics Engineering.</p>
+</a></div>
 </div>
 <div class="metadata">
-<a href="" class="no-external">
+<a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1821876" class="no-external">
 <div class="listing-date">
-Sep 19, 2018
+Nov 7, 2019
 </div>
-<div class="metadata-value listing-venue">
-Tutorial, IEEE CAMAD, Barcelona
+<div class="metadata-value listing-path">
+https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1821876
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1460066400000">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1227000" class="no-external">Pablo Salvador</a>
+</h3>
+<div class="delink listing-description"><a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1227000" class="no-external">
+<p>PhD Telematics Engineering. Premio Extraordinario de Doctorado.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1227000" class="no-external">
+<div class="listing-date">
+Apr 8, 2016
+</div>
+<div class="metadata-value listing-path">
+https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1227000
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1384297200000">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1045236" class="no-external">Andrés García Saavedra</a>
+</h3>
+<div class="delink listing-description"><a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1045236" class="no-external">
+<p>PhD Telematics Engineering. (co-supervised with A. Banchs). Premio Extraordinario de Doctorado.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1045236" class="no-external">
+<div class="listing-date">
+Nov 13, 2013
+</div>
+<div class="metadata-value listing-path">
+https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1045236
 </div>
 </a>
 </div>
@@ -397,25 +543,60 @@ Tutorial, IEEE CAMAD, Barcelona
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
 </div>
-<style>
-/* Style the PDF link to look like a small UC3M button */
-.listing-description a {
-  display: inline-block;
-  background-color: #004884;
-  color: white !important;
-  padding: 2px 10px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  text-decoration: none;
-  margin-top: 10px;
-}
-.listing-description a:hover {
-  background-color: #002b54;
-}
-</style>
+</section>
+<section id="past-msc-students" class="level2">
+<h2 class="anchored" data-anchor-id="past-msc-students">Past MsC Students</h2>
+<div id="listing-past-msc" class="quarto-listing quarto-listing-container-default">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-title-sort="Romina De Lourdes Rodríguez">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="" class="no-external">Romina De Lourdes Rodríguez</a>
+</h3>
+<div class="delink listing-description"><a href="" class="no-external">
+<p>PhD in Telematics Engineering. Research: Machine Learning for Wireless Resource Allocation.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="" class="no-external">
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-title-sort="Lucía Cabanillas Rodríguez">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="" class="no-external">Lucía Cabanillas Rodríguez</a>
+</h3>
+<div class="delink listing-description"><a href="" class="no-external">
+<p>PhD in Telematics Engineering. Research: 6G and Network Virtualization.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="" class="no-external">
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-listing-title-sort="Juan Manuel Montes López">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="" class="no-external">Juan Manuel Montes López</a>
+</h3>
+<div class="delink listing-description"><a href="" class="no-external">
+<p>PhD in Telematics Engineering. Research: Performance Evaluation of 5G/6G Systems.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="" class="no-external">
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
 
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

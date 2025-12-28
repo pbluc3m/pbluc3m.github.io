@@ -1,9 +1,12 @@
 ---
 title: "Contact Information"
 ---
-### Office Location
+### Phone
+**Extension:** 8347
+
+### Location
+**Office:** 4.1.C08  
 **Building:** Torres Quevedo (Building 4)  
-**Office:** 4.3.A07  
 **Campus:** Leganés, Madrid
 
 ### Map
@@ -20,5 +23,3 @@ Avenida de la Universidad, 30
 **Email:** `pablo` [arroba] `it.uc3m.es`  
 *(Please replace [arroba] with @)*
 
-
-> **Join the Lab:** I am always looking for motivated PhD students and Postdocs interested in Wireless Networking and AI. If you are interested in my research, please send me your CV and a brief statement of interest.

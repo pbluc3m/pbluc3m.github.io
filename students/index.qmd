@@ -12,12 +12,15 @@ listing:
   - id: past-phd
     contents: data/past_phd.yml
     type: default
-    field-links: [title] # This ensures the link is attached to the name
+    fields: [title, description, date, path]
   - id: past-msc
     contents: data/past_msc.yml
     type: default
     field-links: [title] # This ensures the link is attached to the name
 ---
+
+> **Join the Lab:** I am always looking for motivated PhD students and Postdocs interested in Wireless Networking and AI. If you are interested in my research, please send me your CV and a brief statement of interest. Do not forget to include my office number in the subject of your email. 
+
 
 I have the privilege of working with a talented group of researchers and students at UC3M.
 
