@@ -1,7 +1,17 @@
 ---
 title: "Publications"
 listing:
-  contents: "papers/*.qmd"
+  contents: papers.yml
   type: default
-  sort: "date desc"
+  sort: "year desc"
+  fields: [title, authors, year, publication, path]
+  categories: true         # Esto es vital: crea una barra lateral con tus temas (5G, 802.11, etc.)
+  page-size: 20            # Muestra 15 por página para no saturar
+  #filter-ui: true          # Añade una barra de búsqueda específica para los papers
+  #sort-ui: [year, title]   # Permite al usuario reordenar por año o título
 ---
+
+Main profiles: [Google Scholar](https://scholar.google.com/citations?user=p2v-k0AAAAAJ) | [ORCID](https://orcid.org/0000-0002-8646-0612) | [DBLP](https://dblp.org/pid/11/3342.html)
+
+---
+

@@ -1,0 +1,60 @@
+# --- Journals 2024-2025 ---
+- title: "Optimal Scaling and Offloading for Sustainable Provision of Reliable V2N Services in Dynamic and Static Scenarios"
+  authors: "L. E. Chatzieleftheriou, J. Pérez-Valero, J. Martín-Pérez, P. Serrano"
+  year: 2025
+  publication: "IEEE Transactions on Network and Service Management"
+  categories: [Journal, V2N, Reliability]
+
+- title: "DiWi: A Transformer-Based Digital Twin for Wireless Mobility"
+  authors: "J. M. Montes-Lopez, P. Serrano, M. Gramaglia, A. Banchs"
+  year: 2025
+  publication: "Elsevier Computer Networks"
+  categories: [Journal, Digital Twin, AI]
+  doi: "10.1016/j.comnet.2025.111571"
+  path: "./pdfs/2025-montes-comnet-diwi.pdf"
+
+- title: "Minimum-Cost Design of Auto-Scaling Server Farms Providing Reliability Guarantees"
+  authors: "J. Pérez-Valero, P. Serrano, J. Garcia-Reinoso, A. Banchs, X. Costa-Perez"
+  year: 2025
+  publication: "IEEE Open Journal of the Communications Society"
+  categories: [Journal, NFV, Reliability]
+
+- title: "Can I Add a VR Flow? On the Maximum Capacity of 5G to Support 360º Video"
+  authors: "P. Serrano, A. Virdis, F. Gringoli, M. Gramaglia"
+  year: 2024
+  publication: "IEEE Communications Magazine"
+  categories: [Journal, 5G, VR]
+  doi: "10.1109/MCOM.005.2300756"
+
+# --- Clásicos y Citados ---
+- title: "Balloons in the Sky: Unveiling the Characteristics and Trade-offs of the Google Loon Service"
+  authors: "P. Serrano, M. Gramaglia, F. Mancini, L. Chiaraviglio, G. Bianchi"
+  year: 2023
+  publication: "IEEE Transactions on Mobile Computing"
+  categories: [Journal, Measurement, Google Loon]
+
+- title: "Experimenting with Open Source Tools to Deploy a Multi-Service and Multi-Slice Mobile Network"
+  authors: "G. García-Avilés, M. Gramaglia, P. Serrano, F. Gringoli, et al."
+  year: 2020
+  publication: "Elsevier Computer Communications"
+  categories: [Journal, Network Slicing, Open Source]
+
+- title: "Per-frame Energy Consumption in 802.11 Devices and its Implication on Modeling and Design"
+  authors: "P. Serrano, A. Garcia-Saavedra, G. Bianchi, A. Banchs, A. Azcorra"
+  year: 2015
+  publication: "IEEE/ACM Transactions on Networking"
+  categories: [Journal, 802.11, Energy Efficiency]
+
+- title: "Device to device communications with WiFi Direct: overview and experimentation"
+  authors: "D. Camps-Mur, A. Garcia-Saavedra, P. Serrano"
+  year: 2013
+  publication: "IEEE Wireless Communications"
+  categories: [Journal, D2D, WiFi Direct]
+
+# --- Libros ---
+- title: "Una introducción amable a la teoría de colas"
+  authors: "P. Serrano, J.A. Hernández"
+  year: 2024
+  publication: "Libro / Open Material"
+  categories: [Book, Teoria de Colas]
+  path: "../teoria-colas.qmd"

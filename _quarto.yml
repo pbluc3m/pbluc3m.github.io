@@ -12,7 +12,9 @@ website:
         text: Home
       - href: bio.qmd
         text: Bio
-      - href: publications.qmd
+      - href: contact.qmd
+        text: Contact
+      - href: publications/index.qmd
         text: Publications
       - href: teaching.qmd
         text: Teaching
@@ -24,10 +26,12 @@ website:
         text: Service
       - href: talks/index.qmd
         text: Talks
+      - href: teoria-colas.qmd
+        text: Teoría de Colas
 
     right:
       - icon: google-scholar
-        href: https://scholar.google.com/citations?user=YOUR_ID
+        href: http://scholar.google.com/citations?user=5exVXrIAAAAJ
       - icon: github
         href: https://github.com/pbluc3m
 
@@ -38,6 +42,3 @@ format:
   html:
     css: styles.css
     toc: true
-
-
-

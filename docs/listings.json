@@ -1,14 +1,8 @@
 [
   {
-    "listing": "/publications.html",
-    "items": [
-      "/publications/papers/loon-2021.html"
-    ]
-  },
-  {
     "listing": "/publications/index.html",
     "items": [
-      "/publications/papers/loon-2021.html"
+      "/teoria-colas.html"
     ]
   },
   {

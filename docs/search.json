@@ -7,11 +7,11 @@
     "text": "Pablo Serrano got his Telecommunication Engineering degree and his PhD from UC3M in 2002 and 2006, respectively. He has been with the Telematics Department of UC3M since 2002, where he currently holds the position of Associate Professor. He has over 100 peer-reviewed papers in international journal and top conferences, including IEEE/ACM Transasctions on Networking, IEEE INFOCOM, ACM CoNEXT, IEEE Transactions on Mobile Computing. He has served on the TPC of many of many conferences (IEEE Percom, IEEE INFOCOM, IEEE Globecom) and performed editorial activities for IEEE Comm. Letters, Elsevier Computer Networks, and IEEE Communications Magazine. He currently serves as Associate Editor of the IEEE Open Journal of the Communications Society.\nHis work and that from his students has been awarded several times (best paper awards, best Ph.D. Theses), and has been cited more than 4 000 times, having an H-index of 30. He has held visiting positions at Univ. Massachusetts Amherst, Univ. of Edinburgh, Trinity College Dublin, Univ. of Rome Tor Vergata, and Telefónica R+D Barcelona, all of them partly funded or completely supported through competitive calls (e.g., José Castillejo, Salvador de Madariaga). He has participated in various research projects (national and European), acting as Principal Investigator of the flagship Hexa-X project, the H2020 Flex5Gware project and the regional Tigre5-CM project.\nHis research interests lie in the analysis of wireless networks and the design of network protocols and systems. He also enjoys carrying out experimental performance evaluation of protocols and communication systems. He is a Senior Member of the IEEE."
   },
   {
-    "objectID": "publications.html",
-    "href": "publications.html",
-    "title": "Publications",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "You can also find my work on Google Scholar or ORCID.\n\n\n\n\n\n\n\n\n\n\nBalloons in the Sky: Unveiling Google Loon\n\n\n\n\n\nJan 1, 2021\n\n\nP. Serrano, M. Gramaglia, et al.\n\n\nIEEE Communications Magazine\n\n\n\n\n\nNo matching items"
+    "text": "About this site"
   },
   {
     "objectID": "index.html",
@@ -46,7 +46,7 @@
     "href": "publications/index.html",
     "title": "Publications",
     "section": "",
-    "text": "Balloons in the Sky: Unveiling Google Loon\n\n\n\n\n\n\n\n\nJan 1, 2021\n\n\nP. Serrano, M. Gramaglia, et al.\n\n\n\n\n\nNo matching items"
+    "text": "Main profiles: Google Scholar | ORCID | DBLP\n\n\n\n\n\n\n\n\n\n\nOptimal Scaling and Offloading for Sustainable Provision of Reliable V2N Services in Dynamic and Static Scenarios\n\n\n\n\n\nL. E. Chatzieleftheriou, J. Pérez-Valero, J. Martín-Pérez, P. Serrano\n\n\n2025\n\n\nIEEE Transactions on Network and Service Management\n\n\n\n\n\n\n\nDiWi: A Transformer-Based Digital Twin for Wireless Mobility\n\n\n\n\n\nJ. M. Montes-Lopez, P. Serrano, M. Gramaglia, A. Banchs\n\n\n2025\n\n\nElsevier Computer Networks\n\n\n./pdfs/2025-montes-comnet-diwi.pdf\n\n\n\n\n\n\n\nMinimum-Cost Design of Auto-Scaling Server Farms Providing Reliability Guarantees\n\n\n\n\n\nJ. Pérez-Valero, P. Serrano, J. Garcia-Reinoso, A. Banchs, X. Costa-Perez\n\n\n2025\n\n\nIEEE Open Journal of the Communications Society\n\n\n\n\n\n\n\nCan I Add a VR Flow? On the Maximum Capacity of 5G to Support 360º Video\n\n\n\n\n\nP. Serrano, A. Virdis, F. Gringoli, M. Gramaglia\n\n\n2024\n\n\nIEEE Communications Magazine\n\n\n\n\n\n\n\nUna introducción amable a la teoría de colas\n\n\n\n\n\nP. Serrano, J.A. Hernández\n\n\n2024\n\n\nLibro / Open Material\n\n\n/teoria-colas.qmd\n\n\n\n\n\n\n\nBalloons in the Sky: Unveiling the Characteristics and Trade-offs of the Google Loon Service\n\n\n\n\n\nP. Serrano, M. Gramaglia, F. Mancini, L. Chiaraviglio, G. Bianchi\n\n\n2023\n\n\nIEEE Transactions on Mobile Computing\n\n\n\n\n\n\n\nExperimenting with Open Source Tools to Deploy a Multi-Service and Multi-Slice Mobile Network\n\n\n\n\n\nG. García-Avilés, M. Gramaglia, P. Serrano, F. Gringoli, et al.\n\n\n2020\n\n\nElsevier Computer Communications\n\n\n\n\n\n\n\nPer-frame Energy Consumption in 802.11 Devices and its Implication on Modeling and Design\n\n\n\n\n\nP. Serrano, A. Garcia-Saavedra, G. Bianchi, A. Banchs, A. Azcorra\n\n\n2015\n\n\nIEEE/ACM Transactions on Networking\n\n\n\n\n\n\n\nDevice to device communications with WiFi Direct: overview and experimentation\n\n\n\n\n\nD. Camps-Mur, A. Garcia-Saavedra, P. Serrano\n\n\n2013\n\n\nIEEE Wireless Communications\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "service.html",
@@ -116,14 +116,14 @@
     "href": "research.html#research-projects",
     "title": "Research",
     "section": "Research Projects",
-    "text": "Research Projects\nI lead and participate in several high-impact projects funded by the European Commission and the Spanish National Research Agency.\n\n\n\nProject\nRole\nFocus\n\n\n\n\n6G-DATADRIVEN\nPI\nAI-native architectures for 6G\n\n\nDAEMON\nInvestigator\nNetwork Intelligence for 6G\n\n\nSEARCHLIGHT\nInvestigator\nHigh-visibility networking\n\n\n\n\n\nJoin the Lab: I am always looking for motivated PhD students and Postdocs interested in Wireless Networking and AI. If you are interested in my research, please send me your CV and a brief statement of interest."
+    "text": "Research Projects\nI lead and participate in several high-impact projects funded by the European Commission and the Spanish National Research Agency.\n\n\n\nProject\nRole\nFocus\n\n\n\n\n6G-DATADRIVEN\nPI\nAI-native architectures for 6G\n\n\nDAEMON\nInvestigator\nNetwork Intelligence for 6G\n\n\nSEARCHLIGHT\nInvestigator\nHigh-visibility networking"
   },
   {
-    "objectID": "publications/papers/loon-2021.html",
-    "href": "publications/papers/loon-2021.html",
-    "title": "Balloons in the Sky: Unveiling Google Loon",
+    "objectID": "contact.html",
+    "href": "contact.html",
+    "title": "Contact Information",
     "section": "",
-    "text": "You can also include the abstract here."
+    "text": "Office Location\nBuilding: Torres Quevedo (Building 4)\nOffice: 4.3.A07\nCampus: Leganés, Madrid\n\n\nMap\n\n\n\n\n\n\nPostal Address\nUniversidad Carlos III de Madrid\nAvenida de la Universidad, 30\n28911 Leganés, Madrid (Spain)\nEmail: pablo [arroba] it.uc3m.es\n(Please replace [arroba] with @)\n\nJoin the Lab: I am always looking for motivated PhD students and Postdocs interested in Wireless Networking and AI. If you are interested in my research, please send me your CV and a brief statement of interest."
   },
   {
     "objectID": "talks/index.html",
@@ -168,10 +168,24 @@
     "text": "Past MsC Students\n\n\n\n\n\nRomina De Lourdes Rodríguez\n\n\nPhD in Telematics Engineering. Research: Machine Learning for Wireless Resource Allocation.\n\n\n\n\n\n\n\n\n\n\nLucía Cabanillas Rodríguez\n\n\nPhD in Telematics Engineering. Research: 6G and Network Virtualization.\n\n\n\n\n\n\n\n\n\n\nJuan Manuel Montes López\n\n\nPhD in Telematics Engineering. Research: Performance Evaluation of 5G/6G Systems.\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "teoria-colas.html",
+    "href": "teoria-colas.html",
+    "title": "Teoría de Colas",
     "section": "",
-    "text": "About this site"
+    "text": "Autores: Pablo Serrano y José Alberto Hernández\nEste sitio contiene el material actualizado del texto “Una introducción amable a la teoría de colas”. El objetivo de este trabajo es proporcionar un recurso accesible para estudiantes y profesionales interesados en los fundamentos de los sistemas de espera.\nDescargar Apuntes (PDF)\n(Actualizado: Oct 2024)\nBoletín de problemas (PDF)\n(Versión: Jun 2025)\n\n\n\n\n\nPortada del libro"
+  },
+  {
+    "objectID": "teoria-colas.html#para-docentes",
+    "href": "teoria-colas.html#para-docentes",
+    "title": "Teoría de Colas",
+    "section": "Para Docentes",
+    "text": "Para Docentes\nExiste un manual de soluciones detallado destinado exclusivamente a profesores. Si deseas obtener una copia, por favor envía un correo a pablo@it.uc3m.es desde tu cuenta institucional."
+  },
+  {
+    "objectID": "teoria-colas.html#licencia",
+    "href": "teoria-colas.html#licencia",
+    "title": "Teoría de Colas",
+    "section": "Licencia",
+    "text": "Licencia\n\nEste obra está bajo una licencia de CC Reconocimiento-NoComercial-CompartirIgual 4.0."
   }
 ]

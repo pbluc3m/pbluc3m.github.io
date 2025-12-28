@@ -1,0 +1,33 @@
+---
+title: "Teoría de Colas"
+subtitle: "Una introducción amable a la teoría de colas"
+---
+
+::: {layout-ncol=2}
+::: {#first-column}
+**Autores:** Pablo Serrano y José Alberto Hernández
+
+Este sitio contiene el material actualizado del texto *"Una introducción amable a la teoría de colas"*. El objetivo de este trabajo es proporcionar un recurso accesible para estudiantes y profesionales interesados en los fundamentos de los sistemas de espera.
+
+[**Descargar Apuntes (PDF)**](pdfs/apuntes-teoria-colas.pdf){.btn .btn-primary}  
+*(Actualizado: Oct 2024)*
+
+[**Boletín de problemas (PDF)**](pdfs/boletin-problemas-colas.pdf){.btn .btn-outline-primary}  
+*(Versión: Jun 2025)*
+:::
+
+::: {#second-column}
+![Portada del libro](images/ejemplo-colas.png){width=80%}
+:::
+:::
+
+---
+
+## Para Docentes
+Existe un **manual de soluciones detallado** destinado exclusivamente a profesores. Si deseas obtener una copia, por favor envía un correo a [pablo@it.uc3m.es](mailto:pablo@it.uc3m.es) desde tu cuenta institucional.
+
+---
+
+## Licencia
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>  
+Este obra está bajo una licencia de [CC Reconocimiento-NoComercial-CompartirIgual 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).

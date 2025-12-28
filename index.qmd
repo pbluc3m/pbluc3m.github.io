@@ -5,15 +5,9 @@ about:
   template: trestles # Options: jolla, trestles, solana, marquee
   image-shape: rounded
   links:
-    - icon: envelope
-      text: Email
-      href: mailto:pablo@it.uc3m.es
     - icon: google-scholar
       text: Google Scholar
       href: https://scholar.google.com/citations?user=5exVXrIAAAAJ
-    - icon: github
-      text: Github
-      href: https://github.com/pbluc3m
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/pabloserrano/
