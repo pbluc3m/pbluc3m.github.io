@@ -9,10 +9,10 @@ subtitle: "Una introducción amable a la teoría de colas"
 
 Este sitio contiene el material actualizado del texto *"Una introducción amable a la teoría de colas"*. El objetivo de este trabajo es proporcionar un recurso accesible para estudiantes y profesionales interesados en los fundamentos de los sistemas de espera.
 
-[**Descargar Apuntes (PDF)**](pdfs/apuntes-teoria-colas.pdf){.btn .btn-primary}  
+[**Descargar Apuntes (PDF)**](pdfs/introduccion-teoria-colas.pdf){.btn .btn-primary}  
 *(Actualizado: Oct 2024)*
 
-[**Boletín de problemas (PDF)**](pdfs/boletin-problemas-colas.pdf){.btn .btn-outline-primary}  
+[**Boletín de problemas (PDF)**](pdfs/boletin-problemas.pdf){.btn .btn-outline-primary}  
 *(Versión: Jun 2025)*
 :::
 
