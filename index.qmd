@@ -23,39 +23,15 @@ about:
 ---
 
 ### Welcome
-I am a **Full Professor** at the Department of Telematic Engineering of **Universidad Carlos III de Madrid**. My research focuses on wireless networking, performance evaluation, and the intersection of AI and communications.
+I am a **Full Professor** at the [Department of Telematic Engineering](https://www.it.uc3m.es/) of [**Universidad Carlos III de Madrid**](https://www.uc3m.es/). My research focuses on wireless networking, performance evaluation, and the intersection of AI and communications.
 
-## News
-* **[2024]** New paper accepted in IEEE TMC...
-* **[2024]** Appointed Director of the Master in Connected Industry 4.0.
-
-
-## Visiting Positions
-
-* Dip. Ing. Informazione, Universita di Pisa, May 2023 (1.5 weeks)
-* Universita degli Studi di Brescia, December 2022 (2 weeks)
-* Networking Group at the University of Rome Tor Vergata under a UC3M researcher mobility grant, October - November 2020
-* School of Informatics at the University of Edinburgh under a Salvador de Madariaga grant, July - September 2017
-* Universita degli Studi di Brescia, May 2016
-* School of Computer Science and Statistics at Trinity College Dublin, June 2015
-* Telefonica Research Center in Barcelona, September 2013 - March 2014
-*  Computer Network Research Group at Univ. of Massachusetts Amherst under a José Castillejo grant, August 2007 - February 2008
+## Latest News
+* **[2025-12-15]** Jesús Pérez-Valero, Premio Extraordinario de Doctorado UC3M, [link al PDF](./pdfs/2025-12-15-premio-extraordinario.pdf)
+* **[2025-05-15]** TPC member IEEE INFOCOM 2026
+* **[2025-02-27]** Cese como Director del Departamento de Ingeniería Telemática, [link al PDF](./2025-03-17-Documento_justificante.pdf)
+* **[2025-01-20]** Nombrado Subdirector de Infraestructuras, Sostenibilidad y Digitalización de la Escuela Politécnica Superior, [link al PDF](./pdfs/2025-02-03-Resolucion.pdf)
 
 
-## Awards
+## News Archive
 
-* One Outstanding Thesis Award in Telematic Engineering (2023/24) goes to Jesús Pérez Valero (2025-12-15)
-* Distinguished Member of the 2022 INFOCOM Technical Program Commitee (2022-02-17)
-* One Outstanding Thesis Award in Telematic Engineering (2015/16) goes to Ginés García Avilés (2021-12-02)
-* UC3M Excellence Award 2021 in the cathegory of Young Research Excellence Awards 2021 (2021-05-04)
-* LanguageCert Level 2 Certificate in ESOL International (Listening, Reading, Writing) (Expert C1): high pass (2021-02-17)
-* Evaluación "Excelente+" en el programa DOCENTIA-UC3M en la convocatoria 2019-2020 (2020-06-10)
-* Distinguished Member of the 2020 INFOCOM Technical Program Commitee (2020-01-30)
-* UC3M Excellence Award 2019 in the cathegory of Young Research Excellence Awards 2019 (2020-05-11)
-* The paper Fair Coexistence of Scheduled and Random Access Wireless Networks: Unlicensed LTE/WiFi among the 50 most popular in IEEE/ACM Transactions on Networking for the 5th month in a row! (2018-07-06)
-* One Outstanding Thesis Award in Telematic Engineering (2015/16) goes to Pablo Salvador (2016-12-13)
-* ACM WiNTECH 2016 Best Paper Award (2016-10-03)
-* Elevated to IEEE Senior Member (2015-09-29)
-* One Outstanding Thesis Award in Telematic Engineering (2013/14) goes to Andrés García-Saavedra (2014-11-28)
-* Outstanding Thesis Award in Telematic Engineering (2007/08) (2009-01-20)
-* Jitel 2007 AT4 Wireless Best Paper Award (2007-09-17)
+* **[date]** Text
