@@ -1,5 +1,9 @@
 [
   {
+    "listing": "/students/index.html",
+    "items": []
+  },
+  {
     "listing": "/publications/index.html",
     "items": [
       "/teoria-colas.html"
@@ -7,14 +11,6 @@
   },
   {
     "listing": "/talks/index.html",
-    "items": []
-  },
-  {
-    "listing": "/students.html",
-    "items": []
-  },
-  {
-    "listing": "/students/index.html",
     "items": []
   }
 ]

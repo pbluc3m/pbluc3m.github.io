@@ -4,39 +4,45 @@ title: "Bio"
 
 ## Short bio
 
-Pablo Serrano got his Telecommunication Engineering degree and his PhD from UC3M in 2002 and 2006, respectively. He has been with the Telematics Department of UC3M since 2002, where he currently holds the position of Associate Professor. He has over 100 peer-reviewed papers in international journal and top conferences, including IEEE/ACM Transasctions on Networking, IEEE INFOCOM, ACM CoNEXT, IEEE Transactions on Mobile Computing. He has served on the TPC of many of many conferences (IEEE Percom, IEEE INFOCOM, IEEE Globecom) and performed editorial activities for IEEE Comm. Letters, Elsevier Computer Networks, and IEEE Communications Magazine. He currently serves as Associate Editor of the IEEE Open Journal of the Communications Society.
+Pablo Serrano received his M.Sc. and Ph.D. degrees in Telecommunications Engineering from Universidad Carlos III de Madrid (UC3M) in 2002 and 2006, respectively. He joined the UC3M Telematics Engineering Department in 2002, where he is currently a Full Professor. Throughout his tenure, he has held numerous leadership roles, including Director of the Department, Director of the Master’s in Connected Industry 4.0, and his current role as Deputy Director for Infrastructure, Digitalization, and Sustainability at the Polytechnic School.
 
-His work and that from his students has been awarded several times (best paper awards, best Ph.D. Theses), and has been cited more than 4 000 times, having an H-index of 30. He has held visiting positions at Univ. Massachusetts Amherst, Univ. of Edinburgh, Trinity College Dublin, Univ. of Rome Tor Vergata, and Telefónica R+D Barcelona, all of them partly funded or completely supported through competitive calls (e.g., José Castillejo, Salvador de Madariaga). He has participated in various research projects (national and European), acting as Principal Investigator of the flagship Hexa-X project, the H2020 Flex5Gware project and the regional Tigre5-CM project.
+With over 100 peer-reviewed publications in flagship venues such as IEEE/ACM Transactions on Networking, IEEE INFOCOM, and IEEE Transactions on Mobile Computing, Professor Serrano is a recognized expert in wireless network analysis and protocol design. He has served on the TPC for conferences like IEEE INFOCOM and Globecom, and held editorial roles for IEEE Communications Letters and Elsevier Computer Networks. Currently, he is an Associate Editor for IEEE Transactions on Mobile Computing, Elsevier Computer Communications, and Oxford’s The Computer Journal.
 
-His research interests lie in the analysis of wireless networks and the design of network protocols and systems. He also enjoys carrying out experimental performance evaluation of protocols and communication systems. He is a Senior Member of the IEEE.
+His research leadership includes serving as Principal Investigator for 8 projects and 8 research contracts, with additional participation in over 40 national and international initiatives. His work has influenced industry standards, including contributions to the IETF, IEEE 802.11, and ETSI MEC, and he holds a patent for energy-saving 802.11 interfaces.
+
+A Senior Member of the IEEE, Professor Serrano has held prestigious visiting positions at UMass Amherst, the University of Edinburgh, and Trinity College Dublin, supported by competitive grants such as the Salvador de Madariaga. His research, and that of his students, has been recognized with several Best Paper and Best Ph.D. Thesis awards.
+
 
 
 ## Visiting Positions
 
-* Dip. Ing. Informazione, Universita di Pisa, May 2023 (1.5 weeks)
-* Universita degli Studi di Brescia, December 2022 (2 weeks)
-* Networking Group at the University of Rome Tor Vergata under a UC3M researcher mobility grant, October - November 2020
-* School of Informatics at the University of Edinburgh under a Salvador de Madariaga grant, July - September 2017
-* Universita degli Studi di Brescia, May 2016
-* School of Computer Science and Statistics at Trinity College Dublin, June 2015
-* Telefónica Research Center in Barcelona, September 2013 - March 2014
-* Computer Network Research Group at Univ. of Massachusetts Amherst under a José Castillejo grant, August 2007 - February 2008
+
+* **[October 2025]** [Advanced Networking Systems](https://ans.unibs.it), [Universita degli Studi di Brescia](https://www.unibs.it/en) (1.5 weeks)
+* **[May 2023]** [Dip. Ing. Informazione](https://www.dii.unipi.it/), [Universita di Pisa](https://www.unipi.it/) (1.5 weeks)
+* **[December 2022]** [Advanced Networking Systems](https://ans.unibs.it), [Universita degli Studi di Brescia](https://www.unibs.it/en) (2 weeks)
+* **[October - November 2020]** [Networking Group](http://netgroup.uniroma2.it/) at the [University of Rome Tor Vergata](https://en.uniroma2.it/) under a UC3M researcher mobility grant
+* **[July - September 2017]** [School of Informatics](http://www.inf.ed.ac.uk/) at the [University of Edinburgh](http://www.ed.ac.uk/) under a Salvador de Madariaga grant
+* **[May 2016]** [Advanced Networking Systems](https://ans.unibs.it), [Universita degli Studi di Brescia](https://www.unibs.it/en)
+* **[June 2015]** [School of Computer Science and Statistics](https://www.scss.tcd.ie/Doug.Leith/people.htm) at [Trinity College Dublin](https://www.tcd.ie/)
+* **[September 2013 - March 2014]** [Telefónica Research Center in Barcelona](http://www.tid.es/who-we-are/work-places/barcelona)
+* **[August 2007 - February 2008]** [Computer Network Research Group](http://gaia
+.cs.umass.edu/) at [Univ. of Massachusetts Amherst](http://umass.edu/) under a José Castillejo grant
 
 
-## Awards
+## Awards & Highlights 
 
-* One Outstanding Thesis Award in Telematic Engineering (2023/24) goes to Jesús Pérez Valero (2025-12-15)
-* Distinguished Member of the 2022 INFOCOM Technical Program Commitee (2022-02-17)
-* One Outstanding Thesis Award in Telematic Engineering (2015/16) goes to Ginés García Avilés (2021-12-02)
-* UC3M Excellence Award 2021 in the cathegory of Young Research Excellence Awards 2021 (2021-05-04)
-* LanguageCert Level 2 Certificate in ESOL International (Listening, Reading, Writing) (Expert C1): high pass (2021-02-17)
-* Evaluación "Excelente+" en el programa DOCENTIA-UC3M en la convocatoria 2019-2020 (2020-06-10)
-* Distinguished Member of the 2020 INFOCOM Technical Program Commitee (2020-01-30)
-* UC3M Excellence Award 2019 in the cathegory of Young Research Excellence Awards 2019 (2020-05-11)
-* The paper Fair Coexistence of Scheduled and Random Access Wireless Networks: Unlicensed LTE/WiFi among the 50 most popular in IEEE/ACM Transactions on Networking for the 5th month in a row! (2018-07-06)
-* One Outstanding Thesis Award in Telematic Engineering (2015/16) goes to Pablo Salvador (2016-12-13)
-* ACM WiNTECH 2016 Best Paper Award (2016-10-03)
-* Elevated to IEEE Senior Member (2015-09-29)
-* One Outstanding Thesis Award in Telematic Engineering (2013/14) goes to Andrés García-Saavedra (2014-11-28)
-* Outstanding Thesis Award in Telematic Engineering (2007/08) (2009-01-20)
-* Jitel 2007 AT4 Wireless Best Paper Award (2007-09-17)
+* **[2025-12-15]** Outstanding Thesis Award in Telematic Engineering (2023/24) for Jesús Pérez Valero, [PDF link](./pdfs/2025-12-15-premio-extraordinario.pdf)
+* **[2022-02-17]** Distinguished Member of the 2022 INFOCOM Technical Program Commitee, [PDF link](./pdfs/2022-02-17-infocom-distinguished-tpc.pdf)
+* **[2021-12-02)]** Outstanding Thesis Award in Telematic Engineering (2015/16) for Ginés García Avilés, [web link](https://www.uc3m.es/doctorado/premios-extraordinarios-doctorado/premiados-20-21)
+* **[2021-05-04]** UC3M Excellence Award 2021 in the cathegory of Young Research Excellence Awards 2021, [PDF link](./pdfs/2021-04-30-excelencia.pdf)
+* **[2021-02-17]** LanguageCert Level 2 Certificate in ESOL International (Listening, Reading, Writing) (Expert C1): high pass, [PDF link](./pdfs/2021-01-30-ingles-C1.pdf)
+* **[2020-06-10]** Evaluación "Excelente+" en el programa DOCENTIA-UC3M en la convocatoria 2019-2020, [PDF link](./pdfs/2020-06-10-docentia.pdf)
+* **[2020-01-30]** Distinguished Member of the 2020 INFOCOM Technical Program Commitee, [PDF link](./pdfs/2020-04-26-infocom-distinguished-tpc.pdf)
+* **[2020-05-11]** UC3M Excellence Award 2019 in the cathegory of Young Research Excellence Awards 2019, [PDF link](./pdfs/2019-05-10-excelencia.pdf)
+* **[2018-07-06]** The paper [Fair Coexistence of Scheduled and Random Access Wireless Networks: Unlicensed LTE/WiFi](https://ieeexplore.ieee.org/document/8007247) among the 50 most popular in IEEE/ACM Transactions on Networking for the 5th month in a row!
+* **[2016-12-13]**  Outstanding Thesis Award in Telematic Engineering (2015/16) for Pablo Salvador, [web link](https://www.uc3m.es/doctorado/premios-extraordinarios-doctorado/premiados15-16)
+* **[2016-10-03]** ACM WiNTECH 2016 Best Paper Award
+* **[2015-09-29]** Elevated to IEEE Senior Member, [email](./pdfs/2015-09-29-ieee-senior.pdf)
+* **[2014-11-28]** Outstanding Thesis Award in Telematic Engineering (2013/14) for Andrés García-Saavedra, [web link](https://www.uc3m.es/phdprogram/outstanding-thesis-awards/recipients-13-14)
+* **[2009-01-20]** Outstanding Thesis Award in Telematic Engineering (2007/08), [web link](https://www.uc3m.es/phdprogram/outstanding-thesis-awards/recipients-07-08)
+* **[2007-09-17]** Jitel 2007 AT4 Wireless Best Paper Award, [PDF link](./pdfs/2007-09-17-jitel-best-paper.pdf)
