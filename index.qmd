@@ -20,6 +20,14 @@ about:
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/pabloserrano/
+listing:
+  - id: recent-pubs
+    contents: publications/papers.yml # Point to your yaml file path
+    type: default                     # "default" looks better on homepages than a table
+    sort: "year desc"
+    max-items: 5                      # Only shows the 5 most recent
+    image-placeholder: none           # Keeps it clean
+    fields: [title, publication, year]
 ---
 
 ### Welcome
@@ -33,6 +41,12 @@ I am a **Full Professor** at the [Department of Telematic Engineering](https://w
 
 [View older news in the Archive →](news-archive.qmd)
 
+## Some Recent Publications
+
+::: {#recent-pubs}
+:::
+
+[View all publications →](publications/index.qmd)
 
 ## Links
 

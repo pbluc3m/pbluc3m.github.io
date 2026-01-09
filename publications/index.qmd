@@ -1,17 +1,117 @@
 ---
 title: "Publications"
+date: ""
 listing:
-  contents: papers.yml
-  type: default
-  sort: "year desc"
-  fields: [title, authors, year, publication, path]
-  categories: true         # Esto es vital: crea una barra lateral con tus temas (5G, 802.11, etc.)
-  page-size: 20            # Muestra 15 por página para no saturar
-  #filter-ui: true          # Añade una barra de búsqueda específica para los papers
-  #sort-ui: [year, title]   # Permite al usuario reordenar por año o título
+  - id: journals
+    contents: papers.yml
+    type: table
+    include: 
+      type: "journal"
+    sort: "year desc"
+    #max-items: 10      # <--- Limits to top 10
+    categories: true        # This enables the sidebar
+    filter-ui: false
+    fields: [year, title, authors, publication]
+    field-display-names:
+      publication: "Journal"
+
+  - id: selected-confs
+    contents: papers.yml
+    type: table
+    include: 
+      type: "selected_conf"
+    sort: "year desc"
+    #max-items: 10      # <--- Limits to top 10
+    categories: true        # Quarto merges this with the one above
+    filter-ui: false
+    fields: [year, title, authors, publication]
+    field-display-names:
+      publication: "Conference"
+    
+  - id: other-confs
+    contents: papers.yml
+    type: table
+    include: 
+      type: "other_conf"
+    sort: "year desc"
+    #max-items: 10      # <--- Limits to top 10
+    categories: true        # Quarto merges this with the one above
+    filter-ui: false
+    fields: [year, title, authors, publication]
+    field-display-names:
+      publication: "Conference"
+    
+  - id: book-chapters
+    contents: papers.yml
+    type: table
+    include: 
+      type: "book_chapter"
+    sort: "year desc"
+    #max-items: 10      # <--- Limits to top 10
+    categories: true        # Quarto merges this with the one above
+    filter-ui: false
+    fields: [year, title, authors, publication]
+#    field-display-names:
+#      publication: "Conference"
+
 ---
 
 Main profiles: [Google Scholar](https://scholar.google.com/citations?user=p2v-k0AAAAAJ) | [ORCID](https://orcid.org/0000-0002-8646-0612) | [DBLP](https://dblp.org/pid/11/3342.html)
 
+## Journals
+
+::: {#journals}
+:::
+
+## Selected Conferences
+
+::: {#selected-confs}
+:::
+
+## Other Conferences & Workshops
+:::{#other-confs}
+:::
+
+## Book Chapters
+:::{#book-chapters}
+:::
 ---
 
+
+<style>
+/* 1. Bold the Table Headers */
+thead th {
+  background-color: #f8f9fa;
+  font-weight: 700 !important;
+  color: #2c3e50;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+/* 2. Add a hover effect to rows */
+tbody tr:hover {
+  background-color: rgba(0, 123, 255, 0.05) !important;
+  transition: background-color 0.2s ease;
+}
+
+/* 3. Style the Title column to stand out */
+td.listing-title {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* 4. Soften the Year and Venue columns */
+td.listing-year, td.listing-publication {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* 5. Space out the sections */
+h2 {
+  margin-top: 2.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #eee;
+  color: #2c3e50;
+}
+</style>

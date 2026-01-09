@@ -4,10 +4,12 @@
     "items": []
   },
   {
+    "listing": "/index.html",
+    "items": []
+  },
+  {
     "listing": "/publications/index.html",
-    "items": [
-      "/teoria-colas.html"
-    ]
+    "items": []
   },
   {
     "listing": "/talks/index.html",

@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2026-01-09">
 
 <title>Pablo Serrano</title>
 <style>
@@ -30,6 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -67,8 +70,67 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-recent-pubs .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-publication','listing-year',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      page: 25,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
+      searchColumns: ["listing-title","listing-authors","listing-publication","listing-year","listing-type","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-recent-pubs'] = new List('listing-recent-pubs', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 <script data-goatcounter="https://pbluc3m.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -159,6 +221,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a></li>
   <li><a href="#latest-news" id="toc-latest-news" class="nav-link" data-scroll-target="#latest-news">Latest News</a></li>
+  <li><a href="#some-recent-publications" id="toc-some-recent-publications" class="nav-link" data-scroll-target="#some-recent-publications">Some Recent Publications</a></li>
   <li><a href="#links" id="toc-links" class="nav-link" data-scroll-target="#links">Links</a></li>
   </ul>
 </nav>
@@ -173,6 +236,12 @@ ul.task-list li input[type="checkbox"] {
 <h1 class="title">Pablo Serrano</h1>
 </div>
 <div class="quarto-title-meta">
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">9 January 2026</p>
+    </div>
+  </div>
   </div>
 </header>
     <div class="about-links">
@@ -213,6 +282,100 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>[2025-01-20]</strong> Nombrado Subdirector de Infraestructuras, Sostenibilidad y Digitalización de la Escuela Politécnica Superior, <a href="./pdfs/2025-02-03-Resolucion.pdf">link al PDF</a></li>
 </ul>
 <p><a href="./news-archive.html">View older news in the Archive →</a></p>
+</section>
+<section id="some-recent-publications" class="level2">
+<h2 data-anchor-id="some-recent-publications">Some Recent Publications</h2>
+<div id="listing-recent-pubs" class="quarto-listing quarto-listing-container-default">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="Sm91cm5hbCUyQ1YyTiUyQ1N1c3RhaW5hYmlsaXR5">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="https://doi.org/10.1109/TNSM.2025.3605408" class="no-external">Optimal Scaling and Offloading for Sustainable Provision of Reliable V2N Services in Dynamic and Static Scenarios</a>
+</h3>
+</div>
+<div class="metadata">
+<a href="https://doi.org/10.1109/TNSM.2025.3605408" class="no-external">
+<div class="metadata-value listing-publication">
+IEEE Transactions on Network and Service Management
+</div>
+<div class="metadata-value listing-year">
+2025
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="Sm91cm5hbCUyQ0RpZ2l0YWwlMjBUd2luJTJDTWFjaGluZSUyMExlYXJuaW5n">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="https://doi.org/10.1016/j.comnet.2025.111571" class="no-external">DiWi: A Transformer-Based Digital Twin for Wireless Mobility</a>
+</h3>
+</div>
+<div class="metadata">
+<a href="https://doi.org/10.1016/j.comnet.2025.111571" class="no-external">
+<div class="metadata-value listing-publication">
+Elsevier Computer Networks
+</div>
+<div class="metadata-value listing-year">
+2025
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="Sm91cm5hbCUyQ05GViUyQ1JlbGlhYmlsaXR5">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="https://doi.org/10.1109/OJCOMS.2025.3586088" class="no-external">Minimum-Cost Design of Auto-Scaling Server Farms Providing Reliability Guarantees</a>
+</h3>
+</div>
+<div class="metadata">
+<a href="https://doi.org/10.1109/OJCOMS.2025.3586088" class="no-external">
+<div class="metadata-value listing-publication">
+IEEE Open Journal of the Communications Society
+</div>
+<div class="metadata-value listing-year">
+2025
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="Q29uZmVyZW5jZSUyQ0lvVCUyQ1JlbGlhYmlsaXR5JTJDQ29ORVhU">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="" class="no-external">FARO: a scalable and reliable outage detection algorithm for IoT Mobile Virtual Network Aggregators</a>
+</h3>
+</div>
+<div class="metadata">
+<a href="" class="no-external">
+<div class="metadata-value listing-publication">
+ACM CoNEXT 2025
+</div>
+<div class="metadata-value listing-year">
+2025
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-categories="Q29uZmVyZW5jZSUyQ1dDTkMlMkNQZXJmb3JtYW5jZSUyMEV2YWx1YXRpb24=">
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="" class="no-external">Multiscale Radio Reconfigurations: A Trace-Driven Approach to Estimating Network Performance</a>
+</h3>
+</div>
+<div class="metadata">
+<a href="" class="no-external">
+<div class="metadata-value listing-publication">
+IEEE Wireless Communications &amp; Networking Conference (WCNC)
+</div>
+<div class="metadata-value listing-year">
+2025
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
+<p><a href="./publications/index.html">View all publications →</a></p>
 </section>
 <section id="links" class="level2">
 <h2 data-anchor-id="links">Links</h2>
@@ -628,7 +791,7 @@ ul.task-list li input[type="checkbox"] {
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Pablo Serrano | Universidad Carlos III de Madrid | Last updated: today</p>
+<p>Pablo Serrano | Universidad Carlos III de Madrid | Last updated: 9 January 2026</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;

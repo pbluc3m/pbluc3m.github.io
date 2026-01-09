@@ -36,10 +36,12 @@ website:
         href: https://github.com/pbluc3m
 
   page-footer:
-    center: "Pablo Serrano | Universidad Carlos III de Madrid | Last updated: today"
+    center: "Pablo Serrano | Universidad Carlos III de Madrid | Last updated: {{< meta date >}}"
         
 format:
   html:
     css: styles.css
     toc: true
     include-in-header: header.html
+    date: today
+    date-format: "D MMMM YYYY"
