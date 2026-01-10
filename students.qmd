@@ -1,0 +1,104 @@
+---
+title: "Students"
+date: ""
+#page-layout: full
+---
+
+::: {.callout-important}
+### Note for Prospective Students
+If you would like to work with me, please follow the application instructions on my [Research Page](research.qmd#opportunities).
+:::
+
+I have the privilege of working with a talented group of students at various stages of their academic careers. Below is a list of my current and former advisees.
+
+## Current Advising
+
+### PhD Students
+* **Romina De Lourdes Rodríguez**, PhD in Telematics Engineering
+* **Lucía Cabanillas Rodríguez**, PhD in Telematics Engineering (doctorado industrial)
+* **Juan Manuel Montes López**, PhD in Telematics Engineering
+
+### Undergraduate Students
+* **Elena Pérez Manzano**, Grado en Ingeniería Telemática
+
+---
+
+## Past Students
+
+### Doctoral Alumni (PhD)
+* **Jesús Pérez Valero** (2024-09-25). *Premio Extraordinario de Doctorado*.
+* **Ginés García Avilés** (2021-06-11). Co-supervised with M. Gramaglia. *Premio Extraordinario de Doctorado*. [[link Teseo]](https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1934245)
+* **Carlos Donato Morales** (2019-11-07). [[link Teseo]](https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1815594)
+* **Pablo Salvador** (2016-04-08). *Premio Extraordinario de Doctorado*. [[link Teseo]](https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1295360)
+* **Andrés García Saavedra** (2013-11-13). Co-supervised with A. Banchs. *Premio Extraordinario de Doctorado*. [[link Teseo]](https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1045763)
+
+### Master's Alumni (MSc)
+* **Javier Castrejón Torrejón** (2024-09-26). Máster Universitario en Métodos Analíticos para Datos Masivos: Big Data. Co-supervised with J.M. Montes López.
+* **Omar El Kendi** (2023-09-27). Master in Connected Industry 4.0.
+* **[Alejandro Quirós González](https://www.linkedin.com/in/alejandro-quiros/)** (2023-09-27). Double Master in Telecom. Engineering and Cybersecurity.
+* **[Patricia González Iza](https://www.linkedin.com/in/patriciagonzaleziza/)** (2023-03-09). Master in Connected Industry 4.0.
+* **[Mihail Hristov Tsvetkov](https://www.linkedin.com/in/mihail-h-09b072129/)** (2022-09-27). Master in Connected Industry 4.0.
+* **[Mario Martínez Gil](https://www.linkedin.com/in/mario-martinez-gil/)** (2022-09-28). Master in Connected Industry 4.0.
+* **[Ander Martínez López](https://www.linkedin.com/in/andermartinezlopez/)** (2022-09-28). Master in Connected Industry 4.0.
+* **[Diego Calonge Cruz](https://www.linkedin.com/in/diegocalongecruz/)** (2021-09-22). Master in Connected Industry 4.0.
+* **[Claudia Costa Mazón](https://www.linkedin.com/in/claudia-costa-mazón/)** (2021-03-11). Master in Connected Industry 4.0.
+* **[Iñaki Andoni Apaolaza Bombin](https://www.linkedin.com/in/iñaki-andoni-apaolaza-bombin-516461162/)** (2021-03-11). Master in Connected Industry 4.0.
+* **[Pedro Rubén González Sánchez](https://www.linkedin.com/in/pedrorubengonzalezsanchez/)** (2020-11-04). Master in Cybersecurity.
+* **Jesús Pérez Valero** (2020). MSc Telecom. Engineering (UPCT). Co-supervised with J. Vales Alonso.
+* **[Iago González Rodríguez](https://www.linkedin.com/in/iago-gonzalez-rodriguez/)** (2019-09-25). MSc Telematics Engineering.
+* **[Eugenio Miguel Bravo](https://www.linkedin.com/in/eugenio-miguel-bravo/)** (2019-09-25). MSc Telematics Engineering.
+* **[Alberto Bayo Moya](https://www.linkedin.com/in/alberto-bayo-moya-86054164/)** (2019-06-27). MSc in NFV and SDN for 5G Networks.
+* **Ginés García Avilés** (2017-09-28). MSc Telematics Engineering.
+* **Alejandro Blanco Pizarro** (2017-09-12). MSc in Multimedia and Comm. Co-supervised with M.P. Sánchez.
+* **Rubén Montoro Terciado** (2015-09-21). MSc Telecommunications Engineering.
+* **Vasileios Papadopoulos** (2013-07-22). MSc Telematics Engineering.
+* **Georgios Z. Papadopoulos** (2012-07-11). MSc Telematics Engineering.
+* **Jnanesh V. Bhaganagare** (2010). MSc Network and E-Business Centered Computing.
+* **Andrés García Saavedra** (2010). Máster Interuniversitario en Ingeniería Telemática.
+* **Valerio Targon** (2009). MSc Telematics Engineering.
+
+
+### Undergraduate Alumni (BSc)
+* **Marcos Martínez Manzano** (2024-09-24). Doble Grado en Ing. Informática y ADE.
+* **David Colomino Murillo** (2023-07-13). Grado en Ingeniería Telemática.
+* **Paula Capel Silveiro** (2023-07-13). Grado en Ingeniería de Sonido e Imagen.
+* **Pablo Gómez González** (2023-07-11). Grado en Ingeniería Informática.
+* **Juan Lobato Camacho** (2023-07-05). Doble Grado en Ing. Informática y ADE.
+* **Ismael Saleh Rabbu** (2021-09-27). Grado en Ingeniería Telemática.
+* **Daniel Martín Cruz** (2021-07-15). Grado en Ingeniería Telemática.
+* **Francisco Javier Vicente Laso** (2020-09-17). Grado en Ingeniería Telemática.
+* **Sandra Lozano Sánchez** (2020-07-23). Grado en Ingeniería Telemática.
+* **Miguel Serrano Armero** (2020-07-17). Grado en Ingeniería de Sistemas Audiovisuales.
+* **Antonio de Padua Díaz Martínez** (2020-07-17). Grado en Ingeniería Informática.
+* **Álvaro Alfaro Navarro** (2020-07-16). Grado en Ingeniería de Sistemas Audiovisuales.
+* **Antonio Honorato de la Peña** (2020-07-15). Grado en Ingeniería Telemática.
+* **Alejandro García Martín** (2019-03-07). Tutor.
+* **Miguel Rodríguez Ortega** (2017-03-16). Grado en Ingeniería Telemática.
+* **Ginés García Avilés** (2016-02-24). Univ. Murcia.
+* **Luca Cominardi** (2013). Erasmus Training Programme (2012-09-01 -- 2013-03-01).
+* **Francisco Ramos Santos** (2009-07-24). PFC I.T.T. Sonido e Imagen.
+* **Miguel A. Rodelas Delgado** (2007-10-02). PFC I.T.T. Sistemas Telecomunicación.
+* **Víctor J. García Mayoralas** (2005-11-18). PFC Ing. Telecomunicación.
+
+#### Co-supervised with Carlos J. Bernardos
+* **Jorge Saucedo Pavón** (2018-10-04). Tutor.
+* **Guillermo Vázquez Sanchez** (2018-07-11). Tutor.
+* **Margarita Albendea Albaladejo** (2018-03-05). Tutor.
+* **Rodrigo Mompó Redoli** (2018-03-05).
+* **Vicente Gaitán Garrido** (2017-10-18). Tutor.
+* **Javier Bautista Ramos** (2017-10-18).
+* **Cristian Arribas Gonzalez** (2017-10-02).
+* **Diego Sierra Ordóñez** (2016-07-14).
+* **Sergio González Díaz** (2015-07-10).
+* **Sebastián Álvarez Méndez** (2015-10-16).
+* **Diego Lucero Gallego** (2015-07-10). Tutor.
+* **Mario Rodríguez Blanco** (2015-03-09). Tutor.
+* **Enrique Herreros Jiménez** (2014-07-10). Tutor.
+* **Carlos Donato Morales** (2014-07-08).
+* **Diego Grande Benito** (2013-09-24). Tutor.
+* **Javier de Benito Ruiz** (2013-09-24). Tutor.
+* **Rubén Montoro Terciado** (2013-07-10). Tutor.
+* **José María Montes Yuste** (2013-07-10). Tutor.
+* **Elena López Orgaz** (2012-10-08). Tutor.
+* **Miriam Marciel Noguera** (2012-09-27).
+* **Guillermo Fernández Gutiérrez** (2012-07-10). Tutor.

@@ -1,35 +1,83 @@
 ---
 title: "Research"
+subtitle: "Advancing the future of Wireless Networks through Modeling, Softwarization, and AI."
+date: ""
 ---
 
-My research focuses on the design, analysis, and performance evaluation of wireless communication systems and networking protocols. I am particularly interested in the intersection of **Machine Learning** and **Network Softwarization** to enable the next generation of mobile networks (6G).
+## Research Vision
+My research focuses on the design, analysis, and performance evaluation of wireless communication systems. By bridging the gap between **Control Theory**, **Machine Learning**, and **Experimental Networking**, I aim to build more efficient, resilient, and energy-aware architectures for 5G, 6G, and beyond.
 
-## Key Research Areas
+::: {.grid}
 
-### 1. 6G and Open RAN (O-RAN)
-We are investigating the "cloudification" of the Radio Access Network. Our work focuses on:
-* **Resource Allocation:** Using Deep Reinforcement Learning (DRL) for real-time radio resource management.
-* **Serverless Networking:** Exploring how FaaS (Function-as-a-Service) can be applied to mobile core functions to improve resiliency.
+::: {.g-col-12 .g-col-md-4}
+### [6G & Open RAN]{style="color: #003366;"}
+Investigating the cloudification of the RAN. We focus on resource allocation using DRL and exploring **Serverless Networking** (FaaS) to improve mobile core resiliency.
+:::
 
-### 2. Applied Machine Learning in Networking
-Bridging the gap between theoretical ML and practical networking constraints:
-* **Digital Twins:** Developing high-fidelity network replicas for testing security and performance without disrupting live traffic.
-* **Data Privacy:** Analyzing MAC address de-anonymization and developing privacy-preserving mobility data models.
+::: {.g-col-12 .g-col-md-4}
+### [AI-Driven Networking]{style="color: #003366;"}
+Developing **Digital Twins** for network performance and security. We also investigate privacy-preserving mobility models and MAC de-anonymization.
+:::
 
-### 3. Performance Evaluation of WLAN/5G
-Long-standing expertise in the mathematical modeling and experimental validation of:
-* **IEEE 802.11 (Wi-Fi) Evolution:** Performance limits of high-density WLANs.
-* **Network Slicing:** Efficiently partitioning 5G resources to meet diverse Service Level Agreements (SLAs).
+::: {.g-col-12 .g-col-md-4}
+### [WLAN/5G Performance]{style="color: #003366;"}
+Mathematical modeling and experimental validation of **IEEE 802.11** evolution and **Network Slicing** mechanisms to meet diverse SLAs.
+:::
+
+:::
+
+---
+
+## Active Research Lines
+
+### Network Intelligence & 6G
+We are moving towards AI-native architectures where network functions are optimized by "intelligence.". **Focus:** Balancing the performance gain of AI with the reliability constraints of telco infrastructure.
+
+### Sustainable and Energy-Aware Systems
+Building on my long-standing work in energy consumption anatomy, we currently research: **Energy-Aware NFV:** Scaling network functions under reliability and power constraints, and **URLLC for V2N:** Sustainable provision of ultra-reliable low-latency services.
+
+### Network Privacy and Security
+Using ML to identify vulnerabilities in current protocols, Applying Explainable AI (XAI) to understand behavior-based access control and de-anonymization of random MAC addresses.
 
 ---
 
-## Research Projects
-I lead and participate in several high-impact projects funded by the European Commission and the Spanish National Research Agency.
+## Funded Projects
 
-| Project | Role | Focus |
-| :--- | :--- | :--- |
-| **6G-DATADRIVEN** | PI | AI-native architectures for 6G |
-| **DAEMON** | Investigator | Network Intelligence for 6G |
-| **SEARCHLIGHT** | Investigator | High-visibility networking |
+
+### Current proyects
+| Project | Role | Duration | Focus |
+|:--- |:--- |:--- |:--- |
+| [**AMAZING-6G (EU)**](https://amazing6g.eu) | Principal Investigator | 01/25 + 30 m | AI-native architectures for 6G |
+| [**iTrust6G (EU)**](https://www.sns-itrust6g.com) | Principal Investigator | 01/24 + 30 m | Network Intelligence for 6G |
+| [**TUCAN6-CM (Reg.)**](https://tucan6-cm.networks.imdea.org/en/) | Principal Investigator | 01/24 + 30 m | Network Intelligence for 6G |
+
+
+### Past projects
+| Project | Role | Years | Focus |
+|:--- |:--- |:--- |:--- |
+| **6G-DATADRIVEN** | Principal Investigator | 2022-2025 | AI-native architectures for 6G |
+| **DAEMON** | Investigator | 2021-2024 | Network Intelligence for 6G |
+| **SEARCHLIGHT** | Investigator | 2023-2026 | High-visibility networking |
+
+
 
 ---
+
+---
+
+## Opportunities
+
+::: {.callout-tip icon=true}
+### Join the Lab
+I am always looking for motivated **PhD students and Postdocs** interested in Wireless Networking and/or AI. 
+
+If you are interested in joining my research group, please send me your CV and a brief statement of interest. To ensure your email is processed, you **must** use the following subject line format (replacing the bracketed text with my office number found on this site):
+
+> **Subject:** `[Application] - [Office Number] - [Your Full Name]`
+
+*Applications that do not follow this format or omit the office number will be deprioritized.*
+:::
+
+---
+
+[Explore my latest Publications →](./publications/index.qmd)

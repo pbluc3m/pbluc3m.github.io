@@ -1,39 +1,115 @@
 ---
 title: "Service"
+date: ""
 ---
 
-## University Leadership & Administration
-I currently hold and have held several leadership positions at **Universidad Carlos III de Madrid**:
+## Institutional Leadership
 
-* **Deputy Director (Subdirector)** of Infrastructure, Sustainability, and Digitization at the School of Engineering (EPS).
-* **Director of the Department** of Telematic Engineering (Past).
-* **Deputy Director for Academic Affairs** (Past).
-* **Director of the Master's Program** in Connected Industry 4.0.
+* Deputy Director of Infrastructure, Digitization, and Sustainability Polytechnic School (Escuela Politécnica Superior) | Jan 2025 – Present
 
-## Editorial Activities
-I serve or have served as an Editor for the following international journals:
+Leading the strategic digital transformation and sustainability roadmap for the school's infrastructure and facilities.
 
-* **Editor:** *IEEE Open Journal of the Communications Society*
-* **Editor:** *Elsevier Computer Communications*
-* **Editor:** *The Computer Journal* (Oxford Academic)
-* **Past Editor:** *IEEE Communications Letters*
-* **Guest/Feature Editor:** *Elsevier Computer Networks* and *IEEE Communications Magazine*
+* Head of Department (Director de Departamento) [Departamento de Ingeniería Telemática] | Sept 2023 – Feb 2025
 
-## Conference Organization
-I am actively involved in the organization of major networking conferences:
+Directed departmental operations, including budget oversight, faculty recruitment, and strategic academic planning for a team of professors and researchers.
 
-### Organizing Committee (Recent & Selected)
-* **Co-Chair:** 1st Winter School on AI for 6G Communications (2025).
-* **Member of the Organizing Committee** for 14 conferences to date.
+* Deputy Head of Academic Affairs (Subdirector Docente) [Departamento de Ingeniería Telemática] | July 2021 – Sept 2023
 
-### Technical Program Committee (TPC)
-I have served as a TPC member for over 24 different conferences (spanning 70+ editions), including:
-* **IEEE INFOCOM**
-* **IEEE PERCOM**
-* **IEEE GLOBECOM**
-* **ACM CoNEXT**
+Coordinated teaching schedules and the implementation of departmental educational policies.
 
-## Professional Memberships & External Service
-* **Senior Member**, IEEE.
-* **PhD Thesis Committees:** Served on committees at various institutions including University of Palermo, University of Cantabria, and UPC.
-* **Expert Reviewer:** Evaluator for dozens of research projects for national and international funding agencies.
+## Program Management & Mentorship
+
+* Director of the Master’s in Connected Industry 4.0 | Jan 2022 – Sept 2023 
+
+Managed the academic curriculum, industry-university partnerships, and student admissions for the specialized M.Sc. program.
+
+* International Academic Tutor Academic Years 2021/22, 2022/23 
+
+Served as the primary liaison and mentor for international exchange students, overseeing credit transfers and cultural integration.
+
+
+## Editorial Board Memberships
+
+### Current Positions
+* **Associate Editor**, *IEEE Transactions on Mobile Computing* (February 2025 – Present)
+* **Associate Editor**, *Elsevier Computer Communications* (February 2024 – Present)
+* **Editor**, *Oxford Academic's The Computer Journal* (January 2024 – Present)
+* **Regional Correspondent (EMEA)**, *Global Communications Newsletter (GCN)* within *IEEE Communications Magazine* (March 2020 – Present)
+
+### Past Positions
+* **Associate Editor**, *IEEE Open Journal of the Communications Society (IEEE OJ-COM)* (March 2020 – March 2025)
+* **Guest Editor**, *IEEE Communications Magazine* Feature Topic on "Serverless Mobile Computing: From Theory to Practice" (October 2023)
+* **Editorial Board Member**, *MDPI Electronics* - Networks section (July 2019 – February 2020)
+* **Associate Editor**, *IEEE Communications Letters* (September 2012 – January 2017)
+* **Guest Editor**, *Elsevier Computer Networks*: Special Issue on "Green Communications" (February 2015)
+
+---
+
+## Organizing Committee Roles
+
+### Recent Appointments
+* **Co-Chair**, 1st Winter School on AI for 6G Communications, Las Palmas de Gran Canaria, Spain (February 2025)
+* **Track Co-Chair**, *IEEE WCNC 2025* - Track 2: Medium Access Control and Networking, Milano, Italy (March 2025)
+
+### Past Roles
+* **Steering Committee Member**, *LESS '25*: Workshop on Serverless computing for pervasive cloud-edge-device systems and services (co-located with IEEE PerCom 2025)
+* **Co-Chair**, *SIS-SS 2024*: 7th IEEE Int. Workshop on Smart IoT Sensors and Social Systems for eHealth and Well-Being Applications (co-located with IEEE COMPSAC 2024)
+* **Track Co-Chair**, *IEEE ICCCN 2024* - Track 2: Network Architecture, Algorithm, Protocol, and Evaluation (July 2024)
+* **Co-Chair**, *LESS '24*, *LESS '23*, and *LESS '22* Workshops (co-located with IEEE PerCom)
+* **Co-Chair**, *SIS-SS 2023*, *SIS-SS 2022*, *SIS-SS 2021*, and *SIS-SS 2020* Workshops (co-located with IEEE COMPSAC)
+* **Publicity Co-chair**, *CLEEN 2022* (in conjunction with PIMRC 2022)
+* **Competition Co-Chair**, *EWSN 2018*
+* **Demo Co-Chair**, *SustainIT 2013*
+* **Local Arrangements Co-Chair**, *IEEE e-Energy 2012*
+* **TPC Chair**, *MeshTech '11*
+* **Publicity Chair**, *HotMESH 2010*
+* **Committee Member**, *Telecom I+D 2003*
+
+---
+
+## Technical Program Committee (TPC)
+
+### Regular Memberships
+* **IEEE INFOCOM**: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025
+* **IEEE WoWMoM**: 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024
+* **IEEE LANMAN**: 2016, 2017, 2018, 2019, 2020, 2021
+* **IEEE GLOBECOM**: 2008, 2009, 2010, 2011, 2012, 2013
+* **IEEE HotMESH / MACOM / TRIDENTCOM**: Multiple editions (2008–2013)
+
+### Additional Memberships (Selected)
+* **2024**: IEEE ICC Workshop on LLMs for 6G Networks
+* **2022–23**: IEEE PerCom
+* **2021**: Joint EuCNC & 6G Summit
+* **2020**: IEEE SMARTCOMP
+* **2018**: WS on Cloudified Architectures for 5G; EWSN
+* **2017**: CLEEN; IFIP Networking (Demo/Poster)
+* **2015**: IEEE PIMRC; SustainIT
+* **2013**: WiFlex; IEEE VTC Spring/Fall; Future Network & Mobile Summit; WiNMee
+* **2012**: ICCCN; ICNC; IFIP Networking
+
+---
+
+## PhD Thesis Committees
+
+| Candidate | University | Date | Link |
+|:--- |:--- |:--- |:--- |
+| **Domenico Schillaci** | Univ. de Palermo | 2025-07-10 | |
+| **Alain Collet** | Univ. Carlos III de Madrid | 2024-09-19 | [Teseo](https://www.educacion.gob.es/teseo/mostrarRef.do?ref=2247447) |
+| **Jordi Baranda** | Univ. Politécnica de Cataluña | 2021-11-09 | [Teseo](https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1978255) |
+| **Jorge Martin Perez** | Univ. Carlos III de Madrid | 2021-10-26 | [Teseo](https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1969649) |
+| **Nuria Molner** | Univ. Carlos III de Madrid | 2021-09-30 | [Teseo](https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1951564) |
+| **Vicente J. Mayor Gallego** | Univ. de Sevilla | 2020-06-03 | [Teseo](https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1859364) |
+| **Georgia Tseliou** | Univ. Politécnica de Cataluña | 2019-07-19 | [Teseo](https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1786196) |
+| **Sébastien Auroux** | Universität Paderborn | 2017-11-30 | |
+| **Nicola Bui** | Univ. Carlos III de Madrid | 2017-05-12 | [Teseo](https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1460594) |
+| **Qing Wang** | Univ. Carlos III de Madrid | 2016-05-19 | [Teseo](https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1302860) |
+| **Vincenzo Sciancalepore** | Univ. Carlos III de Madrid | 2015-11-27 | [Teseo](https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1214361) |
+| **David Gómez Fernández** | Univ. de Cantabria | 2015-05-14 | [Teseo](https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1125562) |
+| **José Núñez Martinez** | Univ. Politécnica de Cataluña | 2014-07-16 | [Teseo](https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1114594) |
+| **Jorge Navarro Ortiz** | Univ. de Granada | 2010-07-20 | [Teseo](https://www.educacion.gob.es/teseo/mostrarRef.do?ref=814260) |
+
+---
+
+## Evaluation Committees
+* **Panel de expertos**: Evaluación de solicitudes de proyectos de I+D+i (Retos y Excelencia), convocatoria **TEC2016**.
+* **Comisión de selección**: Área de Tecnologías Electrónica y de las Comunicaciones (TEC), subprograma de Tecnología de Comunicaciones (TMC). Vocal (**mayo 2012**).

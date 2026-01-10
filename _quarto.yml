@@ -20,7 +20,7 @@ website:
         text: Teaching
       - href: research.qmd
         text: Research
-      - href: students/index.qmd
+      - href: students.qmd
         text: Students
       - href: service.qmd
         text: Service

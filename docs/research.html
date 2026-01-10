@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-01-09">
 
 <title>Research – Pablo Serrano</title>
 <style>
@@ -117,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./students/index.html"> 
+    <a class="nav-link" href="./students.html"> 
 <span class="menu-text">Students</span></a>
   </li>  
   <li class="nav-item">
@@ -160,13 +159,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#key-research-areas" id="toc-key-research-areas" class="nav-link active" data-scroll-target="#key-research-areas">Key Research Areas</a>
+  <li><a href="#research-vision" id="toc-research-vision" class="nav-link active" data-scroll-target="#research-vision">Research Vision</a></li>
+  <li><a href="#active-research-lines" id="toc-active-research-lines" class="nav-link" data-scroll-target="#active-research-lines">Active Research Lines</a>
   <ul class="collapse">
-  <li><a href="#g-and-open-ran-o-ran" id="toc-g-and-open-ran-o-ran" class="nav-link" data-scroll-target="#g-and-open-ran-o-ran">1. 6G and Open RAN (O-RAN)</a></li>
-  <li><a href="#applied-machine-learning-in-networking" id="toc-applied-machine-learning-in-networking" class="nav-link" data-scroll-target="#applied-machine-learning-in-networking">2. Applied Machine Learning in Networking</a></li>
-  <li><a href="#performance-evaluation-of-wlan5g" id="toc-performance-evaluation-of-wlan5g" class="nav-link" data-scroll-target="#performance-evaluation-of-wlan5g">3. Performance Evaluation of WLAN/5G</a></li>
+  <li><a href="#network-intelligence-6g" id="toc-network-intelligence-6g" class="nav-link" data-scroll-target="#network-intelligence-6g">Network Intelligence &amp; 6G</a></li>
+  <li><a href="#sustainable-and-energy-aware-systems" id="toc-sustainable-and-energy-aware-systems" class="nav-link" data-scroll-target="#sustainable-and-energy-aware-systems">Sustainable and Energy-Aware Systems</a></li>
+  <li><a href="#network-privacy-and-security" id="toc-network-privacy-and-security" class="nav-link" data-scroll-target="#network-privacy-and-security">Network Privacy and Security</a></li>
   </ul></li>
-  <li><a href="#research-projects" id="toc-research-projects" class="nav-link" data-scroll-target="#research-projects">Research Projects</a></li>
+  <li><a href="#funded-projects" id="toc-funded-projects" class="nav-link" data-scroll-target="#funded-projects">Funded Projects</a>
+  <ul class="collapse">
+  <li><a href="#current-proyects" id="toc-current-proyects" class="nav-link" data-scroll-target="#current-proyects">Current proyects</a></li>
+  <li><a href="#past-projects" id="toc-past-projects" class="nav-link" data-scroll-target="#past-projects">Past projects</a></li>
+  </ul></li>
+  <li><a href="#opportunities" id="toc-opportunities" class="nav-link" data-scroll-target="#opportunities">Opportunities</a></li>
   </ul>
 </nav>
     </div>
@@ -176,6 +181,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Research</h1>
+<p class="subtitle lead">Advancing the future of Wireless Networks through Modeling, Softwarization, and AI.</p>
 </div>
 
 
@@ -183,12 +189,6 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">9 January 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -198,53 +198,140 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>My research focuses on the design, analysis, and performance evaluation of wireless communication systems and networking protocols. I am particularly interested in the intersection of <strong>Machine Learning</strong> and <strong>Network Softwarization</strong> to enable the next generation of mobile networks (6G).</p>
-<section id="key-research-areas" class="level2">
-<h2 class="anchored" data-anchor-id="key-research-areas">Key Research Areas</h2>
-<section id="g-and-open-ran-o-ran" class="level3">
-<h3 class="anchored" data-anchor-id="g-and-open-ran-o-ran">1. 6G and Open RAN (O-RAN)</h3>
-<p>We are investigating the “cloudification” of the Radio Access Network. Our work focuses on: * <strong>Resource Allocation:</strong> Using Deep Reinforcement Learning (DRL) for real-time radio resource management. * <strong>Serverless Networking:</strong> Exploring how FaaS (Function-as-a-Service) can be applied to mobile core functions to improve resiliency.</p>
+<section id="research-vision" class="level2">
+<h2 class="anchored" data-anchor-id="research-vision">Research Vision</h2>
+<p>My research focuses on the design, analysis, and performance evaluation of wireless communication systems. By bridging the gap between <strong>Control Theory</strong>, <strong>Machine Learning</strong>, and <strong>Experimental Networking</strong>, I aim to build more efficient, resilient, and energy-aware architectures for 5G, 6G, and beyond.</p>
+<div class="grid">
+<section id="g-open-ran" class="level3 g-col-12 g-col-md-4">
+<h3 class="anchored" data-anchor-id="g-open-ran"><span style="color: #003366;">6G &amp; Open RAN</span></h3>
+<p>Investigating the cloudification of the RAN. We focus on resource allocation using DRL and exploring <strong>Serverless Networking</strong> (FaaS) to improve mobile core resiliency.</p>
 </section>
-<section id="applied-machine-learning-in-networking" class="level3">
-<h3 class="anchored" data-anchor-id="applied-machine-learning-in-networking">2. Applied Machine Learning in Networking</h3>
-<p>Bridging the gap between theoretical ML and practical networking constraints: * <strong>Digital Twins:</strong> Developing high-fidelity network replicas for testing security and performance without disrupting live traffic. * <strong>Data Privacy:</strong> Analyzing MAC address de-anonymization and developing privacy-preserving mobility data models.</p>
+<section id="ai-driven-networking" class="level3 g-col-12 g-col-md-4">
+<h3 class="anchored" data-anchor-id="ai-driven-networking"><span style="color: #003366;">AI-Driven Networking</span></h3>
+<p>Developing <strong>Digital Twins</strong> for network performance and security. We also investigate privacy-preserving mobility models and MAC de-anonymization.</p>
 </section>
-<section id="performance-evaluation-of-wlan5g" class="level3">
-<h3 class="anchored" data-anchor-id="performance-evaluation-of-wlan5g">3. Performance Evaluation of WLAN/5G</h3>
-<p>Long-standing expertise in the mathematical modeling and experimental validation of: * <strong>IEEE 802.11 (Wi-Fi) Evolution:</strong> Performance limits of high-density WLANs. * <strong>Network Slicing:</strong> Efficiently partitioning 5G resources to meet diverse Service Level Agreements (SLAs).</p>
+<section id="wlan5g-performance" class="level3 g-col-12 g-col-md-4">
+<h3 class="anchored" data-anchor-id="wlan5g-performance"><span style="color: #003366;">WLAN/5G Performance</span></h3>
+<p>Mathematical modeling and experimental validation of <strong>IEEE 802.11</strong> evolution and <strong>Network Slicing</strong> mechanisms to meet diverse SLAs.</p>
+</section>
+</div>
+<hr>
+</section>
+<section id="active-research-lines" class="level2">
+<h2 class="anchored" data-anchor-id="active-research-lines">Active Research Lines</h2>
+<section id="network-intelligence-6g" class="level3">
+<h3 class="anchored" data-anchor-id="network-intelligence-6g">Network Intelligence &amp; 6G</h3>
+<p>We are moving towards AI-native architectures where network functions are optimized by “intelligence.”. <strong>Focus:</strong> Balancing the performance gain of AI with the reliability constraints of telco infrastructure.</p>
+</section>
+<section id="sustainable-and-energy-aware-systems" class="level3">
+<h3 class="anchored" data-anchor-id="sustainable-and-energy-aware-systems">Sustainable and Energy-Aware Systems</h3>
+<p>Building on my long-standing work in energy consumption anatomy, we currently research: <strong>Energy-Aware NFV:</strong> Scaling network functions under reliability and power constraints, and <strong>URLLC for V2N:</strong> Sustainable provision of ultra-reliable low-latency services.</p>
+</section>
+<section id="network-privacy-and-security" class="level3">
+<h3 class="anchored" data-anchor-id="network-privacy-and-security">Network Privacy and Security</h3>
+<p>Using ML to identify vulnerabilities in current protocols, Applying Explainable AI (XAI) to understand behavior-based access control and de-anonymization of random MAC addresses.</p>
 <hr>
 </section>
 </section>
-<section id="research-projects" class="level2">
-<h2 class="anchored" data-anchor-id="research-projects">Research Projects</h2>
-<p>I lead and participate in several high-impact projects funded by the European Commission and the Spanish National Research Agency.</p>
+<section id="funded-projects" class="level2">
+<h2 class="anchored" data-anchor-id="funded-projects">Funded Projects</h2>
+<section id="current-proyects" class="level3">
+<h3 class="anchored" data-anchor-id="current-proyects">Current proyects</h3>
 <table class="caption-top table">
 <thead>
 <tr class="header">
 <th style="text-align: left;">Project</th>
 <th style="text-align: left;">Role</th>
+<th style="text-align: left;">Duration</th>
+<th style="text-align: left;">Focus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://amazing6g.eu"><strong>AMAZING-6G (EU)</strong></a></td>
+<td style="text-align: left;">Principal Investigator</td>
+<td style="text-align: left;">01/25 + 30 m</td>
+<td style="text-align: left;">AI-native architectures for 6G</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://www.sns-itrust6g.com"><strong>iTrust6G (EU)</strong></a></td>
+<td style="text-align: left;">Principal Investigator</td>
+<td style="text-align: left;">01/24 + 30 m</td>
+<td style="text-align: left;">Network Intelligence for 6G</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://tucan6-cm.networks.imdea.org/en/"><strong>TUCAN6-CM (Reg.)</strong></a></td>
+<td style="text-align: left;">Principal Investigator</td>
+<td style="text-align: left;">01/24 + 30 m</td>
+<td style="text-align: left;">Network Intelligence for 6G</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="past-projects" class="level3">
+<h3 class="anchored" data-anchor-id="past-projects">Past projects</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Project</th>
+<th style="text-align: left;">Role</th>
+<th style="text-align: left;">Years</th>
 <th style="text-align: left;">Focus</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><strong>6G-DATADRIVEN</strong></td>
-<td style="text-align: left;">PI</td>
+<td style="text-align: left;">Principal Investigator</td>
+<td style="text-align: left;">2022-2025</td>
 <td style="text-align: left;">AI-native architectures for 6G</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>DAEMON</strong></td>
 <td style="text-align: left;">Investigator</td>
+<td style="text-align: left;">2021-2024</td>
 <td style="text-align: left;">Network Intelligence for 6G</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>SEARCHLIGHT</strong></td>
 <td style="text-align: left;">Investigator</td>
+<td style="text-align: left;">2023-2026</td>
 <td style="text-align: left;">High-visibility networking</td>
 </tr>
 </tbody>
 </table>
 <hr>
+<hr>
+</section>
+</section>
+<section id="opportunities" class="level2">
+<h2 class="anchored" data-anchor-id="opportunities">Opportunities</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Join the Lab
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I am always looking for motivated <strong>PhD students and Postdocs</strong> interested in Wireless Networking and/or AI.</p>
+<p>If you are interested in joining my research group, please send me your CV and a brief statement of interest. To ensure your email is processed, you <strong>must</strong> use the following subject line format (replacing the bracketed text with my office number found on this site):</p>
+<blockquote class="blockquote">
+<p><strong>Subject:</strong> <code>[Application] - [Office Number] - [Your Full Name]</code></p>
+</blockquote>
+<p><em>Applications that do not follow this format or omit the office number will be deprioritized.</em></p>
+</div>
+</div>
+<hr>
+<p><a href="./publications/index.html">Explore my latest Publications →</a></p>
 
 
 </section>
@@ -657,7 +744,7 @@ ul.task-list li input[type="checkbox"] {
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Pablo Serrano | Universidad Carlos III de Madrid | Last updated: 9 January 2026</p>
+<p>Pablo Serrano | Universidad Carlos III de Madrid | Last updated: <strong>?meta:date</strong></p>
 </div>
     <div class="nav-footer-right">
       &nbsp;

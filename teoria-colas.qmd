@@ -1,6 +1,7 @@
 ---
 title: "Teoría de Colas"
 subtitle: "Una introducción amable a la teoría de colas"
+date: ""
 ---
 
 ::: {layout-ncol=2}
@@ -24,7 +25,7 @@ Este sitio contiene el material actualizado del texto *"Una introducción amable
 ---
 
 ## Para Docentes
-Existe un **manual de soluciones detallado** destinado exclusivamente a profesores. Si deseas obtener una copia, por favor envía un correo a [pablo@it.uc3m.es](mailto:pablo@it.uc3m.es) desde tu cuenta institucional.
+Existe un **manual de soluciones detallado** destinado exclusivamente a profesores. Si deseas obtener una copia, por favor envíame un correo desde tu cuenta institucional ([Aquí tienes un línk a la página de contacto →](contact.qmd)).
 
 ---
 

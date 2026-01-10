@@ -1,5 +1,6 @@
 ---
 title: "Pablo Serrano"
+date: ""
 image: profile.jpg # Put a photo named profile.jpg in your folder
 about:
   template: trestles # Options: jolla, trestles, solana, marquee
@@ -41,7 +42,7 @@ I am a **Full Professor** at the [Department of Telematic Engineering](https://w
 
 [View older news in the Archive →](news-archive.qmd)
 
-## Some Recent Publications
+## Recent Publications
 
 ::: {#recent-pubs}
 :::
@@ -51,6 +52,7 @@ I am a **Full Professor** at the [Department of Telematic Engineering](https://w
 ## Links
 
 * [2nd Winter School on AI for 6G Communications](https://eventos.uc3m.es/138645/detail/2nd-winter-school-on-ai-for-6g-communications.html)
+* [Institute IMDEA Networks](https://networks.imdea.org/)
 * [Sociedad Científica de Ingeniería Telemática](https://www.scitel.es)
 * [Networking conference statistics](https://sites.cs.ucsb.edu/~almeroth/conf/stats/)
 * [Myron Hlynka's Queueing Theory Page](https://web2.uwindsor.ca/math/hlynka/queue.html)

@@ -1,18 +1,58 @@
 ---
 title: "Teaching"
+date: ""
+#page-layout: full
 ---
 
-I am involved in several undergraduate and graduate programs at the **School of Engineering (EPS)** of UC3M.
+I have been involved in telecommunications and networking education since 2002, covering undergraduate and graduate levels.
 
-## Current Courses (2025/2026)
 
-### Undergraduate
-* **Architecture of Access Networks** (Arquitectura de Redes de Acceso)
-* **Wireless and 5G Networks**
+## Current Courses
 
-### Graduate
-* **Connected Industry 4.0** (Master in Connected Industry 4.0)
-* **Advanced Wireless Communications** (Master in Telematics Engineering)
+| Course Name | Program | Role | Years |
+|:--- |:--- |:--- |:--- |
+| **Arquitectura de redes de acceso y medio compartido** | 2º Grado en Ing. de Comunicaciones Móviles y Espaciales / Telemática | Coordinator | 21/22, 22/23, 23/24, 24/25, 25/26 |
+| **Redes Inalámbricas y 5G** | Máster en Industria Conectada 4.0 | Coordinator | 19/20, 20/21, 21/22, 22/23, 23/24, 24/25, 25/26 |
+| **Redes y protocolos de comunicación** | Grado en Ingeniería Robótica | Coordinator | 24/25, 25/26 |
 
 ---
-*For more details on course materials, please visit [Aula Global](https://aulaglobal.uc3m.es).*
+
+## Past Lectures
+
+### Undergraduate Level (Engineering Degrees)
+
+| Course Name | Program | Role | Years |
+|:--- |:--- |:--- |:--- |
+| **Teoría de Redes** | 2º Grado en Ing. Telemática | Lecturer / Coord. | 09/10 to 13/14 (Coord), 14/15 (Coord), 15/16 to 18/19 (Coord), 19/20 (Coord), 20/21 to 24/25 |
+| **Redes Inalámbricas y Móviles** | Optativa Grado Ing. Sonido e Imagen / Tec. Telecom | Lecturer / Coord. | 19/20, 20/21 |
+| **Transmisión de Datos** | 3º Ing. Telecomunicación | Lecturer / Coord. | 02/03 to 06/07, 07/08 (C), 08/09 (C) |
+| **Redes y Servicios de Comunicaciones I** | 2º Ing. Téc. Telecom. - Sistemas | Lecturer | 02/03 to 07/08 |
+| **Redes y Servicios de Comunicaciones II** | 3º Ing. Téc. Telecom. - Sistemas | Lecturer / Coord. | 06/07, 07/08 (C), 08/09 (C) |
+| **Redes y Servicios de Comunicaciones** | 2º Ing. Téc. Telecom. - Telemática | Lecturer / Coord. | 03/04 to 05/06, 06/07 (C), 07/08 (C) |
+| **Ingeniería de Servicios** | 5º Ing. Telecomunicación | Lecturer | 07/08 |
+
+### Graduate Level (M.Sc. in Telematics Engineering)
+
+| Course Name | Role | Years |
+|:--- |:--- |:--- |
+| **Simulation of Networks and Telematics Apps** | Coordinator | 12/13 (C), 14/15 to 20/21 (C) |
+| **Wireless Communications** | Lecturer / Coord. | 14/15 (C), 15/16 to 19/20 |
+| **Performance Evaluation of Networks** | Coordinator | 12/13 (C), 14/15 (C), 15/16 (C), 16/17, 18/19 (C) |
+| **Internet Measurement** | Lecturer / Coord. | 13/14 (C), 14/15 to 16/17, 17/18 (C) |
+| **Mobile Systems Communications** | Coordinator | 07/08 (C), 08/09, 10/11 (C), 11/12 (C) |
+
+
+---
+
+## Mentoring & Supervision
+
+I am always interested in supervising motivated students for their **Final Degree Project (TFG)** or **Master's Thesis (TFM)**. Current topics of interest include:
+
+* **Experimental 5G/6G:** Working with Open RAN and software-defined radio stacks.
+* **Machine Learning for Networking:** Resource orchestration and traffic modeling.
+* **Sustainability:** Energy-efficient MAC protocols and virtualization.
+
+::: {.callout-important}
+### Note for Prospective Students
+If you would like to work with me, please follow the application instructions on my [Research Page](research.qmd#opportunities).
+:::

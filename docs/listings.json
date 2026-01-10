@@ -1,18 +1,10 @@
 [
   {
-    "listing": "/students/index.html",
-    "items": []
-  },
-  {
     "listing": "/index.html",
     "items": []
   },
   {
     "listing": "/publications/index.html",
-    "items": []
-  },
-  {
-    "listing": "/talks/index.html",
     "items": []
   }
 ]

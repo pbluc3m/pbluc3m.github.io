@@ -1,33 +1,56 @@
 ---
-title: "Talks & Tutorials"
-listing:
-  id: talks-listing
-  contents: talks_list.yml
-  type: default
-  sort: "date desc"
-  categories: true
-  field-display-names:
-    venue: "Venue"
+title: "Talks, Tutorials & Seminars"
+date: ""
 ---
 
-I regularly give talks and tutorials at international conferences and universities. Below is a selection of recent materials.
+A selection of recent and past invited talks, tutorials, and seminars at international universities, research centers, and conferences.
 
-::: {#talks-listing}
-:::
+## 2025
+* **Optimizing 802.11 WLANs: Key Insights for High-Performance MAC Configurations Leveraging Experimental Studies for Capacity and QoE** Wireless Broadband Alliance (online), 2025-12-10  
+  [[Slides]](slides/2025-12-10-WBA-EDCA.pdf)
 
-<style>
-/* Style the PDF link to look like a small UC3M button */
-.listing-description a {
-  display: inline-block;
-  background-color: #004884;
-  color: white !important;
-  padding: 2px 10px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  text-decoration: none;
-  margin-top: 10px;
-}
-.listing-description a:hover {
-  background-color: #002b54;
-}
-</style>
+* **From MAC De-anonymization to Digital Twins: Securing Wireless Mobility Data in the Age of AI** Università degli Studi di Brescia, 2025-10-15  
+  [[Slides]](slides/2025-10-15-Brescia-DT.pdf)
+
+* **Resource Scaling for Sustainable Provision of URLLC Services: Static and Dynamic Optimization** Università degli Studi di Brescia, 2025-10-10  
+  [[Slides]](slides/2025-10-10-Brescia-scaling.pdf)
+
+## 2023
+* **Towards the Efficient and Resilient Cloudification of the Radio Access Network** Keynote talk, 2nd International Workshop on Edge Network Softwarization (ENS 2023), Madrid, 2023-06-23  
+  [[Slides]](slides/2023-06-23-ENS-cloudifying.pdf)
+
+* **Cloudifying the mobile network stack: benefits and challenges** Consiglio Nazionale delle Ricerche, Pisa, 2023-05-25  
+  [[Slides]](slides/2023-05-25-CNR-cloudifying.pdf)
+
+* **Cloudifying the mobile network stack: benefits and challenges** Università di Pisa, 2023-05-24, [[Slides]](slides/2023-05-24-UniPi-cloudifying.pdf)
+
+* **Is Mobile Networking Ready for the Serverless Revolution?** Invited talk, ETSI NFV Conference: Celebrating the 10th Anniversary of ETSI NFV, Sophia Antipolis, France, 2023-03-07  
+  [[Slides]](slides/2023-03-07-ETSI-Serverless.pdf)
+
+## 2022
+* **Nuberu: Reliable RAN Virtualization in Shared Platforms** Università degli Studi di Brescia, 2022-12-12, [[Slides]](slides/2022-12-12-Brescia-Nuberu.pdf)
+
+* **Balloons in the Sky: Unveiling the Characteristics and Trade-offs of the Google Loon Service** Università degli Studi di Brescia, 2022-12-04, [[Slides]](slides/2022-12-02-Brescia-Loon.pdf)
+
+* **Balloons in the Sky: Unveiling the Characteristics and Trade-offs of the Google Loon Service** Moscow Telecommunication Seminar (online), 2022-03-18, [[Slides]](slides/2022-03-18-WNL-IITP-Loon.pdf)  
+
+## 2019 – 2020
+* **Realizing network challenges for Network Slicing** Instituto de Computação - UFF (online), 2020-09-03, [[Slides]](slides/2020-09-03-invited-ic-uff-realizing.pdf)
+
+* **Realizing network challenges for Network Slicing** Keynote talk, IEEE Latincom 2019, Salvador, Brazil, 2019-11-13  
+  [[Slides]](slides/2019-11-13-keynote-latincom-realizing.pdf)
+
+## Pre-2019 (Selected)
+* **A Primer on 5G Network Slicing: Concepts, Algorithms, and Practice** Tutorial, IEEE CAMAD 2018, Barcelona, 2018-09-19, [[Slides]](slides/2018-09-19-tutorial-camad-5g-slicing.pdf)
+
+* **Experimental QoE evaluation of multicast video delivery over IEEE 802.11aa WLANs** University of Edinburgh, 2017-09-28 | Università degli Studi di Brescia, 2017-05-02, [[Slides]](slides/2017-09-28-invited-edinburgh-80211aa.pdf)
+
+* **Control theoretic optimization of 802.11 WLANs: From theory to practice** Politecnico di Milano, Milano, 2016-06-23, [[Slides]](slides/2016-06-23-invited-talk-polimi.pdf)
+
+* **Fair and Efficient Operation of Virtualized Dense 802.11 WLANs: Challenges and Enablers** Huawei Technologies, Paris, 2015-06-30, [[Slides]](slides/2015-06-30-huawei-talk.pdf)
+
+* **Control theoretic optimization of 802.11 WLANs: Design, implementation and experimental evaluation** Trinity College Dublin, 2015-06-10, [[Slides]](slides/2015-06-10-talk-tcd-cac-dac.pdf)
+
+* **Greening Wireless Communications: A Top-Down Overview** University of Edinburgh, 2014-03-07, [[Slides]](slides/2014-03-07-talk-ued-greening.pdf)
+
+* **Greening (Heterogeneous) Wireless Networks: Overview and Future Directions** Universidad Pompeu Fabra, Barcelona, 2014-02-27
