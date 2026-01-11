@@ -8,8 +8,8 @@ website:
     background: "#002b54" # UC3M Navy
     type: dark           # Makes text white
     left:
-      - href: index.qmd
-        text: Home
+#      - href: index.qmd
+#        text: Home
       - href: bio.qmd
         text: Bio
       - href: contact.qmd
