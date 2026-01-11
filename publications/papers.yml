@@ -7,7 +7,7 @@
   publication: "IEEE Transactions on Network and Service Management"
   year: 2025
   type: "journal"
-  categories: [Journal, V2N, Sustainability]
+  categories: [Journal, JCR, Vehicular, Energy]
   path: "https://doi.org/10.1109/TNSM.2025.3605408"
 
 - title: "DiWi: A Transformer-Based Digital Twin for Wireless Mobility"
@@ -15,7 +15,7 @@
   publication: "Elsevier Computer Networks"
   year: 2025
   type: "journal"
-  categories: [Journal, Digital Twin, Machine Learning]
+  categories: [Journal, JCR, Machine Learning, WiFi]
   path: "https://doi.org/10.1016/j.comnet.2025.111571"
 
 - title: "Minimum-Cost Design of Auto-Scaling Server Farms Providing Reliability Guarantees"
@@ -23,7 +23,7 @@
   publication: "IEEE Open Journal of the Communications Society"
   year: 2025
   type: "journal"
-  categories: [Journal, NFV, Reliability]
+  categories: [Journal, JCR, NFV/Cloud, QoS/Reliability]
   path: "https://doi.org/10.1109/OJCOMS.2025.3586088"
 
 - title: "ATELIER: service tailored and limited-trust network analytics using cooperative learning"
@@ -31,7 +31,7 @@
   publication: "IEEE Open Journal of the Communications Society"
   year: 2024
   type: "journal"
-  categories: [Journal, 5G, Cooperative Learning]
+  categories: [Journal, JCR, Machine Learning, 5G/6G]
   path: "https://doi.org/10.1109/OJCOMS.2024.3401746"
 
 - title: "Can I Add a VR Flow? On the Maximum Capacity of 5G to Support 360º Video"
@@ -39,7 +39,7 @@
   publication: "IEEE Communications Magazine"
   year: 2024
   type: "journal"
-  categories: [Journal, 5G, VR]
+  categories: [Journal, JCR, 5G/6G, QoS/Reliability]
   path: "https://doi.org/10.1109/MCOM.005.2300756"
 
 - title: "Performance Trade-offs of Auto Scaling Schemes for NFV with Reliability Requirements"
@@ -47,7 +47,7 @@
   publication: "Elsevier Computer Communications"
   year: 2023
   type: "journal"
-  categories: [Journal, NFV, Reliability]
+  categories: [Journal, JCR, NFV/Cloud, QoS/Reliability]
   path: "https://doi.org/10.1016/j.comcom.2023.10.001"
 
 - title: "Network Automation and Data Analytics in 3GPP 5G Systems"
@@ -55,7 +55,7 @@
   publication: "IEEE Network"
   year: 2024
   type: "journal"
-  categories: [Journal, 5G, Data Analytics]
+  categories: [Journal, JCR, 5G/6G, Machine Learning]
   path: "https://doi.org/10.1109/MNET.2023.3321524"
 
 - title: "Energy-Aware Adaptive Scaling of Server Farms for NFV with Reliability Requirements"
@@ -63,7 +63,7 @@
   publication: "IEEE Transactions on Mobile Computing"
   year: 2023
   type: "journal"
-  categories: [Journal, NFV, Energy Efficiency]
+  categories: [Journal, JCR, NFV/Cloud, Energy]
   path: "https://doi.org/10.1109/TMC.2023.3288604"
 
 - title: "Serverless Vehicular Edge Computing for the Internet of Vehicles"
@@ -71,7 +71,7 @@
   publication: "IEEE Internet Computing"
   year: 2023
   type: "journal"
-  categories: [Journal, Vehicular Computing, Edge Computing]
+  categories: [Journal, JCR, Vehicular, NFV/Cloud]
   path: "https://doi.org/10.1109/MIC.2023.3271641"
 
 - title: "Design and Validation of an Open Source Cloud Native Mobile Network"
@@ -79,7 +79,7 @@
   publication: "IEEE Communications Magazine"
   year: 2022
   type: "journal"
-  categories: [Journal, 5G, Cloud Native]
+  categories: [Journal, JCR, 5G/6G, NFV/Cloud]
   path: "https://doi.org/10.1109/MCOM.003.2200195"
 
 - title: "Exploiting radio access information to improve performance of remote-controlled mobile robots in MEC-based 5G networks"
@@ -87,7 +87,7 @@
   publication: "Elsevier Computer Networks"
   year: 2022
   type: "journal"
-  categories: [Journal, Robotics, MEC, 5G]
+  categories: [Journal, JCR, 5G/6G, Vehicular]
   path: "https://doi.org/10.1016/j.comnet.2022.109061"
 
 - title: "Monitoring Platform Evolution towards Serverless Computing for 5G and Beyond Systems"
@@ -95,7 +95,7 @@
   publication: "IEEE Transactions on Network and Service Management"
   year: 2022
   type: "journal"
-  categories: [Journal, Serverless, 5G, Monitoring]
+  categories: [Journal, JCR, NFV/Cloud, 5G/6G]
   path: "https://doi.org/10.1109/TNSM.2022.3150586"
 
 - title: "Analysis of scaling policies for NFV providing 5G/6G reliability levels with fallible servers"
@@ -103,7 +103,7 @@
   publication: "IEEE Transactions on Network and Service Management"
   year: 2022
   type: "journal"
-  categories: [Journal, NFV, Reliability, 6G]
+  categories: [Journal, JCR, NFV/Cloud, QoS/Reliability]
   path: "https://doi.org/10.1109/TNSM.2022.3147146"
 
 # 53
@@ -113,7 +113,7 @@
   publication: "IEEE Transactions on Mobile Computing"
   year: 2023
   type: "journal"
-  categories: [Journal, Google Loon, Measurements]
+  categories: [Journal, JCR, Measurements]
   path: "https://doi.org/10.1109/TMC.2021.3135976"
 
 - title: "Deployment and Evaluation of an Industry 4.0 Use Case over 5G"
@@ -121,7 +121,7 @@
   publication: "IEEE Communications Magazine"
   year: 2021
   type: "journal"
-  categories: [Journal, Industry 4.0, 5G]
+  categories: [Journal, JCR, 5G/6G, Vehicular]
   path: "https://doi.org/10.1109/MCOM.001.2001104"
 
 - title: "An Experimental Publish-Subscribe Monitoring Assessment to Beyond 5G Networks"
@@ -129,7 +129,7 @@
   publication: "EURASIP Journal on Wireless Communications and Networking"
   year: 2021
   type: "journal"
-  categories: [Journal, 5G, Monitoring]
+  categories: [Journal, JCR, 5G/6G, Measurements]
   path: "https://doi.org/10.1186/s13638-021-01962-y"
 
 - title: "ACHO: A Framework for Flexible Re-Orchestration of Virtual Network Functions"
@@ -137,7 +137,7 @@
   publication: "Elsevier Computer Networks"
   year: 2020
   type: "journal"
-  categories: [Journal, NFV, Orchestration]
+  categories: [Journal, JCR, NFV/Cloud]
   path: "https://doi.org/10.1016/j.comnet.2020.107382"
 
 - title: "Experimenting with open source tools to deploy a multi-service and multi-slice mobile network"
@@ -145,7 +145,7 @@
   publication: "Elsevier Computer Communications"
   year: 2020
   type: "journal"
-  categories: [Journal, Network Slicing, Open Source]
+  categories: [Journal, JCR, Network Slicing, 5G/6G]
   path: "https://doi.org/10.1016/j.comcom.2019.11.003"
 
 - title: "A Future-proof Architecture for Management and Orchestration of Multi-domain NextGen Networks"
@@ -153,7 +153,7 @@
   publication: "IEEE Access"
   year: 2019
   type: "journal"
-  categories: [Journal, MANO, NextGen]
+  categories: [Journal, JCR, NFV/Cloud, 5G/6G]
   path: "https://doi.org/10.1109/ACCESS.2019.2923364"
 
 - title: "Experimental QoE Evaluation of Multicast Video Delivery over IEEE 802.11aa WLANs"
@@ -161,7 +161,7 @@
   publication: "IEEE Transactions on Mobile Computing"
   year: 2019
   type: "journal"
-  categories: [Journal, 802.11aa, Multicast, QoE]
+  categories: [Journal, JCR, WiFi, QoS/Reliability]
   path: "https://doi.org/10.1109/TMC.2018.2876000"
   
 # 46 
@@ -171,7 +171,7 @@
   publication: "IEEE Wireless Communications Magazine"
   year: 2018
   type: "journal"
-  categories: [Journal, Network Slicing, Open Source]
+  categories: [Journal, JCR, Network Slicing, 5G/6G]
   path: "https://doi.org/10.1109/MWC.2018.1800050"
 
 - title: "Performance Assessment of Open Software Platforms for 5G Prototyping"
@@ -179,7 +179,7 @@
   publication: "IEEE Wireless Communications Magazine"
   year: 2018
   type: "journal"
-  categories: [Journal, 5G, Prototyping]
+  categories: [Journal, JCR, 5G/6G, Measurements]
   path: "https://doi.org/10.1109/MWC.2018.1800049"
 
 - title: "Design, implementation and experimental validation of a 5G energy-aware reconfigurable hotspot"
@@ -187,7 +187,7 @@
   publication: "Elsevier Computer Communications"
   year: 2018
   type: "journal"
-  categories: [Journal, 5G, Energy Efficiency]
+  categories: [Journal, JCR, 5G/6G, Energy]
   path: "https://doi.org/10.1016/j.comcom.2018.06.008"
 
 - title: "The path towards a cloud-aware mobile network protocol stack"
@@ -195,7 +195,7 @@
   publication: "Transactions on Emerging Telecommunications Technologies"
   year: 2018
   type: "journal"
-  categories: [Journal, Cloud, Protocol Stack]
+  categories: [Journal, JCR, NFV/Cloud, 5G/6G]
   path: "https://doi.org/10.1002/ett.3312"
 
 - title: "Design and Analysis of 5G Scenarios with simmer: An R Package for Fast DES Prototyping"
@@ -203,7 +203,7 @@
   publication: "IEEE Communications Magazine"
   year: 2018
   type: "journal"
-  categories: [Journal, 5G, Simulation, R]
+  categories: [Journal, JCR, 5G/6G, Measurements]
   path: "https://doi.org/10.1109/MCOM.2018.1700960"
 
 - title: "Experimental evaluation of SDN-based service provisioning in mobile networks"
@@ -211,17 +211,17 @@
   publication: "Elsevier Computer Standards and Interfaces"
   year: 2018
   type: "journal"
-  categories: [Joournal, SDN]
+  categories: [Journal, JCR, NFV/Cloud]
   path: "https://doi.org/10.1016/j.csi.2018.01.004"
 
-# 40 
+# 40
 
 - title: "Fair Coexistence of Scheduled and Random Access Wireless Networks: Unlicensed LTE/WiFi"
   authors: "C. Cano, D. Leith, A. Garcia-Saavedra, P. Serrano"
   publication: "IEEE/ACM Transactions on Networking"
   year: 2017
   type: "journal"
-  categories: [Journal, LTE, WiFi, Coexistence]
+  categories: [Journal, JCR, WiFi, 5G/6G]
   path: "http://dx.doi.org/10.1109/TNET.2017.2731377"
 
 - title: "On the Energy Efficiency of Rate and Transmission Power Control in 802.11"
@@ -229,7 +229,7 @@
   publication: "Elsevier Computer Communications"
   year: 2017
   type: "journal"
-  categories: [Journal, 802.11, Energy Efficiency]
+  categories: [Journal, JCR, WiFi, Energy]
   path: "https://doi.org/10.1016/j.comcom.2017.07.002"
 
 - title: "uNap: Practical Micro-Sleeps for 802.11 WLANs"
@@ -237,7 +237,7 @@
   publication: "Elsevier Computer Communications"
   year: 2017
   type: "journal"
-  categories: [Journal, 802.11, Energy Efficiency]
+  categories: [Journal, JCR, WiFi, Energy]
   path: "https://doi.org/10.1016/j.comcom.2017.06.008"
 
 - title: "Resource-on-Demand Schemes in 802.11 WLANs with Non-Zero Start-Up Times"
@@ -245,7 +245,7 @@
   publication: "IEEE Journal on Selected Areas in Communications"
   year: 2016
   type: "journal"
-  categories: [Journal, 802.11, Resource Management]
+  categories: [Journal, JCR, WiFi, Energy]
   path: "http://dx.doi.org/10.1109/JSAC.2016.2624158"
 
 - title: "Flex5Gware: Flexible and efficient hardware and software platforms for 5G network elements and devices"
@@ -253,7 +253,7 @@
   publication: "Wiley Trans. Emerging Tel. Tech."
   year: 2016
   type: "journal"
-  categories: [Journal, 5G]
+  categories: [Journal, JCR, 5G/6G]
   path: "http://dx.doi.org/10.1002/ett.3070"
 
 - title: "Optimal configuration of a resource-on-demand 802.11 WLAN with non-zero start-up times"
@@ -261,7 +261,7 @@
   publication: "Elsevier Computer Communications"
   year: 2016
   type: "journal"
-  categories: [Journal, ]
+  categories: [Journal, JCR, WiFi, Energy]
   path: "http://dx.doi.org/10.1016/j.comcom.2016.04.022"
 
 - title: "Thwarting Selfish Behavior in 802.11 WLANs"
@@ -269,7 +269,7 @@
   publication: "IEEE/ACM Transactions on Networking"
   year: 2016
   type: "journal"
-  categories: [Journal, 802.11, Game Theory]
+  categories: [Journal, JCR, WiFi, Control Theory]
   path: "http://dx.doi.org/10.1109/TNET.2014.2369535"
 
 - title: "An OpenFlow Architecture for Energy Aware Traffic Engineering in Mobile Networks"
@@ -277,7 +277,7 @@
   publication: "IEEE Network"
   year: 2015
   type: "journal"
-  categories: [Journal, Energy]
+  categories: [Journal, JCR, Energy, NFV/Cloud]
   path: "http://dx.doi.org/10.1109/MNET.2015.7166191"
 
 - title: "Experimenting with Commodity 802.11 Hardware: Overview and Future Directions"
@@ -285,7 +285,7 @@
   publication: "IEEE Communications Surveys and Tutorials"
   year: 2015
   type: "journal"
-  categories: [Journal, 802.11, Experimental]
+  categories: [Journal, JCR, WiFi, Measurements]
   path: "http://dx.doi.org/10.1109/COMST.2015.2417493"
 
 - title: "Adaptive Mechanism for Distributed Opportunistic Scheduling"
@@ -293,7 +293,7 @@
   publication: "IEEE Transactions on Wireless Communications"
   year: 2015
   type: "journal"
-  categories: [Journal]
+  categories: [Journal, JCR, Control Theory]
   path: "http://dx.doi.org/10.1109/TWC.2015.2407367"
 
 # 30 
@@ -303,7 +303,7 @@
   publication: "IEEE/ACM Transactions on Networking"
   year: 2015
   type: "journal"
-  categories: [Journal, Energy, WiFi]
+  categories: [Journal, JCR, WiFi, Energy]
   path: "http://dx.doi.org/10.1109/TNET.2014.2321975"
 
 - title: "Per-frame Energy Consumption in 802.11 Devices and its Implication on Modeling and Design"
@@ -311,7 +311,7 @@
   publication: "IEEE/ACM Transactions on Networking"
   year: 2015
   type: "journal"
-  categories: [Journal, Energy, WiFi]
+  categories: [Journal, JCR, WiFi, Energy]
   path: "http://dx.doi.org/10.1109/TNET.2014.2322262"
 
 - title: "An Architecture for Software Defined Wireless Networking"
@@ -319,7 +319,7 @@
   publication: "IEEE Wireless Communications"
   year: 2014
   type: "journal"
-  categories: [Journal, SDN, Wireless, Architecture]
+  categories: [Journal, JCR, NFV/Cloud, WiFi]
   path: "http://dx.doi.org/10.1109/MWC.2014.6845049"
 
 - title: "Energy-efficient Optimization for Distributed Opportunistic Scheduling"
@@ -327,7 +327,7 @@
   publication: "IEEE Communications Letters"
   year: 2014
   type: "journal"
-  categories: [Journal, Energy]
+  categories: [Journal, JCR, Energy, Control Theory]
   path: "http://dx.doi.org/10.1109/LCOMM.2014.2315210"
 
 - title: "Performance Analysis and Algorithm Selection for Reliable Multicast in IEEE 802.11aa Wireless LAN"
@@ -335,7 +335,7 @@
   publication: "IEEE Transactions on Vehicular Technology"
   year: 2014
   type: "journal"
-  categories: [Journal, 802.11aa, Multicast, Reliability]
+  categories: [Journal, JCR, WiFi, QoS/Reliability]
   path: "http://dx.doi.org/10.1109/TVT.2014.2306014"
 
 - title: "VoIPiggy: Analysis and Implementation of a Mechanism to Boost Capacity in IEEE 802.11 WLANs Carrying VoIP traffic"
@@ -343,7 +343,7 @@
   publication: "IEEE Transactions on Mobile Computing"
   year: 2014
   type: "journal"
-  categories: [Journal, 802.11, VoIP, Capacity]
+  categories: [Journal, JCR, WiFi, QoS/Reliability]
   path: "http://dx.doi.org/10.1109/TMC.2013.114"
 
 - title: "A First Implementation and Evaluation of the IEEE 802.11aa Group Addressed Transmission Service"
@@ -351,7 +351,7 @@
   publication: "ACM Computer Communication Review"
   year: 2014
   type: "journal"
-  categories: [Journal, 802.11aa, Experimental]
+  categories: [Journal, JCR, WiFi, Measurements]
   path: "http://dx.doi.org/10.1145/2567561.2567567"
 
 - title: "A Game Theoretic Approach to Distributed Opportunistic Scheduling"
@@ -359,7 +359,7 @@
   publication: "IEEE/ACM Transactions on Networking"
   year: 2013
   type: "journal"
-  categories: [Journal, Game Theory, Scheduling]
+  categories: [Journal, JCR, Control Theory]
   path: "http://dx.doi.org/10.1109/TNET.2012.2228500"
 
 - title: "Device to device communications with WiFi Direct: overview and experimentation"
@@ -367,7 +367,7 @@
   publication: "IEEE Wireless Communications"
   year: 2013
   type: "journal"
-  categories: [Journal, WiFi Direct, D2D]
+  categories: [Journal, JCR, WiFi, Measurements]
   path: "http://dx.doi.org/10.1109/MWC.2013.6549288"
 
 - title: "Control Theoretic Optimization of 802.11 WLANs: Implementation and Experimental Evaluation"
@@ -375,7 +375,7 @@
   publication: "Elsevier Computer Networks"
   year: 2013
   type: "journal"
-  categories: [Journal, 802.11, Control Theory, Optimization]
+  categories: [Journal, JCR, WiFi, Control Theory]
   path: "http://dx.doi.org/10.1016/j.comnet.2012.09.010"
 
 # 20 
@@ -385,7 +385,7 @@
   publication: "Elsevier Computer Communications"
   year: 2012
   type: "journal"
-  categories: [Journal, Green Communications, Energy Efficiency]
+  categories: [Journal, JCR, Energy]
   path: "http://dx.doi.org/10.1016/j.comcom.2012.06.011"
 
 - title: "Providing Throughput and Fairness Guarantees in Virtualized WLANs through Control Theory"
@@ -393,7 +393,7 @@
   publication: "Springer Mobile Networks and Applications"
   year: 2012
   type: "journal"
-  categories: [Journal, Virtualization, WLAN, Control Theory]
+  categories: [Journal, JCR, WiFi, Control Theory]
   path: "http://dx.doi.org/10.1007/s11036-012-0382-2"
 
 - title: "Throughput and energy-aware routing for 802.11 based Mesh Networks"
@@ -401,7 +401,7 @@
   publication: "Elsevier Computer Communications"
   year: 2012
   type: "journal"
-  categories: [Journal, Energy, WiFi]
+  categories: [Journal, JCR, WiFi, Energy]
   path: "http://dx.doi.org/10.1016/j.comcom.2012.04.004"
 
 - title: "Balancing Energy Efficiency and Throughput Fairness in IEEE 802.11 WLANs"
@@ -409,15 +409,15 @@
   publication: "Elsevier Pervasive and Mobile Computing"
   year: 2012
   type: "journal"
-  categories: [Journal, 802.11, Energy Efficiency, Fairness]
+  categories: [Journal, JCR, WiFi, Energy]
   path: "http://dx.doi.org/10.1016/j.pmcj.2012.03.006"
-  
+
 - title: "Providing Throughput Guarantees in Heterogeneous Wireless Mesh Networks"
   authors: "A. de la Oliva, A. Banchs, P. Serrano, F. Zdarsky"
   publication: "Wiley Wireless Communications and Mobile Computing"
   year: 2014
   type: "journal"
-  categories: [Journal, Mesh Networks, QoS]
+  categories: [Journal, JCR, WiFi, QoS/Reliability]
   path: "http://dx.doi.org/10.1002/wcm.2192"
 
 - title: "A Control Theoretic Scheme for Efficient Video Transmission over IEEE 802.11e EDCA WLANs"
@@ -425,7 +425,7 @@
   publication: "ACM Transactions on Multimedia Computing, Communications and Applications"
   year: 2012
   type: "journal"
-  categories: [Journal, Video, 802.11e]
+  categories: [Journal, JCR, WiFi, Control Theory]
   path: "http://doi.acm.org/10.1145/2240136.2240142"
 
 - title: "A Control Theoretic Approach to Distributed Optimal Configuration of 802.11 WLANs"
@@ -433,7 +433,7 @@
   publication: "IEEE Transactions on Mobile Computing"
   year: 2011
   type: "journal"
-  categories: [Journal, WiFi, 802.11]
+  categories: [Journal, JCR, WiFi, Control Theory]
   path: "http://doi.ieeecomputersociety.org/10.1109/TMC.2010.231"
 
 - title: "On the Trade-Off between Throughput Maximization and Energy Consumption Minimization in IEEE 802.11 WLANs"
@@ -441,7 +441,7 @@
   publication: "Journal of Communications and Networks"
   year: 2010
   type: "journal"
-  categories: [Journal, Energy]
+  categories: [Journal, JCR, WiFi, Energy]
   path: "#"
 
 - title: "Optimal Configuration of 802.11e EDCA for Real-Time and Data Traffic"
@@ -449,7 +449,7 @@
   publication: "IEEE Transactions on Vehicular Technology"
   year: 2010
   type: "journal"
-  categories: [Journal, 802.11e, QoS, Optimization]
+  categories: [Journal, JCR, WiFi, QoS/Reliability]
   path: "http://dx.doi.org/10.1109/TVT.2010.2043274"
 
 - title: "Providing Service Guarantees in 802.11e EDCA WLANs with legacy stations"
@@ -457,7 +457,7 @@
   publication: "IEEE Transactions on Mobile Computing"
   year: 2010
   type: "journal"
-  categories: [Journal, 802.11e, WiFi]
+  categories: [Journal, JCR, WiFi, QoS/Reliability]
   path: "http://doi.ieeecomputersociety.org/10.1109/TMC.2010.52"
 
 # 10 
@@ -467,7 +467,7 @@
   publication: "IEEE Communications Letters"
   year: 2010
   type: "journal"
-  categories: [Journal, WiFi]
+  categories: [Journal, JCR, WiFi]
   path: "http://dx.doi.org/10.1109/LCOMM.2010.02.092026"
 
 - title: "FloorNet: Deployment and Evaluation of a Multihop Wireless 802.11 Testbed"
@@ -475,7 +475,7 @@
   publication: "EURASIP Journal on Wireless Communications and Networking"
   year: 2010
   type: "journal"
-  categories: [Journal, WiFi, Experimental]
+  categories: [Journal, JCR, WiFi, Measurements]
   path: "#"
 
 - title: "A Control Theoretic Approach for Throughput Optimization in IEEE 802.11e EDCA WLANs"
@@ -483,7 +483,7 @@
   publication: "Springer Mobile Networks and Applications"
   year: 2009
   type: "journal"
-  categories: [Journal, WiFi]
+  categories: [Journal, JCR, WiFi, Control Theory]
   path: "#"
 
 - title: "Revisiting 802.11e EDCA performance analysis"
@@ -491,7 +491,7 @@
   publication: "Wireless Personal Communications"
   year: 2007
   type: "journal"
-  categories: [Journal, 802.11e, EDCA]
+  categories: [Journal, JCR, WiFi]
   path: "#"
 
 - title: "Reducing the Impact of Legacy Stations on Voice Traffic in 802.11e EDCA WLANs"
@@ -499,7 +499,7 @@
   publication: "IEEE Communications Letters"
   year: 2007
   type: "journal"
-  categories: [Journal, 802.11e]
+  categories: [Journal, JCR, WiFi, QoS/Reliability]
   path: "http://dx.doi.org/10.1109/LCOM.2007.348291"
 
 - title: "A Throughput and Delay Model for IEEE 802.11e EDCA Under Non Saturation"
@@ -507,7 +507,7 @@
   publication: "Wireless Personal Communications"
   year: 2007
   type: "journal"
-  categories: [Journal, 802.11e, EDCA]
+  categories: [Journal, JCR, WiFi]
   path: "#"
 
 - title: "Network Controlled Handovers: Challenges and Possibilities"
@@ -515,7 +515,7 @@
   publication: "Wireless Personal Communications"
   year: 2007
   type: "journal"
-  categories: [Journal]
+  categories: [Journal, JCR, 5G/6G]
   path: ""
 
 - title: "Proportional Fair Throughput Allocation in Multirate IEEE 802.11e Wireless LANs"
@@ -523,7 +523,7 @@
   publication: "Springer Wireless Networks"
   year: 2007
   type: "journal"
-  categories: [Journal, 802.11e, Fairness]
+  categories: [Journal, JCR, WiFi, QoS/Reliability]
   path: "http://dx.doi.org/10.1007/s11276-006-6156-5"
 
 - title: "End-to-end Delay Analysis and Admission Control in 802.11 DCF WLANs"
@@ -531,7 +531,7 @@
   publication: "Elsevier Computer Communications"
   year: 2006
   type: "journal"
-  categories: [Journal, WiFi]
+  categories: [Journal, JCR, WiFi, QoS/Reliability]
   path: "http://dx.doi.org/10.1016/j.comcom.2005.08.006"
 
 - title: "Usability and Evaluation of a Deployed 4G Network Prototype"
@@ -539,7 +539,7 @@
   publication: "Journal of Communications and Networks"
   year: 2005
   type: "journal"
-  categories: [Journal]
+  categories: [Journal, JCR, 5G/6G, Measurements]
   path: "#"
 
 - title: "Modeling and exploiting the relation between packet losses and hidden traffic"
@@ -547,7 +547,7 @@
   publication: "IEEE Wireless Communications Letters"
   year: 2013
   type: "journal"
-  categories: [Non-JCR-Journal]
+  categories: [Journal, WiFi]
   path: "http://dx.doi.org/10.1109/WCL.2013.050613.130159"
 
 
@@ -561,21 +561,21 @@
   publication: "ACM CoNEXT 2025"
   year: 2025
   type: "selected_conf"
-  categories: [Conference, IoT, Reliability, CoNEXT]
+  categories: [Conference, Vehicular, QoS/Reliability]
 
 - title: "Multiscale Radio Reconfigurations: A Trace-Driven Approach to Estimating Network Performance"
   authors: "A. P. Bianzino, J. M. Montes-Lopez, P. Serrano, A. A. de A. Rocha"
   publication: "IEEE Wireless Communications & Networking Conference (WCNC)"
   year: 2025
   type: "selected_conf"
-  categories: [Conference, WCNC, Performance Evaluation]
+  categories: [Conference, 5G/6G, Measurements]
 
 - title: "Sustainable Provision of URLLC Services for V2N: Analysis and Optimal Configuration"
   authors: "L. Chatzieleftheriou, J. Pérez-Valero, J. Martín-Pérez, P. Serrano, A. Banchs"
   publication: "ACM MobiHoc 2024"
   year: 2024
   type: "selected_conf"
-  categories: [Conference, V2N, URLLC, Sustainability]
+  categories: [Conference, Vehicular, Energy]
   path: "https://doi.org/10.1145/3641512.3686363"
 
 - title: "Nuberu: Reliable RAN Virtualization in Shared Platforms"
@@ -583,7 +583,7 @@
   publication: "ACM MobiCom 2021"
   year: 2021
   type: "selected_conf"
-  categories: [Conference, RAN Virtualization, MobiCom]
+  categories: [Conference, Network Slicing, 5G/6G]
   path: "https://doi.org/10.1145/3447993.3483266"
 
 - title: "Protecting against Website Fingerprinting with Multihoming"
@@ -591,9 +591,9 @@
   publication: "20th Privacy Enhancing Technologies Symposium (PETS 2020)"
   year: 2020
   type: "selected_conf"
-  categories: [Conference, Privacy, Multihoming]
+  categories: [Conference, QoS/Reliability]
   path: "https://doi.org/10.2478/popets-2020-0019"
-  
+
 # 20
 
 - title: "Design and Validation of a Multi-service 5G Network with QoE-aware Orchestration"
@@ -601,63 +601,63 @@
   publication: "ACM WiNTECH 2018"
   year: 2018
   type: "selected_conf"
-  categories: [Conference, 5G, QoE, Orchestration]
+  categories: [Conference, 5G/6G, NFV/Cloud]
 
 - title: "SEMPER: A Stateless Traffic Engineering Solution for WAN based on MP-TCP"
   authors: "G. Garcia-Aviles, M. Gramaglia, P. Serrano, M. Portoles-Comeras, A. Banchs, F. Maino"
   publication: "IEEE ICC 2018"
   year: 2018
   type: "selected_conf"
-  categories: [Conference, Traffic Engineering, MP-TCP]
+  categories: [Conference, NFV/Cloud]
 
 - title: "Revisiting 802.11 Rate Adaptation from Energy Consumption's Perspective"
   authors: "I. Ucar, C. Donato, P. Serrano, A. García-Saavedra, A. Azcorra, A. Banchs"
   publication: "ACM MSWiM 2016"
   year: 2016
   type: "selected_conf"
-  categories: [Conference, 802.11, Energy Efficiency]
+  categories: [Conference, WiFi, Energy]
 
 - title: "srsLTE: An Open-Source Platform for LTE Evolution and Experimentation"
   authors: "I. Gomez-Miguelez, A. Garcia-Saavedra, P. D. Sutton, P. Serrano, C. Cano, D. J. Leith"
   publication: "ACM WiNTECH 2016 (Best paper award)"
   year: 2016
   type: "selected_conf"
-  categories: [Conference, LTE, Open Source, Best Paper]
+  categories: [Conference, 5G/6G, Measurements]
 
 - title: "Modeling the Impact of Start-Up Times on the Performance of Resource-on-Demand Schemes in 802.11 WLANs"
   authors: "J. Ortín, P. Serrano, C. Donato"
   publication: "SustainIT 2015"
   year: 2015
   type: "selected_conf"
-  categories: [Conference, 802.11, Sustainability]
+  categories: [Conference, WiFi, Energy]
 
 - title: "Making a Case for Flexible 802.11 Architectures"
   authors: "P. Salvador, F. Gringoli, P. Serrano, N. Facchi, S. Paris"
   publication: "IEEE ICC 2015"
   year: 2015
   type: "selected_conf"
-  categories: [Conference, 802.11, Architecture]
+  categories: [Conference, WiFi]
 
 - title: "Energy Consumption Savings with 3G Offload"
   authors: "M. I. Sanchez, C. J. Bernardos, A. de la Oliva, P. Serrano"
   publication: "IEEE VTC-Fall 2013"
   year: 2013
   type: "selected_conf"
-  categories: [Conference, 3G, Energy Efficiency]
+  categories: [Conference, 5G/6G, Energy]
 
 - title: "Performance Evaluation of the IEEE 802.11aa Multicast Mechanisms for Video Streaming"
   authors: "A. de la Oliva, P. Serrano, P. Salvador, A. Banchs"
   publication: "IEEE WoWMoM 2013"
   year: 2013
   type: "selected_conf"
-  categories: [Conference, 802.11aa, Multicast, Video Streaming]
+  categories: [Conference, WiFi, QoS/Reliability]
 
 - title: "Energy consumption anatomy of 802.11 devices and its implication on modeling and design"
   authors: "A. Garcia-Saavedra, P. Serrano, A. Banchs, G. Bianchi"
   publication: "ACM CoNEXT 2012"
   year: 2012
   type: "selected_conf"
-  categories: [Conference, 802.11, Energy Efficiency]
+  categories: [Conference, WiFi, Energy]
   path: "http://doi.acm.org/10.1145/2413176.2413197"
 
 - title: "Distributed Opportunistic Scheduling: A Control Theoretic Approach"
@@ -665,7 +665,7 @@
   publication: "IEEE INFOCOM 2012"
   year: 2012
   type: "selected_conf"
-  categories: [Conference, INFOCOM, Control Theory, Scheduling]
+  categories: [Conference, Control Theory]
   path: "http://dx.doi.org/10.1109/INFCOM.2012.6195795"
   
   
@@ -676,42 +676,42 @@
   publication: "IEEE INFOCOM 2012"
   year: 2012
   type: "selected_conf"
-  categories: [Conference, 802.11, VoIP, Capacity]
+  categories: [Conference, WiFi, QoS/Reliability]
 
 - title: "Energy-efficient fair channel access for IEEE 802.11 WLANs"
   authors: "A. Garcia-Saavedra, P. Serrano, A. Banchs, M. Hollick"
   publication: "IEEE WoWMoM 2011"
   year: 2011
   type: "selected_conf"
-  categories: [Conference, 802.11, Energy Efficiency, Fairness]
+  categories: [Conference, WiFi, Energy]
 
 - title: "New Insights from the Analysis of Free Flow Vehicular Traffic in Highways"
   authors: "M. Gramaglia, P. Serrano, J. A. Hernandez, M. Calderon, C. J. Bernardos"
   publication: "IEEE WoWMoM 2011"
   year: 2011
   type: "selected_conf"
-  categories: [Conference, Vehicular Traffic, Modeling]
+  categories: [Conference, Vehicular, Measurements]
 
 - title: "On the Energy Efficiency of IEEE 802.11 WLANs"
   authors: "P. Serrano, A. García-Saavedra, M. Hölllick, A. Banchs"
   publication: "European Wireless 2010"
   year: 2010
   type: "selected_conf"
-  categories: [Conference, 802.11, Energy Efficiency]
+  categories: [Conference, WiFi, Energy]
 
 - title: "Lessons Learned from the Deployment of a Multihop IEEE 802.11g Testbed Using COTS Devices"
   authors: "P. Serrano, C. J. Bernardos, A. de la Oliva, I. Soto"
   publication: "European Wireless 2010"
   year: 2010
   type: "selected_conf"
-  categories: [Conference, Mesh Networks, Experimental]
+  categories: [Conference, WiFi, Measurements]
 
 - title: "Assessing the fidelity of COTS 802.11 sniffers"
   authors: "P. Serrano, M. Zink, J. Kurose"
   publication: "IEEE INFOCOM 2009"
   year: 2009
   type: "selected_conf"
-  categories: [Conference, 802.11, Measurements]
+  categories: [Conference, WiFi, Measurements]
   path: "http://dx.doi.org/10.1109/INFCOM.2009.5062021"
 
 - title: "Optimal Configuration of 802.11e EDCA under Voice Traffic"
@@ -719,28 +719,28 @@
   publication: "IEEE Globecom 2007"
   year: 2007
   type: "selected_conf"
-  categories: [Conference, 802.11e, VoIP]
+  categories: [Conference, WiFi, QoS/Reliability]
 
 - title: "Fast Robust Hashing"
   authors: "M. Urueña, D. Larrabeiti, P. Serrano"
   publication: "IEEE Globecom 2006"
   year: 2006
   type: "selected_conf"
-  categories: [Conference, Hashing, Security]
+  categories: [Conference, QoS/Reliability]
 
 - title: "Performance Anomalies of Nonoptimally Configured Wireless LANs"
   authors: "P. Serrano, A. Banchs, T. Melia, L. Vollero"
   publication: "IEEE WCNC 2006"
   year: 2006
   type: "selected_conf"
-  categories: [Conference, 802.11, Performance Analysis]
+  categories: [Conference, WiFi]
 
 - title: "Detection of Malicious Parameter Configurations in 802.11e EDCA"
   authors: "P. Serrano, A. Banchs, J. F. Kukielka"
   publication: "IEEE Globecom 2005"
   year: 2005
   type: "selected_conf"
-  categories: [Conference, 802.11e, Security]
+  categories: [Conference, WiFi, QoS/Reliability]
   
   
 # Other
@@ -752,79 +752,79 @@
   publication: "Jornadas de Ingeniería Telemática (Jitel 2025)"
   year: 2025
   type: "other_conf"
-  categories: [Conference, 802.11, Security, Jitel]
+  categories: [Conference, WiFi, Machine Learning]
 
 - title: "DEBAC: Dynamic Explainable Behavior-Based Access Control"
   authors: "L. Cabanillas, J. M. Montes-Lopez, D. R. López, P. Serrano"
   publication: "2025 EuCNC & 6G Summit"
   year: 2025
   type: "other_conf"
-  categories: [Conference, Access Control, 6G, EuCNC]
+  categories: [Conference, 5G/6G, Machine Learning]
 
 - title: "EAI-driven Orchestration for 6G Networking: the Hexa-X vision"
   authors: "J. Pérez-Valero, A. Virdis, A. G. Sánchez, C. Ntogkas, P. Serrano, et al."
   publication: "IEEE GLOBECOM 2022 Workshop (6GARCH)"
   year: 2022
   type: "other_conf"
-  categories: [Workshop, 6G, Orchestration, Hexa-X]
+  categories: [Conference, 5G/6G, NFV/Cloud]
 
 - title: "Enabling Network and Service Programmability in 6G Mobile Communication Systems"
   authors: "M. A. Habibi, A. G. Sánchez, I. L. Pavón, B. Han, G. Landi, et al."
   publication: "2022 IEEE Future Networks World Forum (FNWF)"
   year: 2022
   type: "other_conf"
-  categories: [Conference, 6G, Programmability]
+  categories: [Conference, 5G/6G, NFV/Cloud]
 
 - title: "Hexa-X the European 6G Flagship Project"
   authors: "M. Uusitalo, P. Rugeland, M. Boldi, E. C. Strinati, G. Carrozzo, et al."
   publication: "EuCNC & 6G Summit"
   year: 2021
   type: "other_conf"
-  categories: [Conference, 6G, Hexa-X]
+  categories: [Conference, 5G/6G]
 
 - title: "A Performance Comparison of Virtualization Techniques to Deploy a 5G Monitoring Platform"
   authors: "P. Benedetti, M. Pergolesi, J. Garcia-Reinoso, A. Zabala, P. Serrano, et al."
   publication: "EuCNC & 6G Summit"
   year: 2021
   type: "other_conf"
-  categories: [Conference, 5G, Virtualization, Monitoring]
+  categories: [Conference, 5G/6G, Network Slicing]
 
 - title: "Automatic deployment, execution and analysis of 5G experiments using the 5G EVE platform"
   authors: "W. Nakimuli, G. Landi, R. Perez, M. Pergolesi, M. M. Roselló, et al."
   publication: "IEEE 3rd 5G World Forum (5GWF)"
   year: 2020
   type: "other_conf"
-  categories: [Conference, 5G, Experiments, 5G EVE]
+  categories: [Conference, 5G/6G, Measurements]
 
 - title: "The case for serverless mobile networking"
   authors: "M. Gramaglia, P. Serrano, A. Banchs, G. García, A. Garcia-Saavedra, R. Perez"
   publication: "IFIP Networking 2020 (Network Slicing Workshop)"
   year: 2020
   type: "other_conf"
-  categories: [Workshop, Serverless, 5G]
+  categories: [Conference, NFV/Cloud, Network Slicing]
 
 - title: "A Monitoring Framework for Multi-Site 5G Platforms"
   authors: "R. Pérez, J. Garcia-Reinoso, A. Zabala, P. Serrano, A. Banchs"
   publication: "European Conference on Networks and Communications (EuCNC)"
   year: 2020
   type: "other_conf"
-  categories: [Conference, 5G, Monitoring, EuCNC]
+  categories: [Conference, 5G/6G, Measurements]
 
 - title: "The Path Towards Resource Elasticity for 5G Network Architecture"
   authors: "D. M. Gutierrez-Estevez, M. Gramaglia, A. de Domenico, N. di Pietro, et al."
   publication: "IEEE WCNCW 2018 (FlexNets Workshop)"
   year: 2018
   type: "other_conf"
-  categories: [Workshop, 5G, Architecture]
+  categories: [Conference, 5G/6G, NFV/Cloud]
   
-# 20 
+# 20
 
 - title: "Energy footprint reduction in 5G reconfigurable hotspots via function partitioning and bandwidth adaptation"
   authors: "N. Bartzoudis, O. Font-Bach, M. Miozzo, C. Donato, P. Harbanau, et al."
   publication: "Fifth International Workshop (CLEEN 2017)"
   year: 2017
   type: "other_conf"
-  categories: [Workshop, 5G, Energy Efficiency]
+  categories: [Conference, 5G/6G, Energy]
   path: "http://doi.org/10.23919/CLEEN.2017.8045934"
 
 - title: "A Flexible and Reconfigurable 5G Networking Architecture Based on Context and Content Information"
@@ -832,135 +832,135 @@
   publication: "European Conference on Networks and Communications (EuCNC)"
   year: 2017
   type: "other_conf"
-  categories: [Conference, 5G, Architecture, EuCNC]
+  categories: [Conference, 5G/6G, NFV/Cloud]
 
 - title: "Making IEEE 802.11 Wireless Access Programmable"
   authors: "E. Khorov, A. Krasilov, A. Safonov, P. Serrano, I. Tinnirello"
   publication: "ICT-MobileSummit 2013"
   year: 2013
   type: "other_conf"
-  categories: [Conference, 802.11, Programmability]
+  categories: [Conference, WiFi]
 
 - title: "IEEE 802.21: A Shift in the Media Independence"
   authors: "A. de la Oliva, L. Eznarriaga, C. J. Bernardos, P. Serrano, A. Vidal"
   publication: "ICT-MobileSummit 2011"
   year: 2011
   type: "other_conf"
-  categories: [Conference, 802.21]
+  categories: [Conference, 5G/6G]
 
 - title: "CARMEN: Resource Management and Abstraction in Wireless Heterogeneous Mesh Networks"
   authors: "N. Bayer, K. Loziak, A. Garcia-Saavedra, C. Sengul, P. Serrano"
   publication: "ACM SIGCOMM 2010 (Demo)"
   year: 2010
   type: "other_conf"
-  categories: [Demo, Mesh Networks, SIGCOMM]
+  categories: [Conference, WiFi, Measurements]
 
 - title: "Throughput and Energy Efficiency in IEEE 802.11 WLANs: Friends or Foes?"
   authors: "P. Serrano, A. Banchs, M. Hollick, L. Vollero"
   publication: "ICST QShine 2009 (Invited Paper)"
   year: 2009
   type: "other_conf"
-  categories: [Conference, 802.11, Energy Efficiency]
+  categories: [Conference, WiFi, Energy]
 
 - title: "A CARMEN Mesh Experience: Deployment and Results"
   authors: "P. Serrano, A. de la Oliva, C. J. Bernardos, I. Soto, A. Banchs, A. Azcorra"
   publication: "IEEE WoWMoM 2009 Workshop - HotMesh (Invited Paper)"
   year: 2009
   type: "other_conf"
-  categories: [Workshop, Mesh Networks, Experimental]
+  categories: [Conference, WiFi, Measurements]
 
 - title: "A MAC Layer Abstraction for Heterogeneous Carrier Grade Mesh Networks"
   authors: "P. Serrano, P. Patras, X. Pérez Costa, B. Gloss, D. Chieng"
   publication: "ICT-MobileSummit 2009"
   year: 2009
   type: "other_conf"
-  categories: [Conference, Mesh Networks, MAC Layer]
+  categories: [Conference, WiFi]
 
 - title: "Configuration of IEEE 802.11e EDCA for Voice and Data traffic: An Experimental Study"
   authors: "P. Serrano, A. Banchs, J. F. Kukielka, G. D'Agostino, S. Murphy"
   publication: "ICT-MobileSummit 2008"
   year: 2008
   type: "other_conf"
-  categories: [Conference, 802.11e, Experimental]
+  categories: [Conference, WiFi, Measurements]
 
 - title: "Configuración óptima de redes WLAN 802.11e EDCA cursando datos y tráfico VoIP"
   authors: "P. Serrano, A. Banchs"
   publication: "JITEL 2007 (Best Paper Award)"
   year: 2007
   type: "other_conf"
-  categories: [Conference, Jitel, 802.11e, VoIP]
+  categories: [Conference, WiFi, QoS/Reliability]
 
-# 10 
+# 10
 
 - title: "A CAPWAP Architecture for Dynamic Configuration of QoS MAC Parameters"
   authors: "A. Banchs, G. Iannello, P. Serrano, L. Vollero"
   publication: "MediaWiN 2006 (Invited Paper)"
   year: 2006
   type: "other_conf"
-  categories: [Workshop, QoS, CAPWAP]
+  categories: [Conference, WiFi, QoS/Reliability]
 
 - title: "The Daidalos Architecture for Mobility and QoS"
   authors: "T. Melia, M. Liebsh, P. Serrano, A. Banchs"
   publication: "World Telecommunications Congress"
   year: 2006
   type: "other_conf"
-  categories: [Conference, Mobility, QoS, Daidalos]
+  categories: [Conference, 5G/6G, QoS/Reliability]
 
 - title: "Soporte de QoS en Redes de 4a. Generación"
   authors: "C. García, A. Cuevas, J. I. Moreno, I. Soto, C. J. Bernardos, P. Serrano"
   publication: "IEEE Latin America Transactions"
   year: 2006
   type: "other_conf"
-  categories: [Journal, QoS, 4G]
+  categories: [Conference, 5G/6G, QoS/Reliability]
 
 - title: "Error-Aware Scheduling and its Effects on Efficiency and Fairness"
   authors: "P. Serrano, D. Larrabeiti, M. Urueña, A. G. Marques"
   publication: "EUNICE 2005"
   year: 2005
   type: "other_conf"
-  categories: [Conference, Scheduling, Fairness]
+  categories: [Conference, Control Theory]
 
 - title: "Tunable Least Served First"
   authors: "P. Serrano, D. Larrabeiti, A. León"
   publication: "EUNICE 2005"
   year: 2005
   type: "other_conf"
-  categories: [Conference, Scheduling]
+  categories: [Conference, Control Theory]
 
 - title: "The DAIDALOS Architecture for QoS over Heterogeneous Wireless Networks"
   authors: "G. Carneiro, C. Garcia, P. Neves, Z. Chen, et al."
   publication: "IST Mobile & Wireless Communications Summit"
   year: 2005
   type: "other_conf"
-  categories: [Conference, QoS, Daidalos]
+  categories: [Conference, 5G/6G, QoS/Reliability]
 
 - title: "A Scalable Service Discovery Framework with Load Sharing Capabilities"
   authors: "M. Urueña, D. Larrabeiti, P. Serrano"
   publication: "IFIP TC6 Workshops (WCM)"
   year: 2004
   type: "other_conf"
-  categories: [Workshop, Service Discovery]
+  categories: [Conference, NFV/Cloud]
 
 - title: "Charging for Web Content Pre-fetching in 3G Networks"
   authors: "D. Larrabeiti, R. Romeral, M. Urueña, A. Azcorra, P. Serrano"
   publication: "Quality of Future Internet Services (QofIS 2004)"
   year: 2004
   type: "other_conf"
-  categories: [Workshop, 3G, Prefetching]
+  categories: [Conference, 5G/6G]
 
 - title: "Field Evaluation of a 4G True-IP network"
   authors: "A. Cuevas, P. Serrano, C. J. Bernardos, J. I. Moreno, et al."
   publication: "IST Mobile and Wireless Communications Summit"
   year: 2004
   type: "other_conf"
-  categories: [Conference, 4G, Experimental]
+  categories: [Conference, 5G/6G, Measurements]
 
 - title: "Medida y Análisis del Tráfico Multimedia en Redes Móviles de Cuarta Generación"
   authors: "P. Serrano, C. J. Bernardos, I. Soto, J. I. Moreno"
   publication: "Jornadas Telecom I+D 2003"
   year: 2003
   type: "other_conf"
-  categories: [Conference, 4G, Measurements]
+  categories: [Conference, 5G/6G, Measurements]
 
     
 # Book Chapters
@@ -971,27 +971,27 @@
   publication: "5G System Design: Architectural and Functional Considerations and Long Term Research, John Wiley and Sons"
   year: 2018
   type: "book_chapter"
-  categories: [Book Chapter, 5G, Architecture]
+  categories: [Book Chapter, 5G/6G]
 
 - title: "Towards Carrier-Grade Quality in Heterogeneous Wireless Mesh Networks"
   authors: "J. Lessmann, P. Loureiro, J. Fitzpatrick, P. Serrano, A. Banchs"
   publication: "Wireless Multi-Access Environments and Quality of Service Provisioning: Solutions and Applications, IGI Global"
   year: 2011
   type: "book_chapter"
-  categories: [Book Chapter, Mesh Networks, QoS]
+  categories: [Book Chapter, WiFi, QoS/Reliability]
 
 - title: "Analysis and Configuration of IEEE 802.11e"
   authors: "A. Banchs, P. Serrano"
   publication: "Medium Access Control in Wireless Networks, Nova Science Publishers"
   year: 2008
   type: "book_chapter"
-  categories: [Book Chapter, 802.11e]
+  categories: [Book Chapter, WiFi]
 
 - title: "Applications and Configuration of 802.11e Wireless LANs"
   authors: "A. Banchs, P. Serrano"
   publication: "Progress in Wireless Communications Research, Nova Science Publishers"
   year: 2007
   type: "book_chapter"
-  categories: [Book Chapter, 802.11e]
+  categories: [Book Chapter, WiFi]
   
   
