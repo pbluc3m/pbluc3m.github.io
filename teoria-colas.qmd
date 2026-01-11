@@ -1,7 +1,6 @@
 ---
 title: "Teoría de Colas"
 subtitle: "Una introducción amable a la teoría de colas"
-date: ""
 ---
 
 ::: {layout-ncol=2}

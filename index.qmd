@@ -1,6 +1,5 @@
 ---
 title: "Pablo Serrano"
-date: ""
 image: profile.jpg # Put a photo named profile.jpg in your folder
 about:
   template: trestles # Options: jolla, trestles, solana, marquee

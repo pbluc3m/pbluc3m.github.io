@@ -1,7 +1,5 @@
 ---
 title: "Students"
-date: ""
-#page-layout: full
 ---
 
 ::: {.callout-important}

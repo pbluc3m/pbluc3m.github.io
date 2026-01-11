@@ -1,7 +1,5 @@
 ---
 title: "Teaching"
-date: ""
-#page-layout: full
 ---
 
 I have been involved in telecommunications and networking education since 2002, covering undergraduate and graduate levels.

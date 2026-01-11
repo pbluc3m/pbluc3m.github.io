@@ -1,6 +1,5 @@
 ---
 title: "News Archive"
-date: ""
 ---
 
 * **[2025-12-15]** Jesús Pérez-Valero, Premio Extraordinario de Doctorado UC3M, [link al PDF](./pdfs/2025-12-15-premio-extraordinario.pdf)

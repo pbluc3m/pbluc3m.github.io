@@ -36,12 +36,10 @@ website:
         href: https://github.com/pbluc3m
 
   page-footer:
-    center: "Pablo Serrano | Universidad Carlos III de Madrid | Last updated: {{< meta date >}}"
+    center: "Pablo Serrano | Departamento de Ingeniería Telematica | Universidad Carlos III de Madrid "
         
 format:
   html:
     css: styles.css
     toc: true
     include-in-header: header.html
-    date: today
-    date-format: "D MMMM YYYY"

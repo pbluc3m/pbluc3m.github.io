@@ -1,7 +1,6 @@
 ---
 title: "Research"
 subtitle: "Advancing the future of Wireless Networks through Modeling, Softwarization, and AI."
-date: ""
 ---
 
 ## Research Vision
