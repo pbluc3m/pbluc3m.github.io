@@ -1,11 +1,30 @@
-/* UC3M Styles */
+/* ==========================================================================
+   UC3M Academic Website - Custom Styles
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   CSS Custom Properties (Color Palette)
+   -------------------------------------------------------------------------- */
+:root {
+  --uc3m-navy: #002b54;
+  --uc3m-blue: #004884;
+  --uc3m-light-bg: #f8f9fa;
+  --uc3m-border: #eee;
+  --uc3m-border-soft: #f0f0f0;
+  --uc3m-text-muted: #666;
+  --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* --------------------------------------------------------------------------
+   Base Typography
+   -------------------------------------------------------------------------- */
 h1, h2, h3 {
-  color: #002b54; /* UC3M Navy */
+  color: var(--uc3m-navy);
   font-weight: 700;
 }
 
 a {
-  color: #004884; /* UC3M Secondary Blue */
+  color: var(--uc3m-blue);
   text-decoration: none;
 }
 
@@ -13,95 +32,112 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Make the profile sidebar look clean */
+/* --------------------------------------------------------------------------
+   Navbar
+   -------------------------------------------------------------------------- */
+.navbar-brand {
+  margin-right: 20px;
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   Profile Sidebar (Trestles Layout)
+   -------------------------------------------------------------------------- */
 .about-entity {
-  background-color: #f8f9fa;
+  background-color: var(--uc3m-light-bg);
   padding: 20px;
   border-radius: 8px;
 }
 
+.quarto-about-trestles .about-entity {
+  max-width: 250px;
+  height: fit-content;
+  padding: 20px;
+  background: var(--uc3m-light-bg);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-subtle);
+}
 
-/* Styling the "Students" list items */
+.about-entity img {
+  width: 150px !important;
+}
+
+/* --------------------------------------------------------------------------
+   Student Listings
+   -------------------------------------------------------------------------- */
 .quarto-listing-container-default .quarto-post {
-  border-bottom: 1px solid #f0f0f0; /* Soft line between names */
+  border-bottom: 1px solid var(--uc3m-border-soft);
   padding: 0.8em 0;
   margin-bottom: 0;
 }
 
-/* UC3M Navy for Names */
 .quarto-listing-container-default .listing-title {
-  color: #002b54; 
+  color: var(--uc3m-navy);
   font-weight: 600;
   font-size: 1.15em;
   margin-bottom: 0.2em;
 }
 
-/* Grey for the Degree/Description */
 .quarto-listing-container-default .listing-description {
-  color: #666;
+  color: var(--uc3m-text-muted);
   font-style: italic;
   font-size: 0.95em;
 }
 
-/* Hide dates and categories since we don't need them for students */
-.listing-metadata, .listing-categories {
+/* Hide metadata not needed for student listings */
+.listing-metadata,
+.listing-categories {
   display: none;
 }
 
-/* Allow links to be clickable again but keep the style clean */
+/* Student name links */
 .listing-title a {
-  color: #002b54; /* UC3M Navy */
+  color: var(--uc3m-navy);
   text-decoration: none;
   cursor: pointer;
 }
 
-/* Add a subtle underline only on hover to show it is a link */
 .listing-title a:hover {
-  color: #004884; /* UC3M Secondary Blue */
+  color: var(--uc3m-blue);
   text-decoration: underline;
 }
 
-/* If a student has no link, make their name look like plain text */
+/* Students without links appear as plain text */
 .quarto-listing-container-default .quarto-post:not([data-anchor]) .listing-title {
   pointer-events: none;
   cursor: default;
 }
 
-
-/* Narrow the left column of the trestles layout */
-.quarto-about-trestles .about-entity {
-  border-right: 1px solid #eee; /* Optional: adds a subtle divider */
-  padding-right: 2em;
-  max-width: 250px; /* Limits the width of the whole image/links column */
-}
-
-/* Ensure the image itself stays small */
-.about-entity img {
-  width: 150px !important;
-}
-
-/* Make the about sidebar a floating card instead of a full-height column */
-.quarto-about-trestles .about-entity {
-    border-right: none !important; /* Remove the vertical line */
-    height: fit-content;           /* Shrink height to fit content */
-    padding: 20px;
-    background: #f8f9fa;           /* Light grey background to make it pop */
-    border-radius: 10px;           /* Rounded corners */
-    margin-bottom: 20px;
-}
-
-/* Optional: Add a subtle shadow to give it depth */
-.quarto-about-trestles .about-entity {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-
-/* Centra el texto de los pies de foto */
-figcaption, .figure-caption {
+/* --------------------------------------------------------------------------
+   Figures
+   -------------------------------------------------------------------------- */
+figcaption,
+.figure-caption {
   text-align: center !important;
 }
 
-.navbar-brand {
-  margin-right: 20px;
-  font-weight: 500;
+/* --------------------------------------------------------------------------
+   Cards (for Teoría de Colas page)
+   -------------------------------------------------------------------------- */
+.card {
+  border: 1px solid var(--uc3m-border);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-subtle);
+  transform: translateY(-2px);
+}
+
+.card-title {
+  color: var(--uc3m-navy);
+  font-weight: 600;
+}
+
+/* Lead text styling */
+.lead {
+  font-size: 1.15em;
+  color: var(--uc3m-text-muted);
+  margin-bottom: 1rem;
 }

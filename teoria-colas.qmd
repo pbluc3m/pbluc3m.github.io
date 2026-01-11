@@ -3,31 +3,102 @@ title: "Teoría de Colas"
 subtitle: "Una introducción amable a la teoría de colas"
 ---
 
-::: {layout-ncol=2}
-::: {#first-column}
+::: {.lead}
+Un recurso educativo gratuito para estudiantes y profesionales interesados en los fundamentos matemáticos de los **sistemas de espera**.
+:::
+
 **Autores:** Pablo Serrano y José Alberto Hernández
 
-Este sitio contiene el material actualizado del texto *"Una introducción amable a la teoría de colas"*. El objetivo de este trabajo es proporcionar un recurso accesible para estudiantes y profesionales interesados en los fundamentos de los sistemas de espera.
+---
 
-[**Descargar Apuntes (PDF)**](pdfs/introduccion-teoria-colas.pdf){.btn .btn-primary}  
-*(Actualizado: Oct 2024)*
+## Materiales Disponibles
 
-[**Boletín de problemas (PDF)**](pdfs/boletin-problemas.pdf){.btn .btn-outline-primary}  
-*(Versión: Jun 2025)*
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100}
+::: {.card-body}
+### Apuntes Teóricos {.card-title}
+
+El texto completo con los fundamentos de la teoría de colas: procesos de Poisson, cadenas de Markov, modelos M/M/1, M/M/c, M/G/1 y más.
+
+[Descargar PDF](pdfs/introduccion-teoria-colas.pdf){.btn .btn-primary .mt-2}
+
+::: {.text-muted .small}
+Actualizado: Oct 2024
 :::
 
-::: {#second-column}
-![Página de ejemplo](images/ejemplo-colas.png){width=80%}
 :::
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .h-100}
+::: {.card-body}
+### Boletín de Problemas {.card-title}
+
+Colección de ejercicios prácticos con problemas resueltos para afianzar los conceptos teóricos.
+
+[Descargar PDF](pdfs/boletin-problemas.pdf){.btn .btn-outline-primary .mt-2}
+
+::: {.text-muted .small}
+Versión: Jun 2025
+:::
+
+:::
+:::
+:::
+
 :::
 
 ---
 
+## Contenidos
+
+::: {.grid}
+
+::: {.g-col-6 .g-col-md-4}
+- Procesos de Poisson
+- Cadenas de Markov
+- Modelo M/M/1
+:::
+
+::: {.g-col-6 .g-col-md-4}
+- Modelo M/M/c
+- Colas con capacidad finita
+- Modelo M/G/1
+:::
+
+::: {.g-col-6 .g-col-md-4}
+- Redes de Jackson
+- Aplicaciones prácticas
+- Ejercicios resueltos
+:::
+
+:::
+
+---
+
+## Vista Previa
+
+![Ejemplo del contenido de los apuntes](images/ejemplo-colas.png){.img-fluid .rounded .shadow fig-align="center" width="70%"}
+
+---
+
+::: {.callout-tip}
 ## Para Docentes
-Existe un **manual de soluciones detallado** destinado exclusivamente a profesores. Si deseas obtener una copia, por favor envíame un correo desde tu cuenta institucional ([Aquí tienes un línk a la página de contacto →](contact.qmd)).
+
+Existe un **manual de soluciones detallado** destinado exclusivamente a profesores. Si deseas obtener una copia, por favor envíame un correo desde tu cuenta institucional.
+
+[Contactar](contact.qmd){.btn .btn-outline-secondary .btn-sm}
+:::
 
 ---
 
 ## Licencia
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>  
-Este obra está bajo una licencia de [CC Reconocimiento-NoComercial-CompartirIgual 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+::: {.d-flex .align-items-center .gap-3}
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+
+Este obra está bajo una licencia [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/): puedes compartir y adaptar el material siempre que cites la fuente, no lo uses con fines comerciales, y distribuyas tus contribuciones bajo la misma licencia.
+:::
