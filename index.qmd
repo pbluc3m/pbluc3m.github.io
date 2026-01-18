@@ -31,7 +31,7 @@ listing:
 ---
 
 ### Welcome
-I am a **Full Professor** at the [Department of Telematic Engineering](https://www.it.uc3m.es/) of [**Universidad Carlos III de Madrid**](https://www.uc3m.es/). My research focuses on wireless networking, performance evaluation, and the intersection of AI and communications.
+I am a **Full Professor** at the [Department of Telematic Engineering](https://www.it.uc3m.es/) of [**Universidad Carlos III de Madrid**](https://www.uc3m.es/). My [research](research.qmd) focuses on wireless networking, performance evaluation, and the intersection of AI and communications. Since January 2025, I've been acting as [Deputy Director of Infrastructure, Digitization, and Sustainability at the Polytechnic School](https://www.uc3m.es/ss/Satellite/UC3MInstitucional/es/ComposicionOrganismo/1371303276858/Infraestructuras,_Sostenibilidad_y_Digitalizacion).
 
 ## Latest News
 * **[2025-12-15]** Jesús Pérez-Valero, Premio Extraordinario de Doctorado UC3M, [link al PDF](./pdfs/2025-12-15-premio-extraordinario.pdf)
@@ -55,3 +55,4 @@ I am a **Full Professor** at the [Department of Telematic Engineering](https://w
 * [Sociedad Científica de Ingeniería Telemática](https://www.scitel.es)
 * [Networking conference statistics](https://sites.cs.ucsb.edu/~almeroth/conf/stats/)
 * [Myron Hlynka's Queueing Theory Page](https://web2.uwindsor.ca/math/hlynka/queue.html)
+* [My old webpage (no longer maintained)](https://www.it.uc3m.es/pablo/)
