@@ -47,10 +47,11 @@ Served as the primary liaison and mentor for international exchange students, ov
 ## Organizing Committee Roles
 
 ### Recent Appointments
-* **Co-Chair**, 1st Winter School on AI for 6G Communications, Las Palmas de Gran Canaria, Spain (February 2025)
-* **Track Co-Chair**, *IEEE WCNC 2025* - Track 2: Medium Access Control and Networking, Milano, Italy (March 2025)
+* **Co-Chair**, [2nd Winter School on AI for 6G Communications](https://eventos.uc3m.es/138645/detail/2nd-winter-school-on-ai-for-6g-communications.html), Las Palmas de Gran Canaria, Spain (January 2026)
 
 ### Past Roles
+* **Track Co-Chair**, *IEEE WCNC 2025* - Track 2: Medium Access Control and Networking, Milano, Italy (March 2025)
+* **Co-Chair**, [1st Winter School on AI for 6G Communications](https://eventos.uc3m.es/123255/detail/ieee-sps-1st-winter-school-on-ai-for-6g-communications.html), Las Palmas de Gran Canaria, Spain (February 2025)
 * **Steering Committee Member**, *LESS '25*: Workshop on Serverless computing for pervasive cloud-edge-device systems and services (co-located with IEEE PerCom 2025)
 * **Co-Chair**, *SIS-SS 2024*: 7th IEEE Int. Workshop on Smart IoT Sensors and Social Systems for eHealth and Well-Being Applications (co-located with IEEE COMPSAC 2024)
 * **Track Co-Chair**, *IEEE ICCCN 2024* - Track 2: Network Architecture, Algorithm, Protocol, and Evaluation (July 2024)

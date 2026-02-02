@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Service – Pablo Serrano</title>
+<title>claude – Pablo Serrano</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -116,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Students</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./service.html" aria-current="page"> 
+    <a class="nav-link" href="./service.html"> 
 <span class="menu-text">Service</span></a>
   </li>  
   <li class="nav-item">
@@ -155,264 +190,169 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#institutional-leadership" id="toc-institutional-leadership" class="nav-link active" data-scroll-target="#institutional-leadership">Institutional Leadership</a></li>
-  <li><a href="#program-management-mentorship" id="toc-program-management-mentorship" class="nav-link" data-scroll-target="#program-management-mentorship">Program Management &amp; Mentorship</a></li>
-  <li><a href="#editorial-board-memberships" id="toc-editorial-board-memberships" class="nav-link" data-scroll-target="#editorial-board-memberships">Editorial Board Memberships</a>
+  <li><a href="#claude.md" id="toc-claude.md" class="nav-link active" data-scroll-target="#claude.md">CLAUDE.md</a>
   <ul class="collapse">
-  <li><a href="#current-positions" id="toc-current-positions" class="nav-link" data-scroll-target="#current-positions">Current Positions</a></li>
-  <li><a href="#past-positions" id="toc-past-positions" class="nav-link" data-scroll-target="#past-positions">Past Positions</a></li>
-  </ul></li>
-  <li><a href="#organizing-committee-roles" id="toc-organizing-committee-roles" class="nav-link" data-scroll-target="#organizing-committee-roles">Organizing Committee Roles</a>
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link" data-scroll-target="#project-overview">Project Overview</a></li>
+  <li><a href="#build-commands" id="toc-build-commands" class="nav-link" data-scroll-target="#build-commands">Build Commands</a>
   <ul class="collapse">
-  <li><a href="#recent-appointments" id="toc-recent-appointments" class="nav-link" data-scroll-target="#recent-appointments">Recent Appointments</a></li>
-  <li><a href="#past-roles" id="toc-past-roles" class="nav-link" data-scroll-target="#past-roles">Past Roles</a></li>
+  <li><a href="#preview-the-site-locally" id="toc-preview-the-site-locally" class="nav-link" data-scroll-target="#preview-the-site-locally">Preview the site locally</a></li>
+  <li><a href="#build-the-site-for-production" id="toc-build-the-site-for-production" class="nav-link" data-scroll-target="#build-the-site-for-production">Build the site for production</a></li>
+  <li><a href="#check-quarto-version" id="toc-check-quarto-version" class="nav-link" data-scroll-target="#check-quarto-version">Check Quarto version</a></li>
   </ul></li>
-  <li><a href="#technical-program-committee-tpc" id="toc-technical-program-committee-tpc" class="nav-link" data-scroll-target="#technical-program-committee-tpc">Technical Program Committee (TPC)</a>
+  <li><a href="#architecture" id="toc-architecture" class="nav-link" data-scroll-target="#architecture">Architecture</a>
   <ul class="collapse">
-  <li><a href="#regular-memberships" id="toc-regular-memberships" class="nav-link" data-scroll-target="#regular-memberships">Regular Memberships</a></li>
-  <li><a href="#additional-memberships-selected" id="toc-additional-memberships-selected" class="nav-link" data-scroll-target="#additional-memberships-selected">Additional Memberships (Selected)</a></li>
+  <li><a href="#site-structure" id="toc-site-structure" class="nav-link" data-scroll-target="#site-structure">Site Structure</a></li>
+  <li><a href="#publications-system" id="toc-publications-system" class="nav-link" data-scroll-target="#publications-system">Publications System</a></li>
+  <li><a href="#navigation" id="toc-navigation" class="nav-link" data-scroll-target="#navigation">Navigation</a></li>
+  <li><a href="#styling" id="toc-styling" class="nav-link" data-scroll-target="#styling">Styling</a></li>
   </ul></li>
-  <li><a href="#phd-thesis-committees" id="toc-phd-thesis-committees" class="nav-link" data-scroll-target="#phd-thesis-committees">PhD Thesis Committees</a></li>
-  <li><a href="#evaluation-committees" id="toc-evaluation-committees" class="nav-link" data-scroll-target="#evaluation-committees">Evaluation Committees</a></li>
+  <li><a href="#common-workflows" id="toc-common-workflows" class="nav-link" data-scroll-target="#common-workflows">Common Workflows</a>
+  <ul class="collapse">
+  <li><a href="#adding-a-new-publication" id="toc-adding-a-new-publication" class="nav-link" data-scroll-target="#adding-a-new-publication">Adding a New Publication</a></li>
+  <li><a href="#adding-a-new-page" id="toc-adding-a-new-page" class="nav-link" data-scroll-target="#adding-a-new-page">Adding a New Page</a></li>
+  <li><a href="#updating-news" id="toc-updating-news" class="nav-link" data-scroll-target="#updating-news">Updating News</a></li>
+  </ul></li>
+  <li><a href="#deployment" id="toc-deployment" class="nav-link" data-scroll-target="#deployment">Deployment</a></li>
+  <li><a href="#file-organization" id="toc-file-organization" class="nav-link" data-scroll-target="#file-organization">File Organization</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Service</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="institutional-leadership" class="level2">
-<h2 class="anchored" data-anchor-id="institutional-leadership">Institutional Leadership</h2>
-<ul>
-<li><strong>Deputy Director of Infrastructure, Digitization, and Sustainability</strong> | Polytechnic School (Escuela Politécnica Superior) | Jan 2025 – Present</li>
-</ul>
-<p>Leading the strategic digital transformation and sustainability roadmap for the school’s infrastructure and facilities.</p>
-<ul>
-<li><strong>Head of Department</strong> | Departamento de Ingeniería Telemática | Sep 2023 – Feb 2025</li>
-</ul>
-<p>Directed departmental operations, including budget oversight, faculty recruitment, and strategic academic planning for a team of professors and researchers.</p>
-<ul>
-<li><strong>Deputy Head of Academic Affairs</strong> (Subdirector Docente) | Departamento de Ingeniería Telemática | Jul 2021 – Sep 2023</li>
-</ul>
-<p>Coordinated teaching schedules and the implementation of departmental educational policies.</p>
+<section id="claude.md" class="level1">
+<h1>CLAUDE.md</h1>
+<p>This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.</p>
+<section id="project-overview" class="level2">
+<h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
+<p>This is a <strong>Quarto-based academic personal website</strong> for a university professor. The site includes bio, publications, teaching, research, students, service activities, and talks.</p>
+<p>The site is hosted on GitHub Pages and deploys from the <code>docs/</code> directory (not the typical <code>_site/</code> output).</p>
 </section>
-<section id="program-management-mentorship" class="level2">
-<h2 class="anchored" data-anchor-id="program-management-mentorship">Program Management &amp; Mentorship</h2>
-<ul>
-<li><strong>Director of the Master’s in Connected Industry 4.0</strong> | Jan 2022 – Sep 2023</li>
-</ul>
-<p>Managed the academic curriculum, industry-university partnerships, and student admissions for the specialized M.Sc. program.</p>
-<ul>
-<li><strong>International Academic Tutor</strong> Academic Years 2021/22, 2022/23</li>
-</ul>
-<p>Served as the primary liaison and mentor for international exchange students, overseeing credit transfers and cultural integration.</p>
+<section id="build-commands" class="level2">
+<h2 class="anchored" data-anchor-id="build-commands">Build Commands</h2>
+<section id="preview-the-site-locally" class="level3">
+<h3 class="anchored" data-anchor-id="preview-the-site-locally">Preview the site locally</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="editorial-board-memberships" class="level2">
-<h2 class="anchored" data-anchor-id="editorial-board-memberships">Editorial Board Memberships</h2>
-<section id="current-positions" class="level3">
-<h3 class="anchored" data-anchor-id="current-positions">Current Positions</h3>
-<ul>
-<li><strong>Associate Editor</strong>, <em>IEEE Transactions on Mobile Computing</em> (February 2025 – Present)</li>
-<li><strong>Associate Editor</strong>, <em>Elsevier Computer Communications</em> (February 2024 – Present)</li>
-<li><strong>Editor</strong>, <em>Oxford Academic’s The Computer Journal</em> (January 2024 – Present)</li>
-<li><strong>Regional Correspondent (EMEA)</strong>, <em>Global Communications Newsletter (GCN)</em> within <em>IEEE Communications Magazine</em> (March 2020 – Present)</li>
-</ul>
+<section id="build-the-site-for-production" class="level3">
+<h3 class="anchored" data-anchor-id="build-the-site-for-production">Build the site for production</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This generates the static site in the <code>docs/</code> directory (configured in <code>_quarto.yml</code> via <code>output-dir: docs</code>).</p>
 </section>
-<section id="past-positions" class="level3">
-<h3 class="anchored" data-anchor-id="past-positions">Past Positions</h3>
-<ul>
-<li><strong>Associate Editor</strong>, <em>IEEE Open Journal of the Communications Society (IEEE OJ-COM)</em> (March 2020 – March 2025)</li>
-<li><strong>Guest Editor</strong>, <em>IEEE Communications Magazine</em> Feature Topic on “Serverless Mobile Computing: From Theory to Practice” (October 2023)</li>
-<li><strong>Editorial Board Member</strong>, <em>MDPI Electronics</em> - Networks section (July 2019 – February 2020)</li>
-<li><strong>Associate Editor</strong>, <em>IEEE Communications Letters</em> (September 2012 – January 2017)</li>
-<li><strong>Guest Editor</strong>, <em>Elsevier Computer Networks</em>: Special Issue on “Green Communications” (February 2015)</li>
-</ul>
-<hr>
+<section id="check-quarto-version" class="level3">
+<h3 class="anchored" data-anchor-id="check-quarto-version">Check Quarto version</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="organizing-committee-roles" class="level2">
-<h2 class="anchored" data-anchor-id="organizing-committee-roles">Organizing Committee Roles</h2>
-<section id="recent-appointments" class="level3">
-<h3 class="anchored" data-anchor-id="recent-appointments">Recent Appointments</h3>
+<section id="architecture" class="level2">
+<h2 class="anchored" data-anchor-id="architecture">Architecture</h2>
+<section id="site-structure" class="level3">
+<h3 class="anchored" data-anchor-id="site-structure">Site Structure</h3>
 <ul>
-<li><strong>Co-Chair</strong>, <a href="https://eventos.uc3m.es/138645/detail/2nd-winter-school-on-ai-for-6g-communications.html">2nd Winter School on AI for 6G Communications</a>, Las Palmas de Gran Canaria, Spain (January 2026)</li>
+<li><p><strong><code>_quarto.yml</code></strong>: Main configuration file defining:</p>
+<ul>
+<li>Project type and output directory (<code>docs/</code>)</li>
+<li>Navigation bar structure and links</li>
+<li>HTML format settings (CSS, TOC, header includes)</li>
+<li>Website metadata (title, footer)</li>
+</ul></li>
+<li><p><strong><code>*.qmd</code> files</strong>: Quarto Markdown source files for each page</p>
+<ul>
+<li><code>index.qmd</code>: Homepage with about section and recent publications listing</li>
+<li><code>bio.qmd</code>, <code>contact.qmd</code>, <code>teaching.qmd</code>, <code>research.qmd</code>, <code>service.qmd</code>, <code>students.qmd</code>: Content pages</li>
+<li><code>publications/index.qmd</code>: Publications page with multiple filtered listings</li>
+<li><code>talks/index.qmd</code>: Talks/presentations page</li>
+<li><code>teoria-colas.qmd</code>: Queueing theory course materials (Spanish)</li>
+<li><code>news-archive.qmd</code>: Archive of older news items</li>
+</ul></li>
+<li><p><strong><code>publications/papers.yml</code></strong>: Single YAML file containing all publications with metadata:</p>
+<ul>
+<li>Structured with fields: <code>title</code>, <code>authors</code>, <code>publication</code>, <code>year</code>, <code>type</code>, <code>categories</code>, <code>path</code></li>
+<li>Types include: <code>journal</code>, <code>selected_conf</code>, <code>other_conf</code>, <code>book_chapter</code></li>
+<li>Categories used for filtering (e.g., JCR, Machine Learning, 5G/6G)</li>
+</ul></li>
+<li><p><strong><code>docs/</code></strong>: Output directory for the rendered static site (committed to git for GitHub Pages)</p></li>
+<li><p><strong><code>_site/</code></strong>: Alternative output location (gitignored, not used for deployment)</p></li>
 </ul>
 </section>
-<section id="past-roles" class="level3">
-<h3 class="anchored" data-anchor-id="past-roles">Past Roles</h3>
+<section id="publications-system" class="level3">
+<h3 class="anchored" data-anchor-id="publications-system">Publications System</h3>
+<p>The publications are managed through a <strong>centralized YAML file</strong> (<code>publications/papers.yml</code>) and rendered using Quarto’s listing feature:</p>
+<ol type="1">
+<li><strong>Single source of truth</strong>: All papers in <code>publications/papers.yml</code></li>
+<li><strong>Multiple filtered views</strong>:
 <ul>
-<li><strong>Track Co-Chair</strong>, <em>IEEE WCNC 2025</em> - Track 2: Medium Access Control and Networking, Milano, Italy (March 2025)</li>
-<li><strong>Co-Chair</strong>, <a href="https://eventos.uc3m.es/123255/detail/ieee-sps-1st-winter-school-on-ai-for-6g-communications.html">1st Winter School on AI for 6G Communications</a>, Las Palmas de Gran Canaria, Spain (February 2025)</li>
-<li><strong>Steering Committee Member</strong>, <em>LESS ’25</em>: Workshop on Serverless computing for pervasive cloud-edge-device systems and services (co-located with IEEE PerCom 2025)</li>
-<li><strong>Co-Chair</strong>, <em>SIS-SS 2024</em>: 7th IEEE Int. Workshop on Smart IoT Sensors and Social Systems for eHealth and Well-Being Applications (co-located with IEEE COMPSAC 2024)</li>
-<li><strong>Track Co-Chair</strong>, <em>IEEE ICCCN 2024</em> - Track 2: Network Architecture, Algorithm, Protocol, and Evaluation (July 2024)</li>
-<li><strong>Co-Chair</strong>, <em>LESS ’24</em>, <em>LESS ’23</em>, and <em>LESS ’22</em> Workshops (co-located with IEEE PerCom)</li>
-<li><strong>Co-Chair</strong>, <em>SIS-SS 2023</em>, <em>SIS-SS 2022</em>, <em>SIS-SS 2021</em>, and <em>SIS-SS 2020</em> Workshops (co-located with IEEE COMPSAC)</li>
-<li><strong>Publicity Co-chair</strong>, <em>CLEEN 2022</em> (in conjunction with PIMRC 2022)</li>
-<li><strong>Competition Co-Chair</strong>, <em>EWSN 2018</em></li>
-<li><strong>Demo Co-Chair</strong>, <em>SustainIT 2013</em></li>
-<li><strong>Local Arrangements Co-Chair</strong>, <em>IEEE e-Energy 2012</em></li>
-<li><strong>TPC Chair</strong>, <em>MeshTech ’11</em></li>
-<li><strong>Publicity Chair</strong>, <em>HotMESH 2010</em></li>
-<li><strong>Committee Member</strong>, <em>Telecom I+D 2003</em></li>
-</ul>
-<hr>
+<li>Homepage shows 5 most recent (<code>max-items: 5</code>)</li>
+<li>Publications page shows separate sections for journals, selected conferences, other conferences, and book chapters</li>
+<li>Filtering by <code>type</code> field in the YAML</li>
+</ul></li>
+<li><strong>Custom styling</strong>: Inline CSS in <code>publications/index.qmd</code> for table appearance</li>
+</ol>
 </section>
+<section id="navigation" class="level3">
+<h3 class="anchored" data-anchor-id="navigation">Navigation</h3>
+<p>The navbar is defined in <code>_quarto.yml</code> with: - UC3M navy blue background (<code>#002b54</code>) - Dark theme for white text - Left-aligned page links - Right-aligned social/academic profile icons (Google Scholar, GitHub)</p>
 </section>
-<section id="technical-program-committee-tpc" class="level2">
-<h2 class="anchored" data-anchor-id="technical-program-committee-tpc">Technical Program Committee (TPC)</h2>
-<section id="regular-memberships" class="level3">
-<h3 class="anchored" data-anchor-id="regular-memberships">Regular Memberships</h3>
+<section id="styling" class="level3">
+<h3 class="anchored" data-anchor-id="styling">Styling</h3>
 <ul>
-<li><strong>IEEE INFOCOM</strong>: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025</li>
-<li><strong>IEEE WoWMoM</strong>: 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024</li>
-<li><strong>IEEE LANMAN</strong>: 2016, 2017, 2018, 2019, 2020, 2021</li>
-<li><strong>IEEE GLOBECOM</strong>: 2008, 2009, 2010, 2011, 2012, 2013</li>
-<li><strong>IEEE HotMESH / MACOM / TRIDENTCOM</strong>: Multiple editions (2008–2013)</li>
+<li><strong><code>styles.css</code></strong>: Custom CSS for the site</li>
+<li><strong><code>header.html</code></strong>: Additional HTML injected into the header (included via <code>_quarto.yml</code>)</li>
 </ul>
 </section>
-<section id="additional-memberships-selected" class="level3">
-<h3 class="anchored" data-anchor-id="additional-memberships-selected">Additional Memberships (Selected)</h3>
+</section>
+<section id="common-workflows" class="level2">
+<h2 class="anchored" data-anchor-id="common-workflows">Common Workflows</h2>
+<section id="adding-a-new-publication" class="level3">
+<h3 class="anchored" data-anchor-id="adding-a-new-publication">Adding a New Publication</h3>
+<ol type="1">
+<li>Edit <code>publications/papers.yml</code></li>
+<li>Add entry with required fields: <code>title</code>, <code>authors</code>, <code>publication</code>, <code>year</code>, <code>type</code>, <code>categories</code>, <code>path</code></li>
+<li>Choose appropriate <code>type</code>: <code>journal</code>, <code>selected_conf</code>, <code>other_conf</code>, or <code>book_chapter</code></li>
+<li>Run <code>quarto render</code> to rebuild</li>
+</ol>
+</section>
+<section id="adding-a-new-page" class="level3">
+<h3 class="anchored" data-anchor-id="adding-a-new-page">Adding a New Page</h3>
+<ol type="1">
+<li>Create <code>pagename.qmd</code> in root directory</li>
+<li>Add front matter with <code>title</code> and other metadata</li>
+<li>Add to navbar in <code>_quarto.yml</code> under <code>website.navbar.left</code></li>
+<li>Run <code>quarto render</code></li>
+</ol>
+</section>
+<section id="updating-news" class="level3">
+<h3 class="anchored" data-anchor-id="updating-news">Updating News</h3>
 <ul>
-<li><strong>2024</strong>: IEEE ICC Workshop on LLMs for 6G Networks</li>
-<li><strong>2022–23</strong>: IEEE PerCom</li>
-<li><strong>2021</strong>: Joint EuCNC &amp; 6G Summit</li>
-<li><strong>2020</strong>: IEEE SMARTCOMP</li>
-<li><strong>2018</strong>: WS on Cloudified Architectures for 5G; EWSN</li>
-<li><strong>2017</strong>: CLEEN; IFIP Networking (Demo/Poster)</li>
-<li><strong>2015</strong>: IEEE PIMRC; SustainIT</li>
-<li><strong>2013</strong>: WiFlex; IEEE VTC Spring/Fall; Future Network &amp; Mobile Summit; WiNMee</li>
-<li><strong>2012</strong>: ICCCN; ICNC; IFIP Networking</li>
+<li>Edit <code>index.qmd</code> to update the “Latest News” section</li>
+<li>Move old news items to <code>news-archive.qmd</code> periodically</li>
 </ul>
-<hr>
 </section>
 </section>
-<section id="phd-thesis-committees" class="level2">
-<h2 class="anchored" data-anchor-id="phd-thesis-committees">PhD Thesis Committees</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Candidate</th>
-<th style="text-align: left;">University</th>
-<th style="text-align: left;">Date</th>
-<th style="text-align: left;">Link</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Domenico Schillaci</strong></td>
-<td style="text-align: left;">Univ. de Palermo</td>
-<td style="text-align: left;">2025-07-10</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Alain Collet</strong></td>
-<td style="text-align: left;">Univ. Carlos III de Madrid</td>
-<td style="text-align: left;">2024-09-19</td>
-<td style="text-align: left;"><a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=2247447">Teseo</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Jordi Baranda</strong></td>
-<td style="text-align: left;">Univ. Politécnica de Cataluña</td>
-<td style="text-align: left;">2021-11-09</td>
-<td style="text-align: left;"><a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1978255">Teseo</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Jorge Martin Perez</strong></td>
-<td style="text-align: left;">Univ. Carlos III de Madrid</td>
-<td style="text-align: left;">2021-10-26</td>
-<td style="text-align: left;"><a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1969649">Teseo</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nuria Molner</strong></td>
-<td style="text-align: left;">Univ. Carlos III de Madrid</td>
-<td style="text-align: left;">2021-09-30</td>
-<td style="text-align: left;"><a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1951564">Teseo</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Vicente J. Mayor Gallego</strong></td>
-<td style="text-align: left;">Univ. de Sevilla</td>
-<td style="text-align: left;">2020-06-03</td>
-<td style="text-align: left;"><a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1859364">Teseo</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Georgia Tseliou</strong></td>
-<td style="text-align: left;">Univ. Politécnica de Cataluña</td>
-<td style="text-align: left;">2019-07-19</td>
-<td style="text-align: left;"><a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1786196">Teseo</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Sébastien Auroux</strong></td>
-<td style="text-align: left;">Universität Paderborn</td>
-<td style="text-align: left;">2017-11-30</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Nicola Bui</strong></td>
-<td style="text-align: left;">Univ. Carlos III de Madrid</td>
-<td style="text-align: left;">2017-05-12</td>
-<td style="text-align: left;"><a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1460594">Teseo</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Qing Wang</strong></td>
-<td style="text-align: left;">Univ. Carlos III de Madrid</td>
-<td style="text-align: left;">2016-05-19</td>
-<td style="text-align: left;"><a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1302860">Teseo</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Vincenzo Sciancalepore</strong></td>
-<td style="text-align: left;">Univ. Carlos III de Madrid</td>
-<td style="text-align: left;">2015-11-27</td>
-<td style="text-align: left;"><a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1214361">Teseo</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>David Gómez Fernández</strong></td>
-<td style="text-align: left;">Univ. de Cantabria</td>
-<td style="text-align: left;">2015-05-14</td>
-<td style="text-align: left;"><a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1125562">Teseo</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>José Núñez Martinez</strong></td>
-<td style="text-align: left;">Univ. Politécnica de Cataluña</td>
-<td style="text-align: left;">2014-07-16</td>
-<td style="text-align: left;"><a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=1114594">Teseo</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Jorge Navarro Ortiz</strong></td>
-<td style="text-align: left;">Univ. de Granada</td>
-<td style="text-align: left;">2010-07-20</td>
-<td style="text-align: left;"><a href="https://www.educacion.gob.es/teseo/mostrarRef.do?ref=814260">Teseo</a></td>
-</tr>
-</tbody>
-</table>
-<hr>
+<section id="deployment" class="level2">
+<h2 class="anchored" data-anchor-id="deployment">Deployment</h2>
+<p>The site deploys to GitHub Pages from the <code>docs/</code> directory on the <code>main</code> branch. After making changes:</p>
+<ol type="1">
+<li>Run <code>quarto render</code> to build the site</li>
+<li>Commit changes including the updated <code>docs/</code> directory</li>
+<li>Push to GitHub - changes will be live automatically</li>
+</ol>
 </section>
-<section id="evaluation-committees" class="level2">
-<h2 class="anchored" data-anchor-id="evaluation-committees">Evaluation Committees</h2>
+<section id="file-organization" class="level2">
+<h2 class="anchored" data-anchor-id="file-organization">File Organization</h2>
 <ul>
-<li><strong>Panel de expertos</strong>: Evaluación de solicitudes de proyectos de I+D+i (Retos y Excelencia), convocatoria <strong>TEC2016</strong>.</li>
-<li><strong>Comisión de selección</strong>: Área de Tecnologías Electrónica y de las Comunicaciones (TEC), subprograma de Tecnología de Comunicaciones (TMC). Vocal (<strong>mayo 2012</strong>).</li>
+<li><strong>PDFs</strong>: Stored in <code>pdfs/</code> directory (certificates, awards, etc.)</li>
+<li><strong>Images</strong>: Stored in <code>images/</code> directory</li>
+<li><strong>Profile photo</strong>: <code>profile.jpg</code> in root</li>
+<li>Both <code>pdfs/</code> and <code>images/</code> are duplicated in <code>docs/</code> for the built site</li>
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
