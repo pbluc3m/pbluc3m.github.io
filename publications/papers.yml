@@ -753,6 +753,7 @@
   year: 2025
   type: "other_conf"
   categories: [Conference, WiFi, Machine Learning]
+  path: "https://hdl.handle.net/10662/40415"
 
 - title: "DEBAC: Dynamic Explainable Behavior-Based Access Control"
   authors: "L. Cabanillas, J. M. Montes-Lopez, D. R. López, P. Serrano"
