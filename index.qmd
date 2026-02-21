@@ -49,7 +49,7 @@ I am a **Full Professor** at the [Department of Telematic Engineering](https://w
 [View all publications →](publications/index.qmd)
 
 ## Links
-
+* [Grado en Ingeniería en Tecnología Cuántica con Mención Dual](https://www.uc3m.es/grado/ingenieria-tecnologias-cuantica)
 * [2nd Winter School on AI for 6G Communications](https://eventos.uc3m.es/138645/detail/2nd-winter-school-on-ai-for-6g-communications.html)
 * [Institute IMDEA Networks](https://networks.imdea.org/)
 * [Sociedad Científica de Ingeniería Telemática](https://www.scitel.es)
