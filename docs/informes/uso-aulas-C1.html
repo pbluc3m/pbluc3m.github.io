@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Análisis de Aulas y Reservas — UC3M 2025-2026</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f4f6f9;
+      --surface:   #ffffff;
+      --primary:   #003865;
+      --accent:    #0071bc;
+      --accent2:   #e8442a;
+      --text:      #1a1a2e;
+      --muted:     #6b7280;
+      --border:    #e5e7eb;
+      --radius:    12px;
+      --shadow:    0 2px 12px rgba(0,0,0,.08);
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #005099 100%);
+      color: #fff;
+      padding: 2.5rem 2rem 0;
+      text-align: center;
+    }
+    header .subtitle { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .7; margin-bottom: .6rem; }
+    header h1 { font-size: 2rem; font-weight: 700; line-height: 1.2; }
+    header p.desc { margin-top: .6rem; opacity: .8; font-size: .95rem; }
+
+    /* ── TABS ── */
+    .tab-nav {
+      display: flex;
+      justify-content: center;
+      gap: .25rem;
+      padding: 1.5rem 1rem 0;
+    }
+    .tab-btn {
+      background: rgba(255,255,255,.12);
+      color: rgba(255,255,255,.75);
+      border: none;
+      padding: .65rem 1.4rem;
+      border-radius: 8px 8px 0 0;
+      font-size: .9rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+      font-weight: 500;
+    }
+    .tab-btn:hover  { background: rgba(255,255,255,.22); color: #fff; }
+    .tab-btn.active { background: var(--bg); color: var(--primary); font-weight: 700; }
+
+    /* ── LAYOUT ── */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    section { margin-bottom: 2.5rem; }
+    section h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      border-left: 4px solid var(--accent);
+      padding-left: .75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── KPI CARDS ── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+    .kpi {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.4rem 1.25rem;
+      text-align: center;
+    }
+    .kpi .value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .kpi .label {
+      margin-top: .5rem;
+      font-size: .8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    /* ── CHARTS GRID ── */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    @media (max-width: 700px) { .charts-grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+    }
+    .card h3 {
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .chart-wrap { position: relative; height: 260px; }
+
+    /* ── HORIZONTAL BAR TABLE ── */
+    .bar-list { list-style: none; display: flex; flex-direction: column; gap: .65rem; }
+    .bar-list li { display: flex; flex-direction: column; gap: .2rem; }
+    .bar-list .row { display: flex; justify-content: space-between; font-size: .82rem; }
+    .bar-list .name { color: var(--text); font-weight: 500; }
+    .bar-list .count { color: var(--muted); }
+    .bar-track { background: var(--border); border-radius: 4px; height: 8px; overflow: hidden; }
+    .bar-fill  { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--accent), #3a9bd5); }
+
+    /* ── LEGEND PILLS (Leganés tab) ── */
+    .legend-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .pill {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .78rem;
+      background: var(--bg);
+      border-radius: 20px;
+      padding: .3rem .75rem;
+      font-weight: 500;
+    }
+    .pill-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── OCUPACIÓN EDIFICIOS ── */
+    .occ-meta {
+      font-size: .82rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      line-height: 1.6;
+    }
+    .scroll-chart-wrap {
+      overflow-y: auto;
+      width: 100%;
+      border-radius: 6px;
+    }
+    .edif-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    @media (max-width: 820px) { .edif-grid { grid-template-columns: 1fr; } }
+    .edif-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ── MAPA DE CALOR ── */
+    .heatmap-outer {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+    .heatmap-sidebar {
+      flex: 0 0 220px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1rem;
+    }
+    .heatmap-sidebar h3 {
+      font-size: .85rem;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .heatmap-sidebar select {
+      width: 100%;
+      padding: .45rem .6rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: .82rem;
+      color: var(--text);
+      background: var(--bg);
+      cursor: pointer;
+    }
+    .heatmap-info {
+      margin-top: .9rem;
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .heatmap-info strong { color: var(--text); }
+    .heatmap-main {
+      flex: 1;
+      min-width: 0;
+    }
+    .heatmap-placeholder {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+    .heatmap-placeholder .icon { font-size: 2.5rem; margin-bottom: .75rem; }
+    .heatmap-wrap { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.5rem; }
+    .heatmap-wrap h3 { font-size: 1rem; font-weight: 700; color: var(--primary); margin-bottom: 1.25rem; }
+
+    .hm-table { border-collapse: collapse; width: 100%; table-layout: fixed; }
+    .hm-table th, .hm-table td { padding: 0; }
+    .hm-time { font-size: .72rem; color: var(--muted); text-align: right; padding-right: 6px; white-space: nowrap; width: 44px; }
+    .hm-day  { font-size: .78rem; font-weight: 700; text-align: center; color: var(--primary); padding-bottom: 4px; }
+    .hm-cell { height: 18px; border: 1px solid #f0f1f3; transition: opacity .15s; cursor: default; }
+    .hm-cell:hover { opacity: .75; outline: 2px solid #333; outline-offset: -1px; }
+
+    .hm-legend {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      margin-top: 1rem;
+      font-size: .75rem;
+      color: var(--muted);
+    }
+    .hm-legend-bar {
+      flex: 1;
+      height: 10px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #f8faff, #b5d0f0, #3a7bc8, #003865);
+      max-width: 200px;
+    }
+
+    /* ── SORT BUTTONS ── */
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+    .card-header h3 { margin-bottom: 0; }
+    .sort-group {
+      display: flex;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .sort-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: .3rem .7rem;
+      font-size: .75rem;
+      font-family: inherit;
+      color: var(--muted);
+      cursor: pointer;
+      transition: background .15s, color .15s, border-color .15s;
+      white-space: nowrap;
+    }
+    .sort-btn:hover  { background: #e8f0fa; color: var(--primary); border-color: var(--accent); }
+    .sort-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      font-size: .78rem;
+      color: var(--muted);
+      padding: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <p class="subtitle">Universidad Carlos III de Madrid</p>
+  <h1>Análisis de Aulas y Reservas</h1>
+  <p class="desc">Datos del <strong>8 sep – 12 dic 2025</strong> &nbsp;·&nbsp; Fuente: <em>cronos_2025-2026-02-26.xlsx</em></p>
+
+  <nav class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('general', this)">Análisis general</button>
+    <button class="tab-btn"        onclick="switchTab('leganes', this)">Campus Leganés — C1</button>
+    <button class="tab-btn"        onclick="switchTab('edificios', this)">Ocupación edificios</button>
+    <button class="tab-btn" id="btn-heatmap" onclick="switchTab('heatmap', this)">Mapa de calor</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ══════════════════════════════════════════
+       TAB 1: ANÁLISIS GENERAL
+  ══════════════════════════════════════════ -->
+  <div id="tab-general" class="tab-panel active">
+
+    <section>
+      <h2>Resumen general</h2>
+      <div class="kpi-grid">
+        <div class="kpi"><div class="value">71.082</div><div class="label">Sesiones totales</div></div>
+        <div class="kpi"><div class="value">10</div><div class="label">Centros docentes</div></div>
+        <div class="kpi"><div class="value">4</div><div class="label">Campus</div></div>
+        <div class="kpi"><div class="value">7</div><div class="label">Tipos de sesión</div></div>
+        <div class="kpi"><div class="value">2</div><div class="label">Cuatrimestres</div></div>
+        <div class="kpi">
+          <div class="value" style="font-size:1.2rem">08/09/2025</div>
+          <div class="label">Primera fecha</div>
+        </div>
+        <div class="kpi">
+          <div class="value" style="font-size:1.2rem">12/12/2025</div>
+          <div class="label">Última fecha</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Distribución por campus y tipo de sesión</h2>
+      <div class="charts-grid">
+        <div class="card">
+          <h3>Sesiones por campus</h3>
+          <div class="chart-wrap"><canvas id="campusChart"></canvas></div>
+        </div>
+        <div class="card">
+          <h3>Tipos de sesión</h3>
+          <div class="chart-wrap"><canvas id="sesionChart"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Distribución por cuatrimestre</h2>
+      <div class="charts-grid">
+        <div class="card">
+          <h3>Sesiones por cuatrimestre</h3>
+          <div class="chart-wrap" style="height:200px"><canvas id="cuatChart"></canvas></div>
+        </div>
+        <div class="card" style="display:flex;flex-direction:column;justify-content:center;">
+          <h3>Detalle</h3>
+          <ul class="bar-list">
+            <li>
+              <div class="row"><span class="name">1.er cuatrimestre</span><span class="count">74.752</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:53.2%"></div></div>
+            </li>
+            <li>
+              <div class="row"><span class="name">2.o cuatrimestre</span><span class="count">65.494</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:46.6%;background:linear-gradient(90deg,var(--accent2),#f07060)"></div></div>
+            </li>
+            <li>
+              <div class="row"><span class="name">Sin cuatrimestre</span><span class="count">240</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:.2%;background:#9ca3af"></div></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Sesiones por centro docente</h2>
+      <div class="card">
+        <ul class="bar-list" id="centrosList"></ul>
+      </div>
+    </section>
+
+  </div><!-- /tab-general -->
+
+
+  <!-- ══════════════════════════════════════════
+       TAB 2: CAMPUS LEGANÉS — C1
+  ══════════════════════════════════════════ -->
+  <div id="tab-leganes" class="tab-panel">
+
+    <section>
+      <h2>Resumen — Campus Leganés, 1.er cuatrimestre (8 sep – 12 dic 2025)</h2>
+      <div class="kpi-grid">
+        <div class="kpi"><div class="value">69</div><div class="label">Días con reservas</div></div>
+        <div class="kpi"><div class="value">157</div><div class="label">Aulas diferentes</div></div>
+        <div class="kpi"><div class="value">19.107</div><div class="label">Sesiones EPS Leganés</div></div>
+        <div class="kpi"><div class="value">2.000</div><div class="label">Sesiones EPS Postgrado</div></div>
+        <div class="kpi"><div class="value">2.777</div><div class="label">Sesiones Centro Postgrado</div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Histograma de hora de inicio</h2>
+      <div class="card">
+        <div class="legend-pills">
+          <span class="pill"><span class="pill-dot" style="background:#0071bc"></span>EPS Leganés</span>
+          <span class="pill"><span class="pill-dot" style="background:#e8442a"></span>EPS – Centro de Postgrado</span>
+          <span class="pill"><span class="pill-dot" style="background:#2ab26a"></span>Centro de Postgrado</span>
+        </div>
+        <div class="chart-wrap" style="height:380px">
+          <canvas id="horaChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Distribución de sesiones por franja horaria</h2>
+      <div class="charts-grid">
+        <div class="card">
+          <h3>EPS Leganés — sesiones por hora</h3>
+          <div class="chart-wrap" style="height:220px"><canvas id="horaEPS"></canvas></div>
+        </div>
+        <div class="card">
+          <h3>Centro de Postgrado — sesiones por hora de inicio</h3>
+          <div class="chart-wrap" style="height:220px"><canvas id="horaPost"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /tab-leganes -->
+
+
+  <!-- ══════════════════════════════════════════
+       TAB 3: OCUPACIÓN DE EDIFICIOS — LEGANÉS C1
+  ══════════════════════════════════════════ -->
+  <div id="tab-edificios" class="tab-panel">
+
+    <section>
+      <h2>Ocupación relativa de todas las aulas</h2>
+      <p class="occ-meta">
+        <strong>Denominador:</strong> 69 días × 750 min/día (9:00–21:30) = 51.750 min disponibles por aula.<br>
+        <strong>Numerador:</strong> suma de minutos reservados en el 1.er cuatrimestre (campus Leganés).<br>
+        Las barras están ordenadas de mayor a menor ocupación. Color por edificio.
+      </p>
+      <div class="card">
+        <div class="card-header">
+          <div class="edif-legend" id="globalLegend" style="margin-bottom:0"></div>
+          <div class="sort-group" id="sort-all">
+            <button class="sort-btn active" onclick="sortChart('all','occ')">↓ Ocupación</button>
+            <button class="sort-btn"        onclick="sortChart('all','alpha')">Az Nombre</button>
+          </div>
+        </div>
+        <div class="scroll-chart-wrap" style="height:680px">
+          <canvas id="aulasAllChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Ocupación por edificio</h2>
+      <div class="edif-grid">
+        <div class="card">
+          <div class="card-header">
+          <h3>Edif. 1 — Agustín de Betancourt <span style="color:var(--muted);font-weight:400;font-size:.8rem">(57 aulas)</span></h3>
+          <div class="sort-group" id="sort-edif1">
+            <button class="sort-btn active" onclick="sortChart('edif1','occ')">↓ Ocupación</button>
+            <button class="sort-btn"        onclick="sortChart('edif1','alpha')">Az Nombre</button>
+          </div>
+        </div>
+          <div class="scroll-chart-wrap" style="height:540px">
+            <canvas id="edif1Chart"></canvas>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+          <h3>Edif. 2 — Sabatini <span style="color:var(--muted);font-weight:400;font-size:.8rem">(32 aulas)</span></h3>
+          <div class="sort-group" id="sort-edif2">
+            <button class="sort-btn active" onclick="sortChart('edif2','occ')">↓ Ocupación</button>
+            <button class="sort-btn"        onclick="sortChart('edif2','alpha')">Az Nombre</button>
+          </div>
+        </div>
+          <div class="scroll-chart-wrap" style="height:540px">
+            <canvas id="edif2Chart"></canvas>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+          <h3>Edif. 4 — Torres Quevedo <span style="color:var(--muted);font-weight:400;font-size:.8rem">(36 aulas)</span></h3>
+          <div class="sort-group" id="sort-edif4">
+            <button class="sort-btn active" onclick="sortChart('edif4','occ')">↓ Ocupación</button>
+            <button class="sort-btn"        onclick="sortChart('edif4','alpha')">Az Nombre</button>
+          </div>
+        </div>
+          <div class="scroll-chart-wrap" style="height:540px">
+            <canvas id="edif4Chart"></canvas>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+          <h3>Edif. 7 — Juan Benet <span style="color:var(--muted);font-weight:400;font-size:.8rem">(31 aulas)</span></h3>
+          <div class="sort-group" id="sort-edif7">
+            <button class="sort-btn active" onclick="sortChart('edif7','occ')">↓ Ocupación</button>
+            <button class="sort-btn"        onclick="sortChart('edif7','alpha')">Az Nombre</button>
+          </div>
+        </div>
+          <div class="scroll-chart-wrap" style="height:540px">
+            <canvas id="edif7Chart"></canvas>
+          </div>
+        </div>
+      </div>
+      <!-- Edif 3 solo tiene 1 aula, lo ponemos aparte -->
+      <div class="card" style="margin-top:1.25rem">
+        <h3>Edif. 3 — Rey Pastor <span style="color:var(--muted);font-weight:400;font-size:.8rem">(1 aula)</span></h3>
+        <div style="height:80px">
+          <canvas id="edif3Chart"></canvas>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /tab-edificios -->
+
+
+  <!-- ══════════════════════════════════════════
+       TAB 4: MAPA DE CALOR
+  ══════════════════════════════════════════ -->
+  <div id="tab-heatmap" class="tab-panel">
+
+    <section>
+      <h2>Mapa de calor semanal por aula</h2>
+      <p class="occ-meta">
+        Porcentaje de semanas en que el aula está ocupada en cada franja horaria (30 min) y día de la semana.
+        Haz clic en cualquier aula del tab <em>Ocupación edificios</em>, o selecciónala aquí.
+      </p>
+
+      <div class="heatmap-outer">
+
+        <!-- Sidebar con selector -->
+        <div class="heatmap-sidebar">
+          <h3>Seleccionar aula</h3>
+          <select id="aulaSelect" onchange="showHeatmap(this.value)">
+            <option value="">— elige un aula —</option>
+          </select>
+          <div class="heatmap-info" id="aulaInfo"></div>
+        </div>
+
+        <!-- Área del mapa -->
+        <div class="heatmap-main">
+          <div class="heatmap-placeholder" id="hmPlaceholder">
+            <div class="icon">🗓️</div>
+            Haz clic en un aula del tab <strong>Ocupación edificios</strong><br>
+            o usa el selector de la izquierda.
+          </div>
+          <div class="heatmap-wrap" id="hmWrap" style="display:none">
+            <h3 id="hmTitle"></h3>
+            <div id="hmGrid"></div>
+            <div class="hm-legend">
+              <span>0%</span>
+              <div class="hm-legend-bar"></div>
+              <span>100%</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div><!-- /tab-heatmap -->
+
+</main>
+
+<footer>
+  Generado el 3 de marzo de 2026 &nbsp;·&nbsp; Datos: Cronos UC3M
+</footer>
+
+<script>
+  /* ──────────────────────────────────────────
+     Tab switching
+  ────────────────────────────────────────── */
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  /* ──────────────────────────────────────────
+     Palettes
+  ────────────────────────────────────────── */
+  const BLUE  = ['#0071bc','#1a8fd1','#3aabeb','#6ac4f7','#a8deff'];
+  const MULTI = ['#0071bc','#e8442a','#2ab26a','#f5a623','#9b59b6','#1abc9c','#e74c3c'];
+
+  /* ──────────────────────────────────────────
+     TAB 1 — GENERAL
+  ────────────────────────────────────────── */
+  new Chart(document.getElementById('campusChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Getafe','Leganés','Madrid-P. de Toledo','Colmenarejo'],
+      datasets: [{ data: [37609, 24254, 5492, 3727], backgroundColor: BLUE, borderWidth: 2 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11 }, boxWidth: 12 } },
+        tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed.toLocaleString('es-ES')}` } }
+      }
+    }
+  });
+
+  new Chart(document.getElementById('sesionChart'), {
+    type: 'polarArea',
+    data: {
+      labels: ['Teoría','Prácticas','Magistral','Examen oficial','Recuperación','Laboratorio','Otros'],
+      datasets: [{ data: [31163, 21148, 17362, 212, 841, 108, 248], backgroundColor: MULTI.map(c => c + 'cc'), borderWidth: 1 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11 }, boxWidth: 12 } },
+        tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed.r.toLocaleString('es-ES')}` } }
+      }
+    }
+  });
+
+  new Chart(document.getElementById('cuatChart'), {
+    type: 'bar',
+    data: {
+      labels: ['1.er cuatrimestre','2.o cuatrimestre','Sin cuatrimestre'],
+      datasets: [{ data: [70699, 267, 116], backgroundColor: ['#0071bc','#e8442a','#9ca3af'], borderRadius: 6 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.y.toLocaleString('es-ES')} sesiones` } }
+      },
+      scales: {
+        y: { ticks: { callback: v => v.toLocaleString('es-ES') }, grid: { color: '#f0f0f0' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  const centros = [
+    ['Facultad de CC. Sociales y Jurídicas (Getafe)',  23105],
+    ['Escuela Politécnica Superior (Leganés)',          19816],
+    ['Centro de Postgrado',                             10036],
+    ['Facultad de Humanidades, Com. y Doc. (Getafe)',   9140],
+    ['Facultad de CC. Sociales y Jurídicas (Colmenarejo)', 2488],
+    ['Escuela Internacional Carlos III',                2444],
+    ['Escuela Politécnica Superior - Postgrado',        2186],
+    ['Escuela Politécnica Superior (Colmenarejo)',       1239],
+    ['Centro YUFE',                                     321],
+    ['Facultad de Ciencias de la Salud',                307],
+  ];
+  const maxC = centros[0][1];
+  const list = document.getElementById('centrosList');
+  centros.forEach(([name, count]) => {
+    const pct = (count / maxC * 100).toFixed(1);
+    list.innerHTML += `
+      <li>
+        <div class="row"><span class="name">${name}</span><span class="count">${count.toLocaleString('es-ES')}</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+      </li>`;
+  });
+
+  /* ──────────────────────────────────────────
+     TAB 2 — LEGANÉS C1
+     Datos extraídos del Excel: campus=Leganés, cuatrimestre=1
+     Solo 3 centros de interés
+  ────────────────────────────────────────── */
+
+  // Todos los slots de hora que aparecen en alguno de los 3 centros (orden cronológico)
+  const horaLabels = ['9:00', '9:30', '10:00', '10:30', '10:45', '11:00', '12:00', '12:30', '13:00', '14:00', '14:15', '14:30', '15:00', '15:30', '16:00', '16:15', '16:30', '17:00', '17:15', '17:30', '17:45', '18:00', '18:45', '19:00', '19:15', '19:30', '19:45'];
+
+  // EPS Leganés — horas de inicio C1
+  const epsLeg = {'10:00':13,'11:00':4711,'13:00':1845,'15:00':3521,'17:00':3512,'19:00':1000,'9:00':4505};
+
+  // EPS – Centro de Postgrado
+  const epsPost = {'11:00':327,'13:00':77,'15:00':547,'16:00':5,'17:00':624,'19:00':108,'19:30':6,'9:00':306};
+
+  // Centro de Postgrado
+  const cPost = {'10:00':41,'10:30':27,'10:45':3,'11:00':92,'12:00':13,'12:30':14,'13:00':77,'14:00':1,'14:15':1,'14:30':122,'15:00':130,'15:30':276,'16:00':312,'16:15':189,'16:30':27,'17:00':331,'17:15':167,'17:30':16,'17:45':282,'18:00':197,'18:45':1,'19:00':193,'19:15':2,'19:30':91,'19:45':59,'9:00':112,'9:30':1};
+
+  const getVal = (obj, key) => obj[key] || 0;
+
+  /* Histograma agrupado (los 3 centros) */
+  new Chart(document.getElementById('horaChart'), {
+    type: 'bar',
+    data: {
+      labels: horaLabels,
+      datasets: [
+        {
+          label: 'EPS Leganés',
+          data: horaLabels.map(h => getVal(epsLeg, h)),
+          backgroundColor: '#0071bc',
+          borderRadius: 3
+        },
+        {
+          label: 'EPS – Centro de Postgrado',
+          data: horaLabels.map(h => getVal(epsPost, h)),
+          backgroundColor: '#e8442a',
+          borderRadius: 3
+        },
+        {
+          label: 'Centro de Postgrado',
+          data: horaLabels.map(h => getVal(cPost, h)),
+          backgroundColor: '#2ab26a',
+          borderRadius: 3
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y.toLocaleString('es-ES')} sesiones`
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { font: { size: 11 } }
+        },
+        y: {
+          ticks: { callback: v => v.toLocaleString('es-ES') },
+          grid: { color: '#f0f0f0' }
+        }
+      }
+    }
+  });
+
+  /* EPS Leganés solo (horas principales, barras horizontales) */
+  const epsHorasMain = ['9:00','10:00','11:00','13:00','15:00','16:00','17:00','19:00'];
+  new Chart(document.getElementById('horaEPS'), {
+    type: 'bar',
+    data: {
+      labels: epsHorasMain,
+      datasets: [{
+        data: epsHorasMain.map(h => getVal(epsLeg, h)),
+        backgroundColor: '#0071bc',
+        borderRadius: 4
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.x.toLocaleString('es-ES')} sesiones` } }
+      },
+      scales: {
+        x: { ticks: { callback: v => v.toLocaleString('es-ES') }, grid: { color: '#f0f0f0' } },
+        y: { grid: { display: false } }
+      }
+    }
+  });
+
+  /* Centro de Postgrado solo */
+  const postHoras = Object.keys(cPost).sort((a,b) => {
+    const toMin = t => { const [h,m] = t.split(':').map(Number); return h*60+m; };
+    return toMin(a) - toMin(b);
+  });
+  new Chart(document.getElementById('horaPost'), {
+    type: 'bar',
+    data: {
+      labels: postHoras,
+      datasets: [{
+        data: postHoras.map(h => cPost[h]),
+        backgroundColor: '#2ab26a',
+        borderRadius: 3
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.y.toLocaleString('es-ES')} sesiones` } }
+      },
+      scales: {
+        x: { ticks: { font: { size: 10 } }, grid: { display: false } },
+        y: { ticks: { callback: v => v.toLocaleString('es-ES') }, grid: { color: '#f0f0f0' } }
+      }
+    }
+  });
+
+
+  /* ──────────────────────────────────────────
+     TAB 3 — OCUPACIÓN EDIFICIOS
+  ────────────────────────────────────────── */
+
+  const EDIF_COLOR = {
+    '1': '#0071bc',  // Betancourt — azul
+    '2': '#e8442a',  // Sabatini   — rojo
+    '3': '#2ab26a',  // Rey Pastor — verde
+    '4': '#f5a623',  // Torres Quevedo — naranja
+    '7': '#9b59b6'   // Juan Benet — morado
+  };
+  const EDIF_NAME = {
+    '1': 'Betancourt', '2': 'Sabatini',
+    '3': 'Rey Pastor', '4': 'Torres Quevedo', '7': 'Juan Benet'
+  };
+
+  // Datos completos extraídos del Excel
+  const RAW_AULAS = {"dias":69,"hora_ini":"9:00","hora_fin":"21:30","minutos_dia":750,"total_min":51750,"aulas":[{"aula":"2.3.A03","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":39840,"ocupacion":76.99},{"aula":"2.3.D04","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":38040,"ocupacion":73.51},{"aula":"2.3.B03","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":37800,"ocupacion":73.04},{"aula":"7.2.J08","edificio":"7","nombre_edificio":"JUAN BENET","planta":2.0,"minutos":37365,"ocupacion":72.2},{"aula":"2.3.A02","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":36840,"ocupacion":71.19},{"aula":"2.3.B01","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":36390,"ocupacion":70.32},{"aula":"2.3.C02","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":36240,"ocupacion":70.03},{"aula":"2.3.B05","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":36120,"ocupacion":69.8},{"aula":"2.3.D02","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":35520,"ocupacion":68.64},{"aula":"2.3.B04","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":35400,"ocupacion":68.41},{"aula":"2.3.A01","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":35130,"ocupacion":67.88},{"aula":"7.1.J01","edificio":"7","nombre_edificio":"JUAN BENET","planta":1.0,"minutos":34920,"ocupacion":67.48},{"aula":"2.3.D01","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":34560,"ocupacion":66.78},{"aula":"4.0.E01","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":0.0,"minutos":33360,"ocupacion":64.46},{"aula":"1.0.B02","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":33270,"ocupacion":64.29},{"aula":"4.2.E05","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":2.0,"minutos":33240,"ocupacion":64.23},{"aula":"2.3.C03","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":33000,"ocupacion":63.77},{"aula":"2.3.D03","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":32880,"ocupacion":63.54},{"aula":"7.0.J06","edificio":"7","nombre_edificio":"JUAN BENET","planta":0.0,"minutos":32490,"ocupacion":62.78},{"aula":"7.2.J01","edificio":"7","nombre_edificio":"JUAN BENET","planta":2.0,"minutos":32460,"ocupacion":62.72},{"aula":"2.3.B02","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":32460,"ocupacion":62.72},{"aula":"4.0.D03","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":0.0,"minutos":32400,"ocupacion":62.61},{"aula":"1.0.C02","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":32280,"ocupacion":62.38},{"aula":"1.1.G02","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":1.0,"minutos":32160,"ocupacion":62.14},{"aula":"2.3.A05","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":32100,"ocupacion":62.03},{"aula":"2.3.A06","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":31800,"ocupacion":61.45},{"aula":"4.1.E06","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":1.0,"minutos":31680,"ocupacion":61.22},{"aula":"4.1.E01","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":1.0,"minutos":31620,"ocupacion":61.1},{"aula":"2.3.A04","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":31590,"ocupacion":61.04},{"aula":"4.1.E04","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":1.0,"minutos":31410,"ocupacion":60.7},{"aula":"1.0.B01","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":31320,"ocupacion":60.52},{"aula":"2.3.D05","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":31320,"ocupacion":60.52},{"aula":"7.1.J08","edificio":"7","nombre_edificio":"JUAN BENET","planta":1.0,"minutos":31260,"ocupacion":60.41},{"aula":"7.2.J06","edificio":"7","nombre_edificio":"JUAN BENET","planta":2.0,"minutos":31080,"ocupacion":60.06},{"aula":"4.1.D03","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":1.0,"minutos":31080,"ocupacion":60.06},{"aula":"7.0.J01","edificio":"7","nombre_edificio":"JUAN BENET","planta":0.0,"minutos":31080,"ocupacion":60.06},{"aula":"2.3.C04","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":30810,"ocupacion":59.54},{"aula":"7.1.J07","edificio":"7","nombre_edificio":"JUAN BENET","planta":1.0,"minutos":30600,"ocupacion":59.13},{"aula":"7.1.J04","edificio":"7","nombre_edificio":"JUAN BENET","planta":1.0,"minutos":30390,"ocupacion":58.72},{"aula":"7.1.J06","edificio":"7","nombre_edificio":"JUAN BENET","planta":1.0,"minutos":29910,"ocupacion":57.8},{"aula":"7.2.J02","edificio":"7","nombre_edificio":"JUAN BENET","planta":2.0,"minutos":29880,"ocupacion":57.74},{"aula":"INF 1.2.G.01","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":2.0,"minutos":29745,"ocupacion":57.48},{"aula":"2.3.C01","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":29580,"ocupacion":57.16},{"aula":"4.0.D01","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":0.0,"minutos":29490,"ocupacion":56.99},{"aula":"4.1.E05","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":1.0,"minutos":29370,"ocupacion":56.75},{"aula":"7.1.J02","edificio":"7","nombre_edificio":"JUAN BENET","planta":1.0,"minutos":29160,"ocupacion":56.35},{"aula":"7.1.J05","edificio":"7","nombre_edificio":"JUAN BENET","planta":1.0,"minutos":29040,"ocupacion":56.12},{"aula":"1.0.F03","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":29040,"ocupacion":56.12},{"aula":"1.1.G01","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":1.0,"minutos":28800,"ocupacion":55.65},{"aula":"4.1.E03","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":1.0,"minutos":28620,"ocupacion":55.3},{"aula":"1.0.B03","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":28560,"ocupacion":55.19},{"aula":"1.0.C01","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":28350,"ocupacion":54.78},{"aula":"7.2.J07","edificio":"7","nombre_edificio":"JUAN BENET","planta":2.0,"minutos":28140,"ocupacion":54.38},{"aula":"1.0.H03","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":27930,"ocupacion":53.97},{"aula":"4.0.E03","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":0.0,"minutos":27780,"ocupacion":53.68},{"aula":"7.1.J03","edificio":"7","nombre_edificio":"JUAN BENET","planta":1.0,"minutos":27690,"ocupacion":53.51},{"aula":"4.0.E06","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":0.0,"minutos":27555,"ocupacion":53.25},{"aula":"INF 7.0.J03 DUAL + TEL","edificio":"7","nombre_edificio":"JUAN BENET","planta":0.0,"minutos":27540,"ocupacion":53.22},{"aula":"2.0.C04","edificio":"2","nombre_edificio":"SABATINI","planta":0.0,"minutos":27375,"ocupacion":52.9},{"aula":"1.0.F02","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":26760,"ocupacion":51.71},{"aula":"7.2.J05","edificio":"7","nombre_edificio":"JUAN BENET","planta":2.0,"minutos":26400,"ocupacion":51.01},{"aula":"4.0.E04","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":0.0,"minutos":25440,"ocupacion":49.16},{"aula":"4.2.E04","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":2.0,"minutos":25110,"ocupacion":48.52},{"aula":"INF 7.0.J04 DUAL","edificio":"7","nombre_edificio":"JUAN BENET","planta":0.0,"minutos":25080,"ocupacion":48.46},{"aula":"7.2.J04","edificio":"7","nombre_edificio":"JUAN BENET","planta":2.0,"minutos":24630,"ocupacion":47.59},{"aula":"7.2.J03","edificio":"7","nombre_edificio":"JUAN BENET","planta":2.0,"minutos":24600,"ocupacion":47.54},{"aula":"7.2.H03","edificio":"7","nombre_edificio":"JUAN BENET","planta":2.0,"minutos":24570,"ocupacion":47.48},{"aula":"2.0.C06","edificio":"2","nombre_edificio":"SABATINI","planta":0.0,"minutos":23730,"ocupacion":45.86},{"aula":"7.2.H01","edificio":"7","nombre_edificio":"JUAN BENET","planta":2.0,"minutos":23640,"ocupacion":45.68},{"aula":"INF 7.0.J05 DUAL","edificio":"7","nombre_edificio":"JUAN BENET","planta":0.0,"minutos":23250,"ocupacion":44.93},{"aula":"4.1.D01","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":1.0,"minutos":23220,"ocupacion":44.87},{"aula":"2.3.A03B","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":22965,"ocupacion":44.38},{"aula":"4.0.E05","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":0.0,"minutos":22920,"ocupacion":44.29},{"aula":"2.0.C05","edificio":"2","nombre_edificio":"SABATINI","planta":0.0,"minutos":22680,"ocupacion":43.83},{"aula":"2.3.C02B","edificio":"2","nombre_edificio":"SABATINI","planta":3.0,"minutos":21930,"ocupacion":42.38},{"aula":"INF 1.2.G.02","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":2.0,"minutos":20730,"ocupacion":40.06},{"aula":"LAB 4.1.B02 (Telematica)","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":1.0,"minutos":20640,"ocupacion":39.88},{"aula":"4.2.E02","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":2.0,"minutos":19875,"ocupacion":38.41},{"aula":"INF 7.0.J02 DUAL+ TEL","edificio":"7","nombre_edificio":"JUAN BENET","planta":0.0,"minutos":19350,"ocupacion":37.39},{"aula":"7.1.H01","edificio":"7","nombre_edificio":"JUAN BENET","planta":1.0,"minutos":19020,"ocupacion":36.75},{"aula":"4.0.E02","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":0.0,"minutos":18900,"ocupacion":36.52},{"aula":"INF 2.2.C.03 DUAL","edificio":"2","nombre_edificio":"SABATINI","planta":2.0,"minutos":18480,"ocupacion":35.71},{"aula":"INF 2.2.C.04 DUAL","edificio":"2","nombre_edificio":"SABATINI","planta":2.0,"minutos":18315,"ocupacion":35.39},{"aula":"LAB 4.1.B01 (Telematica)","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":1.0,"minutos":17550,"ocupacion":33.91},{"aula":"1.1.G03","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":1.0,"minutos":17280,"ocupacion":33.39},{"aula":"1.0.F01","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":17250,"ocupacion":33.33},{"aula":"LAB 1.0.B06 (Automatica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":17130,"ocupacion":33.1},{"aula":"INF 1.2.G.03 DUAL","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":2.0,"minutos":16530,"ocupacion":31.94},{"aula":"LAB 4.S.B01 (Fisica)","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":0.0,"minutos":16320,"ocupacion":31.54},{"aula":"1.2.G04","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":2.0,"minutos":16110,"ocupacion":31.13},{"aula":"INF 4.S.D.01","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":0.0,"minutos":16080,"ocupacion":31.07},{"aula":"2.0.C03","edificio":"2","nombre_edificio":"SABATINI","planta":0.0,"minutos":15900,"ocupacion":30.72},{"aula":"2.0.C15","edificio":"2","nombre_edificio":"SABATINI","planta":0.0,"minutos":15015,"ocupacion":29.01},{"aula":"INF 4.S.D.02","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":0.0,"minutos":14880,"ocupacion":28.75},{"aula":"INF 4.S.D.03","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":0.0,"minutos":13920,"ocupacion":26.9},{"aula":"LAB 2.2.C.05 (Informática)","edificio":"2","nombre_edificio":"SABATINI","planta":2.0,"minutos":13080,"ocupacion":25.28},{"aula":"LAB 2.2.C.06 (Informática)","edificio":"2","nombre_edificio":"SABATINI","planta":2.0,"minutos":12360,"ocupacion":23.88},{"aula":"4.2.E03","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":2.0,"minutos":11970,"ocupacion":23.13},{"aula":"4.1.E02","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":1.0,"minutos":11670,"ocupacion":22.55},{"aula":"LAB 1.0.A02 (Materiales)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":9840,"ocupacion":19.01},{"aula":"LAB 1.0.A01 (Materiales)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":9840,"ocupacion":19.01},{"aula":"LAB 1.0.E01 (Electrónica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":9570,"ocupacion":18.49},{"aula":"INF-3.S1.18","edificio":"3","nombre_edificio":"REY PASTOR","planta":0.0,"minutos":9150,"ocupacion":17.68},{"aula":"LAB 1.0.E02-B (Quim-Mat)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":9120,"ocupacion":17.62},{"aula":"LAB 1.0.E02-A (Quim-Mat)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":9120,"ocupacion":17.62},{"aula":"LAB 1.1.N03 (Mecanica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":1.0,"minutos":8910,"ocupacion":17.22},{"aula":"LAB 1.1.F28","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":1.0,"minutos":8430,"ocupacion":16.29},{"aula":"LAB 1.1.S02 (Ing Electrica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":1.0,"minutos":8160,"ocupacion":15.77},{"aula":"LAB 4.0.B01A (Tª Señal)","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":0.0,"minutos":7560,"ocupacion":14.61},{"aula":"LAB 1.1.L01 (Automatica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":1.0,"minutos":7410,"ocupacion":14.32},{"aula":"LAB 1.1.N04 (Mecánica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":1.0,"minutos":6960,"ocupacion":13.45},{"aula":"LAB 1.1.L02 (Automatica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":1.0,"minutos":6930,"ocupacion":13.39},{"aula":"LAB 1.0.G11 (Bioingeniería)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":6540,"ocupacion":12.64},{"aula":"LAB 4.S.B02 (Fisica)","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":0.0,"minutos":6000,"ocupacion":11.59},{"aula":"LAB 1.1.T06 (Fluidos)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":1.0,"minutos":5520,"ocupacion":10.67},{"aula":"LAB 1.1.F34","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":1.0,"minutos":5400,"ocupacion":10.43},{"aula":"LAB 1.0.G14 (Bioingeniería)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":4080,"ocupacion":7.88},{"aula":"LAB 1.1.S05 (Ing. Electrica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":1.0,"minutos":4080,"ocupacion":7.88},{"aula":"LAB 4.0.F16 (Lab Linux)","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":0.0,"minutos":3960,"ocupacion":7.65},{"aula":"LAB 4.S.B03 (Fisica)","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":0.0,"minutos":3840,"ocupacion":7.42},{"aula":"LAB 1.0.G08 (Bioingenieria)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":3720,"ocupacion":7.19},{"aula":"LAB 1.0.D05 (Ing. Elec)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":3480,"ocupacion":6.72},{"aula":"LAB 1.0.S01 (Ing Electrica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":3480,"ocupacion":6.72},{"aula":"LAB 4.0.B01B (Tª Señal)","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":0.0,"minutos":3480,"ocupacion":6.72},{"aula":"LAB 1.1.S03 (Ing Electrica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":1.0,"minutos":3120,"ocupacion":6.03},{"aula":"LAB 1.0.G15 (Bioingeniería)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":3000,"ocupacion":5.8},{"aula":"LAB 1.1.N02 (Mecánica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":1.0,"minutos":2880,"ocupacion":5.57},{"aula":"LAB 1.1.F32","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":1.0,"minutos":2760,"ocupacion":5.33},{"aula":"LAB 4.S.D04 (Física)","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":0.0,"minutos":2520,"ocupacion":4.87},{"aula":"LAB 1.1.S06 (Ing Electrica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":1.0,"minutos":2520,"ocupacion":4.87},{"aula":"LAB 1.1.M01 (Mec. Medios Con)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":1.0,"minutos":2400,"ocupacion":4.64},{"aula":"LAB 4.0.F18 (Lab Linux)","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":0.0,"minutos":2160,"ocupacion":4.17},{"aula":"LAB 7.1.J10 (Tª Señal)","edificio":"7","nombre_edificio":"JUAN BENET","planta":1.0,"minutos":1920,"ocupacion":3.71},{"aula":"LAB 4.1.F03 (Telematica)","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":1.0,"minutos":1800,"ocupacion":3.48},{"aula":"LAB 1.0.G10 (Bioingeniería)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":1710,"ocupacion":3.3},{"aula":"LAB 7.0.H03 (Aero) ","edificio":"7","nombre_edificio":"JUAN BENET","planta":0.0,"minutos":1440,"ocupacion":2.78},{"aula":"LAB 1.0.D02 (Termica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":1440,"ocupacion":2.78},{"aula":"LAB 1.0.B.04 (Mec. Medios Con)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":1440,"ocupacion":2.78},{"aula":"LAB 1.3.C12","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":3.0,"minutos":1320,"ocupacion":2.55},{"aula":"LAB 1.0.M01 (Mec. Medios Con)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":1200,"ocupacion":2.32},{"aula":"LAB 7.0.H01 (Aero)","edificio":"7","nombre_edificio":"JUAN BENET","planta":0.0,"minutos":1200,"ocupacion":2.32},{"aula":"LAB 7.0.H04 (Aero) ","edificio":"7","nombre_edificio":"JUAN BENET","planta":0.0,"minutos":1200,"ocupacion":2.32},{"aula":"LAB 1.1.T07 (Ing.Termica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":1.0,"minutos":1080,"ocupacion":2.09},{"aula":"LAB 4.2.B01C (Tª Señal)","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":2.0,"minutos":1080,"ocupacion":2.09},{"aula":"LAB 7.0.H06 (Aero) ","edificio":"7","nombre_edificio":"JUAN BENET","planta":0.0,"minutos":1080,"ocupacion":2.09},{"aula":"LAB 1.0.D04 (Ing Electrica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":960,"ocupacion":1.86},{"aula":"LAB 1.1.I09 (Electrónica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":1.0,"minutos":840,"ocupacion":1.62},{"aula":"LAB 1.0.S01 (Máquinas)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":840,"ocupacion":1.62},{"aula":"LAB 1.0.C03 (Mecánica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":720,"ocupacion":1.39},{"aula":"LAB 7.0.H02 (Aero) ","edificio":"7","nombre_edificio":"JUAN BENET","planta":0.0,"minutos":600,"ocupacion":1.16},{"aula":"LAB 1.2.D17 (Ing. Electrica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":2.0,"minutos":360,"ocupacion":0.7},{"aula":"LAB 4.2.E01 (Tª Señal)","edificio":"4","nombre_edificio":"TORRES QUEVEDO","planta":2.0,"minutos":240,"ocupacion":0.46},{"aula":"LAB 1.2.D15 (Ing Electrica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":2.0,"minutos":240,"ocupacion":0.46},{"aula":"LAB 1.0.C04 (Mecanica)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":240,"ocupacion":0.46},{"aula":"LAB 1.0.G12 (Bioingeniería)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":0.0,"minutos":240,"ocupacion":0.46},{"aula":"2.1.A18 (Sala de juntas)","edificio":"2","nombre_edificio":"SABATINI","planta":1.0,"minutos":120,"ocupacion":0.23},{"aula":"LAB 1.3.A14 (Org)","edificio":"1","nombre_edificio":"AGUSTIN DE BETANCOURT","planta":3.0,"minutos":120,"ocupacion":0.23}]};
+
+  // Función para color por ocupación (verde → amarillo → rojo)
+  function occColor(pct) {
+    const t = Math.min(pct / 50, 1);
+    const r = Math.round(t < 0.5 ? 2 * t * 220 : 220);
+    const g = Math.round(t < 0.5 ? 180 : 180 - (t - 0.5) * 2 * 160);
+    return `rgb(${r},${g},60)`;
+  }
+
+  // Leyenda global
+  const legendEl = document.getElementById('globalLegend');
+  Object.entries(EDIF_NAME).forEach(([id, name]) => {
+    legendEl.innerHTML += `<span class="pill"><span class="pill-dot" style="background:${EDIF_COLOR[id]}"></span>Edif. ${id} — ${name}</span>`;
+  });
+
+  // ── Datos heatmap ──
+  const HEATMAP_DATA = {"slots":["9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30","20:00","20:30","21:00"],"n_dow":{"0":13,"3":14,"4":14,"2":14,"1":14},"data":{"2.0.C06":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,7.7,7.7,7.7,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"4.0.E02":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,38.5,38.5,38.5,0.0,38.5,38.5,0.0,100.0,100.0,100.0,0.0,100.0,100.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,92.9,92.9,92.9,0.0,100.0,100.0,0.0,78.6,78.6,78.6,0.0,50.0,50.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,92.9,92.9,92.9,0.0,92.9,92.9,0.0,7.1,7.1,7.1,0.0,78.6,78.6,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,92.9,92.9,92.9,0.0,92.9,92.9,0.0,78.6,78.6,78.6,0.0,14.3,14.3,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,85.7,85.7,85.7,0.0,85.7,85.7,0.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0]],"2.3.A03B":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0],[85.7,85.7,85.7,85.7,85.7,85.7,85.7,85.7,21.4,21.4,21.4,21.4,0.0,100.0,100.0,100.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0],[14.3,14.3,14.3,14.3,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0]],"2.0.C04":[[0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,84.6,84.6,84.6,0.0,84.6,84.6,0.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,57.1,57.1,57.1,0.0,50.0,50.0,0.0,14.3,14.3,14.3,7.1,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,50.0,50.0,50.0,0.0,64.3,64.3,0.0,7.1,7.1,7.1,0.0,0.0],[71.4,71.4,71.4,71.4,57.1,57.1,57.1,57.1,0.0,0.0,0.0,0.0,0.0,85.7,85.7,85.7,0.0,57.1,57.1,0.0,7.1,7.1,7.1,0.0,0.0],[92.9,92.9,92.9,92.9,78.6,78.6,78.6,78.6,0.0,0.0,0.0,0.0,0.0,92.9,92.9,92.9,0.0,78.6,78.6,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 1.2.D17 (Ing. Electrica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,0.0,14.3,14.3,14.3,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"2.0.C15":[[7.7,7.7,7.7,7.7,15.4,15.4,7.7,7.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,0.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0],[7.1,7.1,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,0.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0],[14.3,14.3,14.3,14.3,78.6,78.6,71.4,71.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,0.0,92.9,92.9,92.9,0.0,0.0,0.0,0.0],[14.3,14.3,14.3,14.3,14.3,14.3,7.1,7.1,35.7,35.7,35.7,35.7,0.0,0.0,0.0,100.0,100.0,0.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0],[7.1,14.3,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,57.1,57.1,0.0,85.7,85.7,85.7,0.0,7.1,7.1,0.0]],"7.2.J08":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,0.0,100.0,100.0,100.0,100.0,85.7,85.7,85.7,85.7,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,92.9,92.9,92.9,92.9,64.3,64.3,64.3,64.3,0.0],[92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,0.0,7.1,100.0,100.0,100.0,92.9,92.9,92.9,0.0,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,85.7,85.7,85.7,85.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"2.0.C03":[[7.7,7.7,7.7,7.7,76.9,76.9,76.9,76.9,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,7.7,61.5,61.5,0.0,38.5,38.5,38.5,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,14.3,14.3,14.3,7.1,0.0,92.9,92.9,100.0,7.1,100.0,100.0,7.1,92.9,92.9,92.9,0.0],[0.0,0.0,0.0,0.0,71.4,71.4,71.4,71.4,0.0,0.0,0.0,0.0,0.0,0.0,78.6,78.6,78.6,0.0,78.6,78.6,0.0,50.0,50.0,50.0,0.0],[21.4,21.4,21.4,21.4,14.3,14.3,7.1,0.0,7.1,7.1,42.9,42.9,0.0,0.0,100.0,100.0,100.0,7.1,100.0,92.9,0.0,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"INF 4.S.D.03":[[0.0,0.0,0.0,0.0,30.8,30.8,30.8,30.8,15.4,15.4,15.4,15.4,0.0,0.0,0.0,0.0,7.7,7.7,38.5,38.5,7.7,15.4,15.4,15.4,0.0],[0.0,0.0,0.0,0.0,50.0,50.0,50.0,50.0,7.1,7.1,7.1,7.1,7.1,35.7,35.7,35.7,7.1,7.1,28.6,28.6,21.4,0.0,50.0,50.0,0.0],[100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,78.6,78.6,78.6,78.6,0.0,0.0,21.4,21.4,21.4,0.0,35.7,35.7,0.0,7.1,7.1,7.1,0.0],[21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.4,28.6,28.6,28.6,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,57.1,57.1,57.1,57.1,28.6,28.6,28.6,28.6,0.0,0.0,0.0,42.9,42.9,0.0,0.0,0.0,0.0,0.0,7.1,7.1,0.0]],"1.0.B02":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,15.4,15.4,15.4,15.4,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,14.3,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,42.9,42.9,42.9,42.9,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,78.6,78.6,78.6,78.6,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,64.3,64.3,64.3,64.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"INF 2.2.C.04 DUAL":[[30.8,30.8,30.8,30.8,30.8,30.8,30.8,30.8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,53.8,53.8,53.8,53.8,0.0],[0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,21.4,21.4,21.4,28.6,35.7,50.0,42.9,42.9,64.3,64.3,64.3,64.3,21.4,21.4,21.4,21.4,0.0],[42.9,42.9,42.9,42.9,100.0,100.0,100.0,100.0,28.6,28.6,28.6,28.6,14.3,14.3,14.3,14.3,0.0,0.0,92.9,92.9,92.9,0.0,21.4,21.4,0.0],[100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,28.6,28.6,28.6,28.6,35.7,42.9,35.7,7.1,0.0,100.0,100.0,0.0],[50.0,50.0,50.0,50.0,92.9,92.9,92.9,92.9,28.6,28.6,28.6,28.6,78.6,78.6,78.6,78.6,7.1,7.1,7.1,7.1,21.4,21.4,21.4,21.4,0.0]],"4.2.E02":[[0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,100.0,100.0,100.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,0.0,100.0,100.0,0.0,100.0,100.0,100.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,0.0,100.0,100.0,0.0,100.0,100.0,100.0,0.0],[0.0,0.0,0.0,85.7,85.7,85.7,85.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,35.7,35.7,35.7,0.0,85.7,85.7,0.0,100.0,100.0,100.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,42.9,42.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"INF 1.2.G.02":[[23.1,23.1,23.1,23.1,30.8,30.8,30.8,30.8,38.5,38.5,38.5,38.5,15.4,15.4,15.4,15.4,23.1,23.1,23.1,23.1,23.1,30.8,30.8,30.8,0.0],[0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,7.1,7.1,7.1,7.1,42.9,42.9,42.9,42.9,57.1,57.1,57.1,57.1,0.0],[92.9,92.9,92.9,92.9,64.3,64.3,64.3,64.3,7.1,7.1,7.1,14.3,21.4,21.4,14.3,14.3,14.3,28.6,28.6,14.3,42.9,42.9,42.9,42.9,0.0],[14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,92.9,92.9,92.9,92.9,71.4,78.6,78.6,78.6,35.7,35.7,35.7,28.6,0.0],[64.3,64.3,64.3,64.3,92.9,92.9,92.9,92.9,14.3,14.3,14.3,14.3,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0]],"INF 4.S.D.01":[[23.1,23.1,23.1,23.1,61.5,61.5,61.5,61.5,15.4,15.4,15.4,15.4,0.0,0.0,0.0,0.0,30.8,30.8,38.5,38.5,30.8,30.8,30.8,30.8,0.0],[14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,14.3,21.4,21.4,21.4,57.1,57.1,57.1,57.1,14.3,14.3,14.3,14.3,0.0],[21.4,21.4,21.4,21.4,78.6,78.6,78.6,78.6,42.9,42.9,42.9,57.1,28.6,28.6,14.3,14.3,50.0,50.0,57.1,57.1,21.4,14.3,14.3,14.3,0.0],[0.0,0.0,0.0,0.0,35.7,35.7,35.7,35.7,21.4,21.4,21.4,21.4,7.1,21.4,21.4,21.4,0.0,0.0,14.3,14.3,28.6,14.3,14.3,14.3,0.0],[92.9,92.9,92.9,92.9,78.6,78.6,78.6,78.6,21.4,21.4,21.4,21.4,7.1,21.4,21.4,28.6,28.6,21.4,21.4,21.4,7.1,7.1,7.1,7.1,0.0]],"4.1.E05":[[100.0,100.0,100.0,100.0,76.9,76.9,76.9,76.9,15.4,15.4,15.4,53.8,46.2,46.2,15.4,15.4,15.4,7.7,7.7,7.7,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,78.6,78.6,78.6,78.6,21.4,21.4,21.4,21.4,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,85.7,85.7,85.7,85.7,21.4,21.4,21.4,21.4,78.6,78.6,78.6,78.6,64.3,64.3,64.3,64.3,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,71.4,71.4,71.4,71.4,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"7.1.J07":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,0.0],[0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,64.3,64.3,64.3,64.3,7.1,7.1,7.1,7.1,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"INF 7.0.J03 DUAL + TEL":[[100.0,100.0,100.0,100.0,30.8,30.8,30.8,30.8,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,23.1,23.1,23.1,23.1,23.1,23.1,23.1,23.1,0.0],[100.0,100.0,100.0,100.0,21.4,21.4,21.4,21.4,35.7,35.7,35.7,35.7,64.3,64.3,64.3,64.3,100.0,100.0,100.0,100.0,21.4,21.4,21.4,21.4,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,64.3,64.3,64.3,64.3,100.0,100.0,100.0,92.9,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,71.4,71.4,71.4,71.4,42.9,42.9,42.9,42.9,28.6,28.6,28.6,28.6,92.9,92.9,92.9,92.9,28.6,28.6,28.6,21.4,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,85.7,85.7,85.7,85.7,35.7,35.7,35.7,35.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 1.1.F32":[[0.0,0.0,0.0,0.0,30.8,30.8,30.8,30.8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0],[28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 1.0.B06 (Automatica)":[[100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0],[7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,35.7,35.7,35.7,35.7,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,0.0],[35.7,35.7,35.7,28.6,92.9,92.9,92.9,92.9,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"1.0.F02":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,23.1,30.8,30.8,30.8,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,42.9,42.9,42.9,0.0,14.3,14.3,14.3,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,21.4,21.4,21.4,21.4,0.0],[92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,78.6,85.7,85.7,85.7,50.0,50.0,50.0,50.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 1.1.F34":[[30.8,30.8,30.8,30.8,23.1,23.1,23.1,23.1,0.0,0.0,0.0,0.0,15.4,15.4,15.4,15.4,61.5,61.5,61.5,61.5,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0],[28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,42.9,42.9,42.9,42.9,0.0,0.0,0.0,0.0,0.0],[28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"1.0.C01":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,100.0,100.0,100.0,100.0,15.4,15.4,15.4,15.4,0.0,0.0,0.0,0.0,0.0],[7.1,7.1,7.1,7.1,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,0.0,0.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[71.4,71.4,71.4,71.4,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,71.4,78.6,78.6,78.6,71.4,71.4,71.4,71.4,21.4,21.4,21.4,21.4,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,85.7,85.7,85.7,85.7,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"2.3.B01":[[92.3,92.3,92.3,92.3,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,92.3,92.3,92.3,92.3,7.7,7.7,7.7,7.7,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,57.1,57.1,57.1,35.7,35.7,7.1,35.7,35.7,35.7,35.7,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,85.7,85.7,85.7,85.7,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,71.4,71.4,71.4,71.4,21.4,21.4,21.4,21.4,85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0],[92.9,92.9,92.9,92.9,78.6,78.6,78.6,78.6,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,71.4,71.4,71.4,71.4,7.1,7.1,7.1,7.1,0.0]],"LAB 1.1.F28":[[30.8,30.8,30.8,30.8,46.2,46.2,46.2,46.2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0],[28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,35.7,35.7,35.7,35.7,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0],[28.6,28.6,28.6,28.6,42.9,42.9,42.9,42.9,0.0,0.0,0.0,0.0,42.9,42.9,42.9,42.9,0.0,0.0,14.3,14.3,14.3,14.3,0.0,0.0,0.0],[28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0]],"7.1.J06":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,7.1,78.6,78.6,78.6,64.3,64.3,64.3,14.3,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,78.6,78.6,78.6,78.6,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,28.6,28.6,28.6,28.6,14.3,14.3,14.3,14.3,42.9,42.9,35.7,35.7,0.0,0.0,0.0,0.0,0.0]],"LAB 4.0.B01A (Tª Señal)":[[7.7,7.7,7.7,7.7,76.9,76.9,76.9,76.9,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[7.1,7.1,7.1,7.1,78.6,78.6,78.6,78.6,7.1,7.1,7.1,14.3,14.3,14.3,7.1,14.3,7.1,0.0,7.1,7.1,7.1,0.0,0.0,0.0,0.0],[7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,14.3,7.1,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0],[7.1,7.1,7.1,7.1,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"2.3.A05":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,15.4,15.4,15.4,15.4,92.3,92.3,92.3,92.3,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[28.6,28.6,28.6,28.6,85.7,85.7,85.7,85.7,21.4,21.4,21.4,21.4,21.4,21.4,21.4,21.4,14.3,14.3,57.1,57.1,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,28.6,28.6,28.6,28.6,100.0,100.0,100.0,100.0,64.3,64.3,64.3,64.3,14.3,14.3,14.3,14.3,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[92.9,92.9,92.9,92.9,71.4,71.4,71.4,71.4,42.9,42.9,42.9,42.9,85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0]],"7.2.J06":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,23.1,23.1,23.1,23.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,71.4,71.4,71.4,71.4,7.1,7.1,7.1,7.1,0.0],[14.3,14.3,14.3,14.3,85.7,85.7,85.7,85.7,14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,71.4,71.4,71.4,71.4,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"1.0.B03":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,76.9,76.9,76.9,76.9,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,71.4,71.4,71.4,71.4,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0],[78.6,78.6,78.6,78.6,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,85.7,85.7,85.7,85.7,0.0,0.0,0.0,0.0,50.0,50.0,50.0,50.0,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"2.3.B05":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,15.4,15.4,15.4,15.4,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,15.4,15.4,15.4,15.4,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,35.7,35.7,35.7,35.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,35.7,35.7,35.7,35.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,35.7,35.7,35.7,35.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,50.0,50.0,50.0,50.0,92.9,92.9,92.9,92.9,85.7,85.7,85.7,85.7,0.0,0.0,0.0,0.0,0.0]],"4.2.E05":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,15.4,15.4,15.4,15.4,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,78.6,78.6,78.6,78.6,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,85.7,85.7,85.7,85.7,35.7,35.7,35.7,35.7,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"LAB 1.0.E01 (Electrónica)":[[38.5,38.5,38.5,38.5,46.2,46.2,46.2,46.2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,15.4,15.4,15.4,15.4,0.0,0.0,0.0,0.0,0.0],[28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,64.3,64.3,64.3,64.3,42.9,42.9,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,50.0,50.0,50.0,50.0,0.0,0.0,0.0,0.0,35.7,35.7,35.7,35.7,35.7,35.7,35.7,35.7,0.0,7.1,7.1,7.1,0.0],[50.0,50.0,50.0,50.0,64.3,64.3,64.3,64.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[42.9,42.9,42.9,42.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"4.0.E05":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,7.7,84.6,84.6,84.6,7.7,7.7,7.7,7.7,0.0],[64.3,64.3,64.3,64.3,100.0,100.0,100.0,100.0,85.7,85.7,85.7,85.7,0.0,0.0,0.0,0.0,85.7,85.7,85.7,85.7,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,78.6,78.6,78.6,78.6,21.4,21.4,21.4,21.4,0.0],[7.1,7.1,7.1,7.1,85.7,85.7,85.7,85.7,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,50.0,50.0,50.0,50.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0]],"7.1.J01":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,42.9,42.9,42.9,42.9,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[57.1,57.1,57.1,57.1,100.0,100.0,100.0,100.0,21.4,21.4,21.4,21.4,0.0,57.1,57.1,57.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0],[92.9,92.9,92.9,92.9,64.3,64.3,64.3,64.3,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"1.0.F01":[[76.9,76.9,76.9,76.9,76.9,76.9,84.6,84.6,7.7,7.7,7.7,7.7,0.0,7.7,7.7,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,50.0,50.0,50.0,50.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0],[50.0,50.0,50.0,50.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,14.3,14.3,14.3,14.3,50.0,50.0,57.1,57.1,7.1,7.1,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,64.3,64.3,64.3,64.3,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[35.7,35.7,35.7,35.7,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,64.3,64.3,64.3,64.3,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"7.2.J03":[[92.3,92.3,92.3,92.3,92.3,92.3,92.3,92.3,0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,0.0],[14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,50.0,50.0,50.0,50.0,0.0],[0.0,0.0,0.0,0.0,35.7,35.7,35.7,35.7,0.0,0.0,0.0,0.0,71.4,71.4,71.4,71.4,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,85.7,85.7,85.7,85.7,14.3,14.3,14.3,14.3,0.0],[21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"INF 7.0.J05 DUAL":[[23.1,23.1,23.1,23.1,100.0,100.0,100.0,100.0,23.1,23.1,23.1,23.1,0.0,0.0,100.0,100.0,100.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,0.0],[35.7,35.7,35.7,35.7,35.7,35.7,35.7,35.7,28.6,28.6,28.6,28.6,42.9,42.9,42.9,42.9,57.1,57.1,57.1,57.1,35.7,35.7,35.7,35.7,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,50.0,50.0,50.0,50.0,28.6,28.6,28.6,28.6,71.4,78.6,78.6,21.4,28.6,28.6,28.6,28.6,0.0],[100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,14.3,14.3,14.3,14.3,35.7,35.7,35.7,35.7,50.0,50.0,50.0,50.0,35.7,35.7,35.7,35.7,0.0],[85.7,85.7,85.7,85.7,78.6,78.6,78.6,78.6,35.7,35.7,35.7,35.7,28.6,28.6,28.6,28.6,57.1,57.1,57.1,57.1,35.7,35.7,35.7,35.7,0.0]],"7.2.J07":[[100.0,100.0,100.0,100.0,23.1,23.1,23.1,23.1,100.0,100.0,100.0,100.0,92.3,92.3,92.3,92.3,0.0,0.0,0.0,0.0,7.7,7.7,7.7,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,71.4,71.4,71.4,71.4,0.0,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0],[35.7,35.7,35.7,35.7,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,78.6,78.6,78.6,78.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"4.0.E04":[[0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,15.4,15.4,15.4,15.4,0.0,0.0,0.0,0.0,38.5,38.5,38.5,38.5,7.7,7.7,7.7,7.7,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,71.4,71.4,71.4,71.4,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,78.6,78.6,78.6,78.6,21.4,21.4,21.4,21.4,0.0],[0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,28.6,28.6,28.6,28.6,0.0],[0.0,0.0,0.0,0.0,71.4,71.4,71.4,71.4,7.1,7.1,7.1,7.1,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,0.0]],"1.1.G01":[[0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,84.6,84.6,84.6,84.6,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,57.1,57.1,57.1,57.1,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,71.4,71.4,71.4,71.4,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,50.0,50.0,50.0,50.0,14.3,14.3,14.3,14.3,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,92.9,92.9,92.9,92.9,57.1,57.1,57.1,57.1,0.0,0.0,0.0,0.0,0.0]],"INF 7.0.J02 DUAL+ TEL":[[15.4,15.4,15.4,15.4,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,7.7,7.7,7.7,7.7,7.7,7.7,7.7,7.7,15.4,15.4,15.4,15.4,0.0],[35.7,35.7,35.7,35.7,21.4,21.4,21.4,21.4,14.3,14.3,14.3,14.3,14.3,28.6,28.6,28.6,28.6,28.6,28.6,28.6,57.1,57.1,57.1,57.1,0.0],[50.0,50.0,50.0,50.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,92.9,92.9,92.9,92.9,28.6,28.6,28.6,28.6,0.0],[50.0,50.0,50.0,50.0,64.3,64.3,64.3,64.3,28.6,28.6,28.6,28.6,42.9,57.1,57.1,57.1,35.7,35.7,35.7,35.7,50.0,50.0,50.0,35.7,0.0],[92.9,92.9,92.9,92.9,71.4,71.4,71.4,71.4,50.0,50.0,50.0,50.0,35.7,35.7,35.7,35.7,14.3,14.3,14.3,7.1,0.0,0.0,0.0,0.0,0.0]],"INF 4.S.D.02":[[15.4,15.4,15.4,15.4,100.0,100.0,100.0,100.0,15.4,15.4,15.4,15.4,0.0,0.0,0.0,0.0,23.1,23.1,23.1,23.1,53.8,53.8,53.8,53.8,0.0],[21.4,21.4,21.4,21.4,100.0,100.0,100.0,100.0,35.7,35.7,35.7,35.7,14.3,14.3,14.3,14.3,14.3,14.3,14.3,14.3,42.9,42.9,42.9,42.9,0.0],[42.9,42.9,42.9,42.9,100.0,100.0,100.0,100.0,21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,14.3,14.3,14.3,0.0,42.9,42.9,42.9,42.9,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,28.6,35.7,35.7,35.7,14.3,21.4,21.4,14.3,14.3,14.3,14.3,14.3,0.0],[35.7,35.7,35.7,35.7,64.3,64.3,64.3,64.3,35.7,35.7,35.7,35.7,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,14.3,14.3,14.3,14.3,0.0]],"7.1.J02":[[100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,15.4,15.4,15.4,15.4,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,64.3,64.3,64.3,64.3,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,0.0],[92.9,92.9,92.9,92.9,85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[7.1,7.1,7.1,7.1,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"2.3.A03":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,92.3,92.3,92.3,92.3,92.3,92.3,92.3,92.3,100.0,100.0,100.0,100.0,0.0],[71.4,71.4,71.4,71.4,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[71.4,71.4,71.4,71.4,100.0,100.0,100.0,100.0,28.6,28.6,28.6,28.6,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,71.4,71.4,71.4,71.4,92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,0.0],[92.9,92.9,92.9,92.9,78.6,78.6,78.6,78.6,7.1,7.1,7.1,7.1,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"2.3.C01":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,15.4,15.4,15.4,15.4,100.0,100.0,100.0,100.0,46.2,46.2,53.8,53.8,7.7,0.0,0.0,0.0,0.0],[21.4,21.4,21.4,21.4,57.1,57.1,57.1,57.1,14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,28.6,28.6,28.6,28.6,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,21.4,21.4,21.4,21.4,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,28.6,28.6,28.6,35.7,14.3,14.3,7.1,7.1,100.0,100.0,100.0,100.0,28.6,28.6,28.6,28.6,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,57.1,57.1,57.1,57.1,28.6,28.6,28.6,28.6,14.3,14.3,14.3,14.3,21.4,21.4,21.4,21.4,0.0]],"2.3.C02":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,23.1,23.1,23.1,23.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,42.9,42.9,42.9,42.9,100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,28.6,28.6,28.6,28.6,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,21.4,21.4,21.4,21.4,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,28.6,28.6,28.6,28.6,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,42.9,42.9,42.9,42.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,0.0]],"4.1.D03":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,38.5,38.5,38.5,38.5,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,78.6,78.6,78.6,78.6,21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[92.9,92.9,92.9,92.9,71.4,71.4,71.4,71.4,28.6,28.6,28.6,28.6,14.3,14.3,14.3,14.3,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"1.0.B01":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,28.6,28.6,28.6,28.6,71.4,71.4,71.4,71.4,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,71.4,71.4,71.4,71.4,14.3,14.3,14.3,14.3,0.0],[14.3,14.3,14.3,14.3,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"7.1.J05":[[84.6,84.6,84.6,84.6,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,53.8,53.8,53.8,53.8,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,57.1,57.1,57.1,57.1,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,21.4,21.4,21.4,21.4,85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,85.7,85.7,85.7,85.7,50.0,50.0,50.0,50.0,7.1,7.1,7.1,7.1,0.0]],"4.1.E02":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,30.8,30.8,30.8,30.8,15.4,15.4,15.4,15.4,46.2,46.2,46.2,46.2,7.7,7.7,7.7,7.7,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,85.7,85.7,85.7,85.7,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0,0.0,7.1,7.1,50.0,50.0,92.9,92.9,50.0,42.9,42.9,42.9,0.0],[0.0,0.0,0.0,0.0,85.7,85.7,85.7,85.7,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,42.9,42.9,42.9,42.9,7.1,7.1,7.1,7.1,0.0]],"2.3.A04":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,23.1,23.1,23.1,23.1,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0],[85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,50.0,50.0,50.0,50.0,7.1,7.1,7.1,7.1,14.3,28.6,28.6,28.6,42.9,35.7,28.6,28.6,7.1,7.1,7.1,7.1,0.0],[92.9,92.9,92.9,92.9,78.6,78.6,78.6,78.6,7.1,7.1,7.1,7.1,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"7.0.J01":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,78.6,78.6,78.6,78.6,85.7,85.7,85.7,85.7,7.1,7.1,7.1,7.1,0.0],[14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[85.7,85.7,85.7,85.7,92.9,92.9,92.9,92.9,28.6,28.6,28.6,28.6,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"7.2.J02":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,23.1,23.1,23.1,23.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,0.0],[71.4,71.4,71.4,71.4,78.6,78.6,78.6,78.6,21.4,21.4,21.4,21.4,100.0,100.0,100.0,100.0,78.6,78.6,78.6,78.6,21.4,21.4,21.4,21.4,0.0],[100.0,100.0,100.0,100.0,57.1,57.1,57.1,57.1,21.4,21.4,21.4,21.4,100.0,100.0,100.0,100.0,64.3,64.3,64.3,64.3,0.0,0.0,0.0,0.0,0.0],[85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,85.7,85.7,85.7,85.7,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0]],"4.1.D01":[[100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,42.9,42.9,42.9,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,78.6,78.6,78.6,78.6,71.4,71.4,71.4,71.4,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,50.0,50.0,50.0,50.0,64.3,64.3,64.3,64.3,100.0,100.0,100.0,100.0,64.3,64.3,64.3,64.3,0.0,0.0,0.0,0.0,0.0],[21.4,21.4,21.4,21.4,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,85.7,85.7,85.7,85.7,0.0,0.0,0.0,0.0,0.0]],"4.1.E06":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,64.3,64.3,64.3,64.3,0.0,0.0,0.0,0.0,57.1,57.1,57.1,57.1,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"LAB 4.S.B01 (Fisica)":[[0.0,0.0,0.0,0.0,53.8,53.8,53.8,53.8,38.5,38.5,38.5,38.5,61.5,61.5,61.5,61.5,61.5,61.5,61.5,61.5,61.5,61.5,61.5,61.5,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,42.9,42.9,42.9,42.9,0.0,0.0,0.0,0.0,64.3,64.3,64.3,64.3,57.1,57.1,57.1,57.1,57.1,57.1,57.1,57.1,0.0],[0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,42.9,42.9,42.9,42.9,57.1,57.1,57.1,57.1,0.0],[0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,35.7,35.7,35.7,35.7,28.6,28.6,28.6,28.6,57.1,57.1,57.1,57.1,57.1,57.1,57.1,57.1,0.0]],"7.2.J01":[[84.6,84.6,84.6,84.6,30.8,30.8,30.8,30.8,7.7,7.7,7.7,7.7,100.0,100.0,100.0,100.0,84.6,84.6,84.6,84.6,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,78.6,78.6,78.6,78.6,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,78.6,78.6,78.6,78.6,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,0.0,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"1.0.H03":[[53.8,53.8,53.8,53.8,84.6,84.6,84.6,84.6,0.0,0.0,0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0],[85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,28.6,28.6,28.6,28.6,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[85.7,85.7,85.7,85.7,57.1,57.1,57.1,57.1,14.3,14.3,14.3,14.3,71.4,71.4,71.4,71.4,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,85.7,85.7,85.7,85.7,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"2.3.D02":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,21.4,21.4,21.4,21.4,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,78.6,78.6,78.6,78.6,28.6,28.6,28.6,28.6,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,64.3,64.3,64.3,64.3,21.4,21.4,21.4,21.4,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,14.3,14.3,14.3,14.3,0.0]],"7.2.H03":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,100.0,100.0,100.0,0.0,100.0,100.0,100.0,0.0,0.0],[0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,0.0,100.0,100.0,100.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,100.0,100.0,100.0,0.0,100.0,100.0,100.0,0.0,0.0],[100.0,100.0,100.0,100.0,64.3,64.3,64.3,64.3,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,100.0,100.0,100.0,0.0,100.0,100.0,100.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,7.1,7.1,7.1,7.1,100.0,100.0,100.0,0.0,100.0,100.0,100.0,0.0,0.0]],"LAB 4.1.B01 (Telematica)":[[7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,92.3,92.3,92.3,92.3,38.5,38.5,38.5,38.5,0.0],[0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,35.7,35.7,35.7,35.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,78.6,78.6,78.6,78.6,28.6,28.6,28.6,28.6,0.0],[0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,42.9,42.9,42.9,42.9,50.0,50.0,50.0,50.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[21.4,21.4,21.4,14.3,7.1,7.1,0.0,7.1,14.3,14.3,7.1,7.1,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0]],"INF 1.2.G.01":[[61.5,61.5,61.5,61.5,38.5,38.5,38.5,38.5,7.7,7.7,7.7,7.7,15.4,15.4,15.4,15.4,76.9,76.9,76.9,76.9,15.4,15.4,15.4,15.4,0.0],[100.0,100.0,100.0,100.0,28.6,28.6,28.6,28.6,21.4,21.4,21.4,21.4,100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,28.6,28.6,28.6,28.6,0.0],[35.7,35.7,35.7,35.7,100.0,100.0,100.0,100.0,28.6,28.6,28.6,28.6,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,35.7,35.7,35.7,35.7,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,35.7,35.7,35.7,35.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,21.4,21.4,21.4,21.4,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,21.4,21.4,21.4,21.4,14.3,14.3,21.4,21.4,14.3,7.1,7.1,7.1,14.3,14.3,14.3,14.3,0.0]],"2.3.D04":[[76.9,76.9,76.9,76.9,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,69.2,69.2,69.2,69.2,0.0,0.0,0.0,0.0,0.0],[85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,85.7,85.7,85.7,85.7,21.4,21.4,21.4,21.4,0.0],[78.6,78.6,78.6,78.6,71.4,71.4,71.4,71.4,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,78.6,78.6,78.6,78.6,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[71.4,71.4,71.4,71.4,71.4,71.4,71.4,71.4,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"INF-3.S1.18":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,53.8,53.8,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,0.0,7.1,7.1,7.1,0.0,0.0,50.0,50.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,57.1,57.1,57.1,57.1,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,7.1,57.1,57.1,7.1,0.0,0.0,0.0,0.0],[14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,50.0,50.0,0.0,0.0,0.0,0.0,0.0],[14.3,14.3,14.3,14.3,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"2.3.B02":[[15.4,15.4,15.4,15.4,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,100.0,100.0,100.0,100.0,61.5,61.5,61.5,61.5,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,21.4,28.6,28.6,21.4,92.9,92.9,92.9,92.9,21.4,21.4,21.4,21.4,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,71.4,71.4,71.4,71.4,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0],[64.3,64.3,64.3,64.3,78.6,78.6,78.6,78.6,21.4,21.4,21.4,21.4,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"INF 1.2.G.03 DUAL":[[23.1,23.1,23.1,23.1,23.1,23.1,23.1,23.1,15.4,15.4,15.4,15.4,0.0,0.0,0.0,0.0,23.1,23.1,23.1,23.1,23.1,23.1,23.1,23.1,0.0],[0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,28.6,28.6,28.6,28.6,7.1,7.1,7.1,7.1,14.3,14.3,14.3,14.3,21.4,21.4,21.4,21.4,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,21.4,21.4,21.4,21.4,7.1,14.3,14.3,7.1,21.4,21.4,21.4,21.4,0.0],[7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,42.9,42.9,42.9,42.9,0.0],[14.3,14.3,14.3,14.3,28.6,28.6,28.6,28.6,21.4,21.4,21.4,21.4,35.7,35.7,35.7,35.7,57.1,57.1,57.1,57.1,21.4,21.4,21.4,21.4,0.0]],"7.2.J05":[[84.6,84.6,84.6,84.6,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,7.7,100.0,100.0,7.7,7.7,7.7,7.7,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,7.1,100.0,100.0,7.1,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,7.1,100.0,100.0,7.1,7.1,7.1,0.0,0.0],[85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0,0.0,100.0,100.0,100.0,7.1,78.6,78.6,7.1,7.1,7.1,0.0,0.0],[92.9,92.9,92.9,92.9,71.4,71.4,71.4,71.4,0.0,0.0,0.0,0.0,0.0,0.0,92.9,92.9,92.9,0.0,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"4.1.E03":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,0.0],[21.4,21.4,21.4,21.4,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,42.9,42.9,42.9,42.9,0.0],[28.6,28.6,28.6,28.6,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,57.1,57.1,57.1,57.1,21.4,21.4,21.4,21.4,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,57.1,57.1,57.1,57.1,35.7,35.7,35.7,35.7,21.4,21.4,14.3,14.3,0.0],[92.9,92.9,92.9,92.9,50.0,50.0,50.0,50.0,7.1,7.1,7.1,7.1,71.4,71.4,71.4,71.4,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"1.0.C02":[[100.0,100.0,100.0,100.0,84.6,84.6,84.6,84.6,7.7,7.7,7.7,7.7,76.9,76.9,76.9,76.9,76.9,76.9,76.9,76.9,23.1,23.1,23.1,23.1,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0],[92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"LAB 1.1.T07 (Ing.Termica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 4.1.B02 (Telematica)":[[7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,92.3,92.3,92.3,92.3,38.5,38.5,38.5,38.5,0.0],[0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,21.4,21.4,21.4,21.4,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,71.4,71.4,71.4,71.4,14.3,14.3,14.3,14.3,0.0],[0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,28.6,28.6,28.6,28.6,92.9,92.9,92.9,92.9,35.7,35.7,35.7,35.7,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"4.1.E01":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,0.0,0.0,100.0,100.0,100.0,0.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[78.6,78.6,78.6,78.6,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,21.4,21.4,21.4,21.4,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[85.7,85.7,85.7,85.7,78.6,78.6,78.6,78.6,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,42.9,42.9,42.9,42.9,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,14.3,14.3,14.3,14.3,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,0.0]],"2.0.C05":[[76.9,76.9,76.9,76.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,92.3,92.3,92.3,0.0,100.0,100.0,0.0,100.0,100.0,100.0,7.7,7.7,7.7,0.0],[64.3,64.3,64.3,64.3,28.6,35.7,28.6,28.6,0.0,0.0,0.0,100.0,100.0,100.0,0.0,100.0,100.0,0.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0],[64.3,64.3,64.3,64.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,92.9,92.9,92.9,0.0,92.9,92.9,0.0,92.9,92.9,92.9,0.0,0.0,0.0,0.0],[64.3,64.3,64.3,71.4,71.4,71.4,71.4,64.3,0.0,0.0,7.1,92.9,92.9,92.9,0.0,92.9,92.9,0.0,92.9,92.9,92.9,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,85.7,85.7,85.7,85.7,85.7,85.7,0.0,0.0,0.0,0.0,0.0,0.0]],"4.0.E01":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,14.3,14.3,14.3,14.3,57.1,57.1,57.1,57.1,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"7.2.J04":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.7,7.7,46.2,46.2,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,71.4,71.4,71.4,71.4,14.3,14.3,14.3,14.3,0.0],[100.0,100.0,100.0,100.0,85.7,85.7,85.7,85.7,14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,50.0,50.0,50.0,50.0,100.0,100.0,100.0,100.0,0.0],[100.0,100.0,100.0,100.0,71.4,71.4,71.4,71.4,100.0,100.0,100.0,100.0,42.9,42.9,42.9,42.9,0.0,0.0,42.9,42.9,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,78.6,78.6,78.6,78.6,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,85.7,85.7,85.7,85.7,0.0,0.0,0.0,0.0,0.0]],"LAB 1.0.E02-B (Quim-Mat)":[[15.4,15.4,15.4,15.4,30.8,30.8,30.8,30.8,30.8,30.8,30.8,30.8,46.2,46.2,46.2,46.2,15.4,15.4,15.4,15.4,0.0,0.0,0.0,0.0,0.0],[14.3,14.3,14.3,14.3,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0],[14.3,14.3,14.3,14.3,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,35.7,35.7,35.7,35.7,35.7,35.7,35.7,35.7,0.0,0.0,0.0,0.0,0.0]],"2.3.A02":[[100.0,100.0,100.0,100.0,61.5,61.5,61.5,61.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,15.4,15.4,15.4,15.4,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,64.3,64.3,64.3,64.3,92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"2.3.C04":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,15.4,15.4,15.4,15.4,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,64.3,64.3,64.3,64.3,7.1,7.1,7.1,7.1,28.6,35.7,35.7,35.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0],[100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,14.3,14.3,14.3,14.3,7.1,7.1,7.1,7.1,21.4,28.6,28.6,28.6,21.4,14.3,14.3,14.3,0.0],[92.9,92.9,92.9,92.9,57.1,57.1,57.1,57.1,35.7,35.7,35.7,35.7,92.9,92.9,92.9,92.9,85.7,85.7,85.7,85.7,14.3,14.3,14.3,14.3,0.0]],"LAB 1.0.M01 (Mec. Medios Con)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0]],"INF 7.0.J04 DUAL":[[23.1,23.1,23.1,23.1,100.0,100.0,100.0,100.0,30.8,30.8,30.8,30.8,38.5,38.5,38.5,38.5,15.4,15.4,15.4,15.4,7.7,7.7,7.7,7.7,0.0],[21.4,21.4,21.4,21.4,100.0,100.0,100.0,100.0,28.6,28.6,28.6,28.6,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,35.7,35.7,35.7,35.7,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,50.0,50.0,50.0,50.0,0.0,0.0,100.0,100.0,100.0,14.3,0.0,0.0,50.0,50.0,50.0,50.0,0.0],[50.0,50.0,50.0,50.0,57.1,57.1,57.1,57.1,14.3,14.3,14.3,14.3,35.7,35.7,35.7,35.7,71.4,71.4,71.4,71.4,42.9,42.9,42.9,42.9,0.0],[42.9,42.9,42.9,42.9,78.6,78.6,78.6,78.6,71.4,71.4,71.4,71.4,21.4,21.4,21.4,21.4,14.3,14.3,14.3,14.3,28.6,28.6,28.6,28.6,0.0]],"LAB 1.3.C12":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,84.6,84.6,84.6,84.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"2.3.A06":[[100.0,100.0,100.0,100.0,15.4,15.4,15.4,15.4,7.7,7.7,7.7,7.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,78.6,78.6,78.6,78.6,35.7,35.7,35.7,35.7,100.0,100.0,100.0,100.0,57.1,57.1,57.1,57.1,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0,28.6,28.6,28.6,78.6,78.6,78.6,78.6,71.4,71.4,71.4,71.4,0.0],[42.9,42.9,42.9,42.9,21.4,21.4,21.4,21.4,92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"INF 2.2.C.03 DUAL":[[15.4,15.4,15.4,15.4,100.0,100.0,100.0,100.0,23.1,23.1,23.1,23.1,0.0,30.8,30.8,30.8,0.0,0.0,0.0,0.0,15.4,15.4,15.4,15.4,0.0],[0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,28.6,28.6,28.6,28.6,0.0,14.3,71.4,71.4,71.4,14.3,14.3,14.3,21.4,21.4,21.4,21.4,0.0],[21.4,21.4,21.4,21.4,78.6,78.6,78.6,78.6,85.7,85.7,85.7,85.7,0.0,28.6,28.6,28.6,7.1,14.3,14.3,7.1,42.9,42.9,42.9,35.7,0.0],[28.6,28.6,28.6,28.6,64.3,64.3,64.3,64.3,28.6,28.6,28.6,28.6,35.7,35.7,35.7,35.7,57.1,57.1,57.1,57.1,50.0,50.0,50.0,50.0,0.0],[92.9,92.9,92.9,92.9,50.0,50.0,50.0,50.0,28.6,28.6,28.6,28.6,78.6,78.6,78.6,78.6,7.1,7.1,7.1,7.1,14.3,14.3,14.3,14.3,0.0]],"7.1.J04":[[100.0,100.0,100.0,100.0,92.3,92.3,92.3,92.3,23.1,23.1,23.1,23.1,15.4,15.4,15.4,15.4,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,14.3,35.7,35.7,35.7,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,71.4,71.4,71.4,71.4,7.1,7.1,7.1,7.1,0.0],[92.9,92.9,92.9,92.9,85.7,85.7,85.7,85.7,21.4,21.4,21.4,21.4,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"2.3.B04":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,23.1,23.1,23.1,23.1,23.1,23.1,23.1,23.1,100.0,100.0,100.0,100.0,15.4,15.4,15.4,15.4,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[71.4,71.4,71.4,71.4,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,28.6,28.6,28.6,28.6,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,42.9,42.9,42.9,42.9,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,35.7,35.7,35.7,35.7,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"LAB 1.0.E02-A (Quim-Mat)":[[15.4,15.4,15.4,15.4,30.8,30.8,30.8,30.8,30.8,30.8,30.8,30.8,46.2,46.2,46.2,46.2,15.4,15.4,15.4,15.4,0.0,0.0,0.0,0.0,0.0],[14.3,14.3,14.3,14.3,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0],[14.3,14.3,14.3,14.3,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,35.7,35.7,35.7,35.7,35.7,35.7,35.7,35.7,0.0,0.0,0.0,0.0,0.0]],"LAB 1.1.N03 (Mecanica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,46.2,46.2,46.2,46.2,0.0,0.0,15.4,15.4,23.1,23.1,23.1,23.1,38.5,38.5,38.5,38.5,0.0],[0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,21.4,21.4,21.4,21.4,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,35.7,35.7,35.7,35.7,0.0],[28.6,28.6,28.6,28.6,14.3,14.3,14.3,14.3,50.0,50.0,50.0,50.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,50.0,50.0,50.0,50.0,0.0],[0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,35.7,35.7,35.7,35.7,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,35.7,35.7,35.7,35.7,0.0],[0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,21.4,21.4,21.4,21.4,0.0]],"1.1.G02":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,28.6,28.6,28.6,28.6,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,21.4,21.4,21.4,21.4,21.4,21.4,21.4,21.4,21.4,21.4,21.4,21.4,14.3,14.3,14.3,14.3,0.0]],"LAB 1.1.L01 (Automatica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,53.8,53.8,53.8,53.8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,30.8,30.8,30.8,30.8,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,50.0,50.0,50.0,50.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,50.0,50.0,50.0,50.0,0.0],[7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,57.1,57.1,57.1,57.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,42.9,42.9,42.9,42.9,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,50.0,50.0,50.0,50.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,35.7,35.7,35.7,35.7,0.0],[0.0,0.0,0.0,0.0,7.1,7.1,0.0,0.0,21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,35.7,35.7,35.7,35.7,0.0]],"LAB 2.2.C.06 (Informática)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[7.1,7.1,7.1,7.1,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,0.0]],"2.3.B03":[[100.0,100.0,100.0,100.0,76.9,76.9,76.9,76.9,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,61.5,61.5,61.5,61.5,7.7,7.7,7.7,7.7,0.0],[100.0,100.0,100.0,100.0,85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,42.9,42.9,42.9,42.9,78.6,78.6,78.6,78.6,0.0],[100.0,100.0,100.0,100.0,28.6,28.6,28.6,28.6,100.0,100.0,100.0,100.0,78.6,78.6,78.6,78.6,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,71.4,71.4,71.4,71.4,28.6,28.6,28.6,28.6,0.0],[92.9,92.9,92.9,92.9,64.3,64.3,64.3,64.3,0.0,0.0,0.0,0.0,57.1,57.1,57.1,57.1,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"LAB 1.0.A02 (Materiales)":[[30.8,30.8,30.8,30.8,0.0,0.0,0.0,0.0,46.2,46.2,46.2,46.2,30.8,30.8,30.8,30.8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[35.7,35.7,35.7,35.7,35.7,35.7,35.7,35.7,35.7,35.7,35.7,35.7,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[14.3,14.3,14.3,14.3,42.9,42.9,42.9,42.9,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[42.9,42.9,42.9,42.9,42.9,42.9,42.9,42.9,42.9,42.9,42.9,42.9,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[7.1,7.1,7.1,7.1,28.6,28.6,28.6,28.6,35.7,35.7,35.7,35.7,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 1.0.A01 (Materiales)":[[30.8,30.8,30.8,30.8,0.0,0.0,0.0,0.0,46.2,46.2,46.2,46.2,30.8,30.8,30.8,30.8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[35.7,35.7,35.7,35.7,35.7,35.7,35.7,35.7,35.7,35.7,35.7,35.7,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[14.3,14.3,14.3,14.3,42.9,42.9,42.9,42.9,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[42.9,42.9,42.9,42.9,42.9,42.9,42.9,42.9,42.9,42.9,42.9,42.9,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[7.1,7.1,7.1,7.1,28.6,28.6,28.6,28.6,35.7,35.7,35.7,35.7,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"2.3.D03":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,38.5,38.5,38.5,38.5,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,78.6,78.6,78.6,78.6,21.4,21.4,21.4,21.4,0.0],[78.6,78.6,78.6,78.6,85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,78.6,78.6,78.6,78.6,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[92.9,92.9,92.9,92.9,85.7,85.7,85.7,85.7,14.3,14.3,14.3,14.3,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"7.1.J03":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,78.6,78.6,78.6,78.6,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,78.6,78.6,78.6,78.6,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0],[100.0,100.0,100.0,100.0,85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0],[0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,14.3,14.3,14.3,21.4,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"7.2.H01":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,53.8,53.8,53.8,53.8,92.3,92.3,84.6,84.6,30.8,30.8,30.8,30.8,0.0],[71.4,71.4,71.4,71.4,71.4,71.4,71.4,71.4,21.4,21.4,21.4,21.4,92.9,92.9,92.9,92.9,78.6,78.6,78.6,78.6,57.1,57.1,50.0,50.0,0.0],[85.7,85.7,85.7,85.7,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,71.4,71.4,71.4,71.4,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0],[71.4,71.4,71.4,71.4,71.4,71.4,71.4,71.4,0.0,0.0,0.0,0.0,85.7,85.7,85.7,85.7,92.9,92.9,92.9,92.9,50.0,50.0,50.0,50.0,0.0],[7.1,7.1,7.1,7.1,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,50.0,50.0,50.0,50.0,57.1,57.1,57.1,57.1,14.3,14.3,0.0,0.0,0.0]],"2.3.D01":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,23.1,23.1,23.1,23.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,15.4,15.4,15.4,15.4,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,35.7,35.7,35.7,35.7,64.3,64.3,64.3,64.3,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,21.4,21.4,21.4,21.4,100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,0.0],[92.9,92.9,92.9,92.9,64.3,64.3,64.3,64.3,35.7,35.7,35.7,35.7,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,14.3,14.3,14.3,14.3,0.0]],"4.2.E03":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,53.8,53.8,53.8,0.0,53.8,53.8,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,0.0,92.9,92.9,0.0,92.9,92.9,92.9,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,92.9,92.9,92.9,0.0,92.9,92.9,0.0,92.9,92.9,92.9,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,92.9,92.9,92.9,0.0,92.9,92.9,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,50.0,50.0,50.0,0.0,50.0,50.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 1.0.G15 (Bioingeniería)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,38.5,38.5,38.5,38.5,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[35.7,35.7,35.7,35.7,35.7,35.7,35.7,35.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,35.7,35.7,35.7,35.7,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"2.3.C03":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,15.4,15.4,15.4,15.4,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,28.6,28.6,28.6,28.6,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,57.1,57.1,57.1,57.1,14.3,14.3,14.3,14.3,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,42.9,42.9,42.9,42.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,0.0]],"LAB 1.0.G14 (Bioingeniería)":[[0.0,0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,0.0,0.0,0.0,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,7.1,7.1,7.1,7.1,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,7.1,7.1,7.1,21.4,28.6,28.6,28.6,14.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[28.6,35.7,35.7,35.7,35.7,42.9,42.9,42.9,14.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0],[28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"4.0.E03":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,38.5,38.5,38.5,38.5,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,28.6,28.6,28.6,28.6,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[100.0,100.0,100.0,100.0,64.3,64.3,64.3,64.3,14.3,14.3,14.3,14.3,42.9,42.9,42.9,42.9,57.1,57.1,50.0,50.0,0.0,0.0,0.0,0.0,0.0],[78.6,78.6,78.6,78.6,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,57.1,57.1,57.1,57.1,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,92.9,92.9,92.9,92.9,78.6,78.6,78.6,78.6,0.0,0.0,0.0,0.0,0.0]],"4.1.E04":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,92.3,92.3,92.3,92.3,69.2,69.2,69.2,69.2,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,64.3,64.3,64.3,64.3,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,21.4,21.4,21.4,21.4,0.0],[100.0,100.0,100.0,100.0,78.6,78.6,78.6,78.6,0.0,0.0,0.0,0.0,78.6,85.7,85.7,85.7,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,0.0]],"LAB 2.2.C.05 (Informática)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,23.1,23.1,23.1,23.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,42.9,42.9,42.9,42.9,42.9,42.9,42.9,42.9,0.0,0.0,0.0,0.0,42.9,42.9,42.9,42.9,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,28.6,28.6,28.6,28.6,7.1,7.1,7.1,7.1,0.0],[92.9,92.9,92.9,92.9,35.7,35.7,35.7,35.7,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0]],"LAB 4.0.F16 (Lab Linux)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,42.9,42.9,42.9,42.9,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,50.0,50.0,50.0,50.0,0.0,0.0,0.0,0.0,0.0],[35.7,35.7,35.7,35.7,21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,35.7,35.7,35.7,35.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"2.3.C02B":[[7.7,7.7,7.7,7.7,69.2,69.2,69.2,69.2,0.0,0.0,0.0,0.0,0.0,84.6,84.6,84.6,84.6,84.6,84.6,0.0,7.7,7.7,7.7,0.0,0.0],[7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,0.0,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0],[100.0,100.0,100.0,100.0,78.6,78.6,78.6,78.6,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,0.0,92.9,92.9,0.0,7.1,7.1,7.1,7.1],[85.7,85.7,85.7,85.7,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,100.0,100.0,100.0,0.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0]],"7.1.J08":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,92.3,100.0,100.0,100.0,100.0,92.3,92.3,92.3,100.0,100.0,100.0,100.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,78.6,85.7,85.7,85.7,57.1,57.1,57.1,57.1,14.3,14.3,14.3,14.3,0.0],[100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,28.6,28.6,28.6,28.6,78.6,78.6,78.6,78.6,92.9,92.9,92.9,92.9,14.3,14.3,14.3,14.3,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,7.1,35.7,35.7,28.6,28.6,78.6,78.6,78.6,78.6,0.0,0.0,0.0,0.0,0.0],[85.7,85.7,85.7,85.7,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,35.7,35.7,35.7,35.7,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,0.0]],"LAB 4.S.D04 (Física)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,23.1,23.1,23.1,23.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,0.0],[21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"4.0.D03":[[100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,15.4,15.4,15.4,15.4,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,21.4,21.4,21.4,21.4,100.0,100.0,100.0,100.0,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,85.7,85.7,85.7,85.7,42.9,42.9,42.9,42.9,100.0,100.0,100.0,100.0,85.7,85.7,85.7,85.7,14.3,14.3,14.3,14.3,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,14.3,14.3,14.3,14.3,85.7,85.7,85.7,85.7,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"LAB 1.0.G08 (Bioingenieria)":[[7.7,7.7,7.7,7.7,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,38.5,38.5,38.5,38.5,15.4,15.4,15.4,15.4,0.0,0.0,0.0,0.0,0.0],[7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,35.7,35.7,35.7,35.7,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,0.0],[7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0]],"LAB 4.0.F18 (Lab Linux)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"4.0.D01":[[76.9,76.9,76.9,76.9,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,7.7,7.7,7.7,92.3,92.3,92.3,92.3,38.5,38.5,38.5,38.5,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,71.4,71.4,71.4,71.4,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,35.7,35.7,35.7,35.7,100.0,100.0,100.0,100.0,85.7,85.7,85.7,85.7,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,14.3,14.3,14.3,14.3,92.9,92.9,92.9,92.9,64.3,64.3,64.3,64.3,0.0,0.0,0.0,0.0,0.0]],"2.3.D05":[[7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,28.6,28.6,28.6,28.6,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,0.0],[92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,28.6,28.6,28.6,28.6,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[50.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,14.3,14.3,14.3,14.3,78.6,78.6,78.6,78.6,85.7,85.7,85.7,85.7,0.0,0.0,0.0,0.0,0.0]],"LAB 1.1.N04 (Mecánica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,38.5,38.5,38.5,38.5,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,46.2,46.2,46.2,46.2,0.0],[7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,50.0,50.0,50.0,50.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,57.1,57.1,57.1,57.1,0.0],[14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,35.7,35.7,35.7,35.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,42.9,42.9,42.9,42.9,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,35.7,35.7,35.7,35.7,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0]],"LAB 7.0.H01 (Aero)":[[0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,7.7,7.7,7.7,7.7,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"1.2.G04":[[61.5,61.5,61.5,61.5,53.8,53.8,53.8,53.8,0.0,0.0,0.0,0.0,84.6,84.6,84.6,84.6,53.8,53.8,53.8,53.8,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,21.4,21.4,21.4,21.4,78.6,85.7,85.7,85.7,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,21.4,21.4,21.4,21.4,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,42.9,42.9,7.1,7.1,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,57.1,57.1,0.0,0.0,0.0,0.0,0.0]],"2.3.A01":[[76.9,76.9,76.9,76.9,23.1,23.1,23.1,23.1,15.4,15.4,15.4,15.4,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0],[85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0],[92.9,92.9,92.9,92.9,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,7.1,21.4,28.6,28.6,21.4,92.9,92.9,92.9,92.9,7.1,7.1,7.1,7.1,0.0]],"LAB 4.1.F03 (Telematica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 1.0.G11 (Bioingeniería)":[[0.0,0.0,15.4,15.4,53.8,53.8,38.5,38.5,38.5,38.5,0.0,0.0,7.7,7.7,7.7,7.7,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,14.3,14.3,50.0,50.0,35.7,35.7,35.7,35.7,0.0,0.0,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,35.7,35.7,64.3,64.3,50.0,50.0,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,14.3,14.3,57.1,57.1,42.9,42.9,42.9,42.9,0.0,0.0,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0]],"1.1.G03":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,92.9,92.9,92.9,92.9,14.3,14.3,14.3,14.3,0.0],[85.7,85.7,85.7,85.7,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0]],"LAB 4.2.E01 (Tª Señal)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"4.0.E06":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,84.6,84.6,84.6,84.6,0.0],[100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,64.3,64.3,64.3,64.3,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,35.7,35.7,35.7,35.7,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[78.6,78.6,78.6,78.6,100.0,100.0,100.0,100.0,21.4,21.4,21.4,21.4,100.0,100.0,100.0,100.0,0.0,7.1,7.1,7.1,14.3,14.3,14.3,7.1,0.0],[78.6,78.6,78.6,78.6,85.7,85.7,85.7,85.7,7.1,7.1,7.1,7.1,64.3,64.3,64.3,64.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 1.1.S03 (Ing Electrica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,23.1,23.1,23.1,23.1,23.1,23.1,23.1,23.1,15.4,15.4,15.4,15.4,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,21.4,21.4,21.4,21.4,35.7,35.7,35.7,35.7,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0]],"LAB 7.0.H03 (Aero) ":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,14.3,14.3,14.3,14.3,0.0],[0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,0.0]],"LAB 7.0.H04 (Aero) ":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,15.4,15.4,15.4,15.4,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 4.S.B03 (Fisica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,30.8,30.8,30.8,30.8,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,0.0],[7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"7.0.J06":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,15.4,15.4,15.4,15.4,100.0,100.0,100.0,100.0,23.1,23.1,30.8,30.8,15.4,7.7,7.7,7.7,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,21.4,21.4,21.4,21.4,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,78.6,78.6,78.6,78.6,28.6,28.6,28.6,28.6,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,42.9,42.9,42.9,42.9,7.1,7.1,7.1,7.1,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,21.4,21.4,21.4,21.4,0.0]],"4.2.E04":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.7,7.7,7.7,7.7,7.7,7.7,15.4,15.4,7.7,7.7,0.0,0.0,7.7,7.7,7.7,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,78.6,78.6,78.6,78.6,14.3,14.3,14.3,14.3,21.4,28.6,28.6,28.6,21.4,21.4,21.4,21.4,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,21.4,7.1,50.0,42.9,42.9,42.9,42.9,42.9,0.0,7.1,7.1,7.1,7.1,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[92.9,92.9,92.9,92.9,28.6,28.6,28.6,28.6,14.3,14.3,14.3,14.3,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0]],"7.1.H01":[[100.0,100.0,100.0,100.0,84.6,84.6,84.6,84.6,7.7,7.7,7.7,7.7,100.0,100.0,100.0,100.0,92.3,92.3,92.3,92.3,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[71.4,71.4,71.4,71.4,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,78.6,78.6,78.6,78.6,7.1,7.1,7.1,7.1,7.1,7.1,50.0,50.0,42.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[92.9,92.9,92.9,92.9,64.3,64.3,64.3,64.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 1.1.S05 (Ing. Electrica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,23.1,23.1,23.1,23.1,30.8,30.8,30.8,30.8,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,7.1,7.1,7.1,7.1,21.4,21.4,21.4,21.4,28.6,28.6,28.6,28.6,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,35.7,35.7,35.7,35.7,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 1.0.D05 (Ing. Elec)":[[0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,35.7,35.7,35.7,35.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,14.3,14.3,14.3,14.3,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[28.6,28.6,28.6,28.6,35.7,35.7,35.7,35.7,21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"1.0.F03":[[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,15.4,15.4,15.4,15.4,15.4,15.4,15.4,15.4,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,71.4,71.4,71.4,71.4,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0],[100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,7.1,7.1,7.1,7.1,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,14.3,14.3,14.3,14.3,0.0],[92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0]],"LAB 1.2.D15 (Ing Electrica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 1.0.S01 (Ing Electrica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,15.4,15.4,15.4,15.4,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,57.1,57.1,57.1,57.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,0.0],[0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,57.1,57.1,57.1,57.1,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0]],"LAB 7.1.J10 (Tª Señal)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,30.8,30.8,30.8,30.8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 1.0.D02 (Termica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,7.7,7.7,7.7,7.7,0.0],[7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 4.S.B02 (Fisica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,30.8,30.8,30.8,30.8,38.5,38.5,38.5,38.5,0.0,0.0,0.0,0.0,61.5,61.5,61.5,61.5,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,35.7,35.7,35.7,35.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,0.0]],"LAB 1.1.T06 (Fluidos)":[[7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,23.1,23.1,23.1,23.1,0.0,0.0,0.0,0.0,15.4,15.4,15.4,15.4,15.4,15.4,15.4,15.4,0.0],[14.3,14.3,14.3,14.3,14.3,14.3,14.3,14.3,21.4,21.4,21.4,21.4,21.4,21.4,21.4,21.4,14.3,14.3,14.3,14.3,21.4,21.4,21.4,21.4,0.0],[7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,28.6,28.6,28.6,28.6,0.0],[7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,21.4,21.4,21.4,21.4,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0]],"LAB 1.1.S02 (Ing Electrica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,23.1,23.1,23.1,23.1,38.5,38.5,38.5,38.5,7.7,7.7,7.7,7.7,0.0],[35.7,35.7,35.7,35.7,21.4,21.4,21.4,21.4,42.9,42.9,42.9,42.9,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,50.0,50.0,50.0,50.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,35.7,35.7,35.7,35.7,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,28.6,28.6,28.6,28.6,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0]],"LAB 1.1.M01 (Mec. Medios Con)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,30.8,30.8,30.8,30.8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,23.1,23.1,23.1,23.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0]],"LAB 1.1.S06 (Ing Electrica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,23.1,23.1,23.1,23.1,30.8,30.8,30.8,30.8,7.7,7.7,7.7,7.7,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 1.1.L02 (Automatica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,53.8,53.8,53.8,53.8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,30.8,30.8,30.8,30.8,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,50.0,50.0,50.0,50.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,50.0,50.0,50.0,50.0,0.0],[7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,57.1,57.1,57.1,57.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,50.0,50.0,50.0,50.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0],[0.0,0.0,0.0,0.0,7.1,7.1,0.0,0.0,21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,35.7,35.7,35.7,35.7,0.0]],"LAB 1.0.B.04 (Mec. Medios Con)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,23.1,23.1,23.1,23.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0]],"LAB 1.1.I09 (Electrónica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,21.4,21.4,21.4,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,0.0,0.0,0.0,0.0,0.0]],"LAB 1.1.N02 (Mecánica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,23.1,23.1,23.1,23.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0],[7.1,7.1,7.1,7.1,14.3,14.3,14.3,14.3,21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0]],"LAB 1.0.D04 (Ing Electrica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 4.0.B01B (Tª Señal)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,21.4,21.4,21.4,21.4,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,0.0],[0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 4.2.B01C (Tª Señal)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[7.1,7.1,7.1,7.1,28.6,28.6,28.6,28.6,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 1.0.G10 (Bioingeniería)":[[7.7,7.7,7.7,7.7,7.7,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[28.6,28.6,28.6,28.6,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,28.6,28.6,28.6,28.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 7.0.H02 (Aero) ":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 7.0.H06 (Aero) ":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,0.0],[7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 1.0.S01 (Máquinas)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,21.4,21.4,21.4,21.4,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.4,21.4,21.4,21.4,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 1.0.C03 (Mecánica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 1.0.C04 (Mecanica)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 1.0.G12 (Bioingeniería)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,14.3,14.3,14.3,14.3,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"2.1.A18 (Sala de juntas)":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,7.1,7.1,7.1,7.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]],"LAB 1.3.A14 (Org)":[[0.0,0.0,0.0,0.0,7.7,7.7,7.7,7.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]]}};
+
+  // ── Poblar selector de aulas ──
+  const aulaSelect = document.getElementById('aulaSelect');
+  RAW_AULAS.aulas
+    .sort((a,b) => a.aula.localeCompare(b.aula))
+    .forEach(a => {
+      const opt = document.createElement('option');
+      opt.value = a.aula;
+      opt.textContent = `${a.aula} — Edif. ${a.edificio} (${a.ocupacion}%)`;
+      aulaSelect.appendChild(opt);
+    });
+
+  // ── Color ocupación (blanco → azul UC3M) ──
+  function heatColor(pct) {
+    if (pct === 0) return '#f8faff';
+    const t = Math.min(pct / 100, 1);
+    const r = Math.round(220 - t * 220);
+    const g = Math.round(235 - t * 179);
+    const b = Math.round(255 - t * 154);
+    return `rgb(${r},${g},${b})`;
+  }
+
+  // ── Renderizar heatmap ──
+  function showHeatmap(aulaName) {
+    if (!aulaName || !HEATMAP_DATA.data[aulaName]) return;
+
+    // Cambiar a tab heatmap
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-heatmap').classList.add('active');
+    document.getElementById('btn-heatmap').classList.add('active');
+
+    // Sincronizar selector
+    aulaSelect.value = aulaName;
+
+    // Info del aula
+    const meta = RAW_AULAS.aulas.find(a => a.aula === aulaName);
+    const infoEl = document.getElementById('aulaInfo');
+    if (meta) {
+      infoEl.innerHTML = `
+        <strong>Edificio:</strong> ${meta.edificio} — ${meta.nombre_edificio}<br>
+        <strong>Planta:</strong> ${meta.planta}<br>
+        <strong>Ocupación:</strong> ${meta.ocupacion}%<br>
+        <strong>Min. reservados:</strong> ${meta.minutos.toLocaleString('es-ES')}
+      `;
+    }
+
+    const matrix = HEATMAP_DATA.data[aulaName]; // [5 días][25 slots]
+    const slots  = HEATMAP_DATA.slots;
+    const days   = ['Lun','Mar','Mié','Jue','Vie'];
+
+    let html = '<table class="hm-table"><thead><tr>';
+    html += '<th class="hm-time"></th>';
+    days.forEach(d => html += `<th class="hm-day">${d}</th>`);
+    html += '</tr></thead><tbody>';
+
+    slots.forEach((slot, si) => {
+      html += `<tr><td class="hm-time">${slot}</td>`;
+      for (let d = 0; d < 5; d++) {
+        const val = matrix[d][si];
+        const col = heatColor(val);
+        html += `<td class="hm-cell" style="background:${col}" title="${days[d]} ${slot}–${slots[si+1]||'21:30'}: ${val}%"></td>`;
+      }
+      html += '</tr>';
+    });
+    html += '</tbody></table>';
+
+    document.getElementById('hmTitle').textContent = `Aula ${aulaName}`;
+    document.getElementById('hmGrid').innerHTML = html;
+    document.getElementById('hmPlaceholder').style.display = 'none';
+    document.getElementById('hmWrap').style.display = 'block';
+  }
+
+  // ── Registro de gráficos (para sort dinámico) ──
+  const CHART_REGISTRY = {};
+
+  function sortChart(id, mode) {
+    const reg = CHART_REGISTRY[id];
+    if (!reg) return;
+    const sorted = [...reg.aulas];
+    if (mode === 'occ') sorted.sort((a, b) => b.ocupacion - a.ocupacion);
+    else                sorted.sort((a, b) => a.aula.localeCompare(b.aula, 'es'));
+    reg.sorted = sorted;
+    reg.chart.data.labels                        = sorted.map(a => a.aula);
+    reg.chart.data.datasets[0].data              = sorted.map(a => a.ocupacion);
+    reg.chart.data.datasets[0].backgroundColor   = sorted.map(reg.colorFn);
+    reg.chart.update('none');
+    // Actualizar botones activos
+    const btns = document.querySelectorAll(`#sort-${id} .sort-btn`);
+    btns.forEach(b => b.classList.remove('active'));
+    btns[mode === 'occ' ? 0 : 1].classList.add('active');
+  }
+
+  // ── Función genérica para crear un gráfico de barras horizontales ──
+  function makeHBar(canvasId, chartId, aulas, colorFn, barH = 28) {
+    const sorted = [...aulas]; // ya viene pre-ordenado
+    CHART_REGISTRY[chartId] = { aulas, colorFn, sorted };
+    const canvas = document.getElementById(canvasId);
+    canvas.style.height = (aulas.length * barH + 50) + 'px';
+
+    const chart = new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels: sorted.map(a => a.aula),
+        datasets: [{
+          data:            sorted.map(a => a.ocupacion),
+          backgroundColor: sorted.map(colorFn),
+          borderRadius: 3,
+          borderSkipped: false
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        onClick: (evt, elements) => {
+          if (elements.length > 0)
+            showHeatmap(CHART_REGISTRY[chartId].sorted[elements[0].index].aula);
+        },
+        onHover: (evt, elements) => {
+          evt.native.target.style.cursor = elements.length > 0 ? 'pointer' : 'default';
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => {
+                const a = CHART_REGISTRY[chartId].sorted[ctx.dataIndex];
+                return ` ${a.ocupacion.toFixed(2)}%  (${a.minutos.toLocaleString('es-ES')} min)`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            min: 0,
+            ticks: { callback: v => v + '%', font: { size: 10 } },
+            grid: { color: '#f0f0f0' }
+          },
+          y: {
+            ticks: { font: { size: 11 }, autoSkip: false },
+            grid: { display: false }
+          }
+        }
+      }
+    });
+    CHART_REGISTRY[chartId].chart = chart;
+    return chart;
+  }
+
+  // ── GRÁFICO GLOBAL (todas las aulas, color por edificio) ──
+  makeHBar(
+    'aulasAllChart', 'all',
+    [...RAW_AULAS.aulas].sort((a,b) => b.ocupacion - a.ocupacion),
+    a => EDIF_COLOR[a.edificio] + 'cc',
+    180
+  );
+
+  // ── GRÁFICOS POR EDIFICIO (color por ocupación) ──
+  ['1','2','3','4','7'].forEach(eid => {
+    const subset = RAW_AULAS.aulas
+      .filter(a => a.edificio === eid)
+      .sort((a, b) => b.ocupacion - a.ocupacion);
+    const barH = eid === '1' ? 52 : 28;
+    makeHBar(`edif${eid}Chart`, `edif${eid}`, subset, a => occColor(a.ocupacion), barH);
+  });
+
+</script>
+</body>
+</html>
