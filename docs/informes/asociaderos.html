@@ -349,9 +349,10 @@ function renderSection(s, prefix, title) {
 
   renderMonths('month-'+prefix, s.monthSummary);
 
-  // Daily bar — color by magnitude
+  // Daily bar — amber for peak day(s), muted blue for the rest
+  var dailyMax = Math.max.apply(null, s.daily.map(function(d){ return d.users; }));
   var dailyColors = s.daily.map(function(d){
-    return d.users >= 5 ? C.amber : d.users >= 3 ? C.blue : '#30363d';
+    return d.users === dailyMax ? C.amber : '#3d5a80';
   });
   mkBar('ch-'+prefix+'-daily', s.daily.map(function(d){ return d.date; }), s.daily.map(function(d){ return d.users; }), dailyColors);
 
