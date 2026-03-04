@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accesos Despachos – EPS</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#0d1117; --surface:#161b22; --surface2:#21262d;
+  --border:#30363d; --text:#e6edf3; --muted:#8b949e;
+  --blue:#58a6ff; --green:#3fb950; --amber:#d29922; --red:#f85149;
+  --purple:#bc8cff; --teal:#39d353;
+  --manana:#f0883e; --tarde:#58a6ff;
+  --radius:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+header h1{font-size:17px;font-weight:700}
+.meta{font-size:12px;color:var(--muted)}
+.tabs{display:flex;background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;overflow-x:auto}
+.tab-btn{padding:12px 18px;font-size:13px;font-weight:500;color:var(--muted);border:none;background:transparent;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue);font-weight:600}
+.panel{display:none;padding:24px}
+.panel.active{display:block}
+.stitle{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin:24px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.stitle:first-child{margin-top:0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px;margin-bottom:20px}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+.kpi .v{font-size:30px;font-weight:800;line-height:1;letter-spacing:-1px}
+.kpi .l{font-size:11px;color:var(--muted);margin-top:5px;text-transform:uppercase;letter-spacing:.4px}
+.kpi .s{font-size:12px;color:var(--muted);margin-top:2px}
+.v.blue{color:var(--blue)}.v.green{color:var(--green)}.v.amber{color:var(--amber)}.v.red{color:var(--red)}.v.purple{color:var(--purple)}
+.charts{display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:14px;margin-bottom:20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+.card h3{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+.card canvas{max-height:240px}
+.card.wide{grid-column:1/-1}
+.card canvas.h300{max-height:300px}
+.tscroll{overflow:auto;border-radius:var(--radius);border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{position:sticky;top:0;background:var(--surface2);padding:8px 12px;text-align:left;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;white-space:nowrap}
+tbody td{padding:7px 12px;border-bottom:1px solid var(--border)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:var(--surface2)}
+.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:700}
+.badge.m{background:rgba(240,136,62,.15);color:var(--manana)}
+.badge.t{background:rgba(88,166,255,.15);color:var(--tarde)}
+.badge.x{background:rgba(63,185,80,.15);color:var(--green)}
+.prog{display:flex;align-items:center;gap:8px}
+.prog-bg{flex:1;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden;min-width:80px}
+.prog-fill{height:100%;border-radius:3px;background:var(--blue)}
+.prog span{font-size:12px;color:var(--muted);width:36px;text-align:right}
+.zero-list{display:flex;flex-wrap:wrap;gap:6px}
+.zpill{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:12px}
+.zpill .zd{color:var(--text);font-weight:600}
+.month-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:10px;margin-bottom:20px}
+.mcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px}
+.mcard .mt{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.mcard .mr{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mstat .mv{font-size:22px;font-weight:800}
+.mstat .ml{font-size:11px;color:var(--muted)}
+.mcard .mz{margin-top:10px;font-size:12px;color:var(--muted);line-height:1.5}
+.mcard .mz strong{color:var(--text)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Accesos a Despachos – EPS</h1>
+  <div class="meta" id="meta-header">Cargando…</div>
+</header>
+<div class="tabs">
+  <button class="tab-btn active" data-panel="global">Global</button>
+  <button class="tab-btn" data-panel="d0">Despacho 1.1.C15</button>
+  <button class="tab-btn" data-panel="d1">Despacho 4.0.F12</button>
+  <button class="tab-btn" data-panel="users">Usuarios</button>
+</div>
+
+<!-- GLOBAL -->
+<div class="panel active" id="panel-global">
+  <div class="stitle">Resumen global</div>
+  <div class="kpis" id="kpi-g"></div>
+  <div class="stitle">Resumen por mes</div>
+  <div class="month-grid" id="month-g"></div>
+  <div class="charts">
+    <div class="card wide"><h3>Usuarios únicos presentes por día</h3><canvas id="ch-g-daily" class="h300"></canvas></div>
+    <div class="card"><h3>Usuarios únicos acumulados</h3><canvas id="ch-g-cumul"></canvas></div>
+    <div class="card"><h3>Media usuarios por día de la semana</h3><canvas id="ch-g-wd"></canvas></div>
+    <div class="card"><h3>Distribución horaria de accesos</h3><canvas id="ch-g-hours"></canvas></div>
+    <div class="card"><h3>Franja preferida (días-usuario)</h3><canvas id="ch-g-franja"></canvas></div>
+  </div>
+  <div class="two">
+    <div class="card"><h3>Top 10 días más concurridos</h3>
+      <div class="tscroll" style="max-height:280px"><table><thead><tr><th>#</th><th>Fecha</th><th>Día</th><th>Usuarios</th></tr></thead><tbody id="tb-topdays-g"></tbody></table></div>
+    </div>
+    <div class="card"><h3>Días laborables sin ningún acceso</h3>
+      <div style="color:var(--muted);font-size:12px;margin-bottom:10px">Excluidos festivos y vacaciones navideñas</div>
+      <div class="zero-list" id="zero-g"></div>
+    </div>
+  </div>
+</div>
+
+<!-- DESPACHO 0 -->
+<div class="panel" id="panel-d0">
+  <div class="stitle" id="title-d0"></div>
+  <div class="kpis" id="kpi-d0"></div>
+  <div class="stitle">Por mes</div>
+  <div class="month-grid" id="month-d0"></div>
+  <div class="charts">
+    <div class="card wide"><h3>Usuarios únicos por día</h3><canvas id="ch-d0-daily" class="h300"></canvas></div>
+    <div class="card"><h3>Distribución horaria</h3><canvas id="ch-d0-hours"></canvas></div>
+    <div class="card"><h3>Franja (días-usuario)</h3><canvas id="ch-d0-franja"></canvas></div>
+    <div class="card"><h3>Media por día de semana</h3><canvas id="ch-d0-wd"></canvas></div>
+  </div>
+  <div class="two">
+    <div class="card"><h3>Usuarios en este despacho</h3>
+      <div class="tscroll"><table><thead><tr><th>Usuario</th><th>Días</th><th>Asistencia</th><th>Franja</th></tr></thead><tbody id="tb-d0-users"></tbody></table></div>
+    </div>
+    <div class="card"><h3>Días laborables sin acceso</h3>
+      <div style="color:var(--muted);font-size:12px;margin-bottom:10px">Excluidos festivos y vacaciones</div>
+      <div class="zero-list" id="zero-d0"></div>
+    </div>
+  </div>
+</div>
+
+<!-- DESPACHO 1 -->
+<div class="panel" id="panel-d1">
+  <div class="stitle" id="title-d1"></div>
+  <div class="kpis" id="kpi-d1"></div>
+  <div class="stitle">Por mes</div>
+  <div class="month-grid" id="month-d1"></div>
+  <div class="charts">
+    <div class="card wide"><h3>Usuarios únicos por día</h3><canvas id="ch-d1-daily" class="h300"></canvas></div>
+    <div class="card"><h3>Distribución horaria</h3><canvas id="ch-d1-hours"></canvas></div>
+    <div class="card"><h3>Franja (días-usuario)</h3><canvas id="ch-d1-franja"></canvas></div>
+    <div class="card"><h3>Media por día de semana</h3><canvas id="ch-d1-wd"></canvas></div>
+  </div>
+  <div class="two">
+    <div class="card"><h3>Usuarios en este despacho</h3>
+      <div class="tscroll"><table><thead><tr><th>Usuario</th><th>Días</th><th>Asistencia</th><th>Franja</th></tr></thead><tbody id="tb-d1-users"></tbody></table></div>
+    </div>
+    <div class="card"><h3>Días laborables sin acceso</h3>
+      <div style="color:var(--muted);font-size:12px;margin-bottom:10px">Excluidos festivos y vacaciones</div>
+      <div class="zero-list" id="zero-d1"></div>
+    </div>
+  </div>
+</div>
+
+<!-- USUARIOS -->
+<div class="panel" id="panel-users">
+  <div class="stitle">Detalle por usuario</div>
+  <div style="font-size:12px;color:var(--muted);margin-bottom:14px">
+    Algoritmo: para cada usuario y día, si todos los accesos son antes de las 14h → <strong style="color:var(--manana)">mañana</strong>;
+    todos ≥14h → <strong style="color:var(--tarde)">tarde</strong>; ambas franjas → <strong style="color:var(--green)">mixto</strong>.
+    La franja preferida es la que domina en el total de días.
+  </div>
+  <div class="tscroll">
+    <table><thead><tr>
+      <th>Usuario</th><th>Despachos</th><th>Días presentes</th><th>% Asistencia</th>
+      <th>Días mañana</th><th>Días tarde</th><th>Días mixtos</th><th>Franja pref.</th>
+    </tr></thead><tbody id="tb-users-body"></tbody></table>
+  </div>
+</div>
+
+<script src="asociaderos.js"></script>
+<script>
+// ── TABS ──────────────────────────────────────────────────────────────
+document.querySelectorAll('.tab-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
+  });
+});
+
+// ── COLORS ────────────────────────────────────────────────────────────
+var C = {
+  blue:'#58a6ff', green:'#3fb950', amber:'#d29922', red:'#f85149',
+  purple:'#bc8cff', teal:'#39d353', manana:'#f0883e', tarde:'#58a6ff'
+};
+
+function baseOpts(legend) {
+  return {
+    responsive:true,
+    plugins:{
+      legend:{display:!!legend,labels:{color:'#8b949e',boxWidth:12,font:{size:11}}},
+      tooltip:{backgroundColor:'#161b22',titleColor:'#e6edf3',bodyColor:'#8b949e',borderColor:'#30363d',borderWidth:1}
+    },
+    scales:{
+      x:{ticks:{color:'#8b949e',maxRotation:45,font:{size:11}},grid:{color:'rgba(255,255,255,.04)'}},
+      y:{ticks:{color:'#8b949e',font:{size:11}},grid:{color:'rgba(255,255,255,.06)'},beginAtZero:true}
+    }
+  };
+}
+
+function mkBar(id, labels, data, color) {
+  var colors = Array.isArray(color) ? color : data.map(function(){ return color; });
+  return new Chart(document.getElementById(id), {
+    type:'bar',
+    data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderRadius:4,borderSkipped:false}]},
+    options:baseOpts(false)
+  });
+}
+
+function mkLine(id, labels, data, color) {
+  return new Chart(document.getElementById(id), {
+    type:'line',
+    data:{labels:labels,datasets:[{data:data,borderColor:color,backgroundColor:color+'22',fill:true,tension:0.3,pointRadius:2,pointHoverRadius:5}]},
+    options:baseOpts(false)
+  });
+}
+
+function mkDonut(id, labels, data, colors) {
+  return new Chart(document.getElementById(id), {
+    type:'doughnut',
+    data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderWidth:2,borderColor:'#161b22'}]},
+    options:{
+      plugins:{
+        legend:{position:'right',labels:{color:'#8b949e',font:{size:12},padding:12}},
+        tooltip:{backgroundColor:'#161b22',titleColor:'#e6edf3',bodyColor:'#8b949e',borderColor:'#30363d',borderWidth:1}
+      }
+    }
+  });
+}
+
+// ── RENDER HELPERS ────────────────────────────────────────────────────
+function renderKPIs(id, kpis) {
+  document.getElementById(id).innerHTML = kpis.map(function(k){
+    return '<div class="kpi"><div class="v '+(k.c||'')+'">'+k.v+'</div><div class="l">'+k.l+'</div>'+(k.s?'<div class="s">'+k.s+'</div>':'')+'</div>';
+  }).join('');
+}
+
+function renderZero(id, zeroDays) {
+  var el = document.getElementById(id);
+  if (!zeroDays.length) {
+    el.innerHTML = '<span style="color:var(--green);font-size:13px">Ninguno — actividad todos los días laborables.</span>';
+    return;
+  }
+  el.innerHTML = zeroDays.map(function(z){
+    return '<div class="zpill"><span class="zd">'+z.date+'</span> <span style="color:var(--muted)">'+z.wd+'</span></div>';
+  }).join('');
+}
+
+function renderTopDays(id, topDays) {
+  document.getElementById(id).innerHTML = topDays.map(function(d,i){
+    return '<tr><td style="color:var(--muted)">'+(i+1)+'</td><td style="font-weight:600">'+d.date+'</td><td style="color:var(--muted)">'+d.wd+'</td><td><span style="color:var(--amber);font-weight:700;font-size:15px">'+d.users+'</span> usuarios</td></tr>';
+  }).join('');
+}
+
+function renderMonths(id, monthSummary) {
+  document.getElementById(id).innerHTML = monthSummary.map(function(m){
+    var zeroStr = m.daysZero.length
+      ? m.daysZero.map(function(z){ return '<strong>'+z.date+'</strong> '+z.wd; }).join(', ')
+      : '<span style="color:var(--green)">Ninguno</span>';
+    return '<div class="mcard">'
+      +'<div class="mt">'+m.label+'</div>'
+      +'<div class="mr">'
+      +'<div class="mstat"><div class="mv" style="color:var(--blue)">'+m.uniqueUsers+'</div><div class="ml">Usuarios únicos</div></div>'
+      +'<div class="mstat"><div class="mv" style="color:var(--green)">'+m.daysActive+'/'+m.totalWorking+'</div><div class="ml">Días activos</div></div>'
+      +'<div class="mstat"><div class="mv" style="color:var(--amber)">'+m.avgUsers+'</div><div class="ml">Media usu/día</div></div>'
+      +'<div class="mstat"><div class="mv" style="color:'+(m.daysZero.length?'var(--red)':'var(--green)')+'">'+m.daysZero.length+'</div><div class="ml">Días sin acceso</div></div>'
+      +'</div>'
+      +(m.maxDay?'<div class="mz">Día pico: <strong>'+m.maxDay.date+'</strong> ('+m.maxDay.users+' usuarios)</div>':'')
+      +'<div class="mz">Días sin acceso: '+zeroStr+'</div>'
+      +'</div>';
+  }).join('');
+}
+
+function renderUserRows(tbodyId, userStats) {
+  var maxDays = Math.max.apply(null, userStats.map(function(u){ return u.days; }));
+  document.getElementById(tbodyId).innerHTML = userStats.map(function(u){
+    var bc = u.pref==='mañana'?'m':u.pref==='tarde'?'t':'x';
+    var pct = Math.min(u.pct, 100);
+    return '<tr>'
+      +'<td style="font-weight:600">'+u.user+'</td>'
+      +'<td style="font-size:18px;font-weight:800;color:var(--blue)">'+u.days+'</td>'
+      +'<td><div class="prog"><div class="prog-bg"><div class="prog-fill" style="width:'+pct+'%"></div></div><span>'+u.pct+'%</span></div></td>'
+      +'<td><span class="badge '+bc+'">'+u.pref+'</span></td>'
+      +'</tr>';
+  }).join('');
+}
+
+function renderSection(s, prefix, title) {
+  if (title) document.getElementById('title-'+prefix).textContent = title;
+
+  var maxU = s.maxDay ? s.maxDay.users : 0;
+  renderKPIs('kpi-'+prefix, [
+    {v:s.uniqueUsers,    l:'Usuarios únicos',      c:'blue'},
+    {v:s.daysActive,     l:'Días con actividad',    c:'green'},
+    {v:s.totalWorking,   l:'Días laborables',       c:''},
+    {v:Math.round(s.daysActive/s.totalWorking*100)+'%', l:'Tasa de ocupación', c:'green'},
+    {v:s.daysZero.length, l:'Días sin acceso',      c:s.daysZero.length?'red':'green'},
+    {v:s.avgUsersPerDay, l:'Media usuarios/día',    c:'amber'},
+    {v:maxU,             l:'Pico usuarios/día',     c:'purple', s:s.maxDay?s.maxDay.date+' '+s.maxDay.wd:''},
+  ]);
+
+  renderMonths('month-'+prefix, s.monthSummary);
+
+  // Daily bar — color by magnitude
+  var dailyColors = s.daily.map(function(d){
+    return d.users >= 5 ? C.amber : d.users >= 3 ? C.blue : '#30363d';
+  });
+  mkBar('ch-'+prefix+'-daily', s.daily.map(function(d){ return d.date; }), s.daily.map(function(d){ return d.users; }), dailyColors);
+
+  if (prefix === 'g') {
+    mkLine('ch-g-cumul', s.cumulative.map(function(d){ return d.date; }), s.cumulative.map(function(d){ return d.n; }), C.teal);
+    renderTopDays('tb-topdays-g', s.topDays);
+  }
+
+  mkBar('ch-'+prefix+'-wd', s.wdAvg.map(function(d){ return d.wd; }), s.wdAvg.map(function(d){ return d.avg; }), C.purple);
+  mkBar('ch-'+prefix+'-hours', s.hourDist.map(function(h){ return h.h+'h'; }), s.hourDist.map(function(h){ return h.n; }), s.hourDist.map(function(h){ return h.h<14?C.manana:C.tarde; }));
+
+  var ft = s.franjaTotals;
+  mkDonut('ch-'+prefix+'-franja', ['Solo mañana','Solo tarde','Mixto'], [ft.manana,ft.tarde,ft.mixto], [C.manana,C.tarde,C.green]);
+
+  renderZero('zero-'+prefix, s.daysZero);
+
+  if (prefix !== 'g') {
+    renderUserRows('tb-'+prefix+'-users', s.userStats);
+  }
+}
+
+function renderUsersTab() {
+  var us = DATA.global.userStats;
+  document.getElementById('tb-users-body').innerHTML = us.map(function(u){
+    var bc = u.pref==='mañana'?'m':u.pref==='tarde'?'t':'x';
+    var pct = Math.min(u.pct,100);
+    var doors = (DATA.userDoors[u.user]||[]).map(function(d){
+      return '<span style="font-size:11px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:1px 6px">'+d+'</span>';
+    }).join(' ');
+    return '<tr>'
+      +'<td style="font-weight:600">'+u.user+'</td>'
+      +'<td>'+doors+'</td>'
+      +'<td style="font-size:18px;font-weight:800;color:var(--blue)">'+u.days+' <span style="font-size:12px;color:var(--muted);font-weight:400">días</span></td>'
+      +'<td><div class="prog"><div class="prog-bg"><div class="prog-fill" style="width:'+pct+'%"></div></div><span>'+u.pct+'%</span></div></td>'
+      +'<td style="color:var(--manana);font-weight:600">'+u.manana+'</td>'
+      +'<td style="color:var(--tarde);font-weight:600">'+u.tarde+'</td>'
+      +'<td style="color:var(--green);font-weight:600">'+u.mixto+'</td>'
+      +'<td><span class="badge '+bc+'">'+u.pref+'</span></td>'
+      +'</tr>';
+  }).join('');
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────
+var g  = DATA.global;
+var d0 = DATA.doors[DATA.doorNames[0]];
+var d1 = DATA.doors[DATA.doorNames[1]];
+
+var dates = g.daily.map(function(d){ return d.date; });
+document.getElementById('meta-header').textContent =
+  dates[0]+' – '+dates[dates.length-1]+'  ·  '+g.uniqueUsers+' usuarios  ·  '+g.totalWorking+' días laborables';
+
+renderSection(g,  'g',  null);
+renderSection(d0, 'd0', DATA.doorNames[0]);
+renderSection(d1, 'd1', DATA.doorNames[1]);
+renderUsersTab();
+</script>
+</body>
+</html>
