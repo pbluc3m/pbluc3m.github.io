@@ -5,6 +5,9 @@ date: ""
 
 A selection of recent and past invited talks, tutorials, and seminars at international universities, research centers, and conferences.
 
+## 2026
+* **The Trace You Leave Behind --and What We Can Do About It** 2026 IMDEA Networks Annual Workshop, 2026-05-27
+
 ## 2025
 * **Optimizing 802.11 WLANs: Key Insights for High-Performance MAC Configurations Leveraging Experimental Studies for Capacity and QoE** Wireless Broadband Alliance (online), 2025-12-10  
   [[Slides]](slides/2025-12-10-WBA-EDCA.pdf)

@@ -1,5 +1,9 @@
 ---
 title: "Service"
+# Quito estos dos: 
+# * **Regional Correspondent (EMEA)**, *Global Communications Newsletter (GCN)* within *IEEE Communications Magazine* (March 2020 – Present)
+# * **Editorial Board Member**, *MDPI Electronics* - Networks section (July 2019 – February 2020)
+
 ---
 
 ## Institutional Leadership
@@ -30,15 +34,13 @@ Served as the primary liaison and mentor for international exchange students, ov
 ## Editorial Board Memberships
 
 ### Current Positions
-* **Associate Editor**, *IEEE Transactions on Mobile Computing* (February 2025 – Present)
 * **Associate Editor**, *Elsevier Computer Communications* (February 2024 – Present)
-* **Regional Correspondent (EMEA)**, *Global Communications Newsletter (GCN)* within *IEEE Communications Magazine* (March 2020 – Present)
 
 ### Past Positions
+* **Associate Editor**, *IEEE Transactions on Mobile Computing* (February 2025 – May 2026)
 * **Editor**, *Oxford Academic's The Computer Journal* (January 2024 – February 2026)
 * **Associate Editor**, *IEEE Open Journal of the Communications Society (IEEE OJ-COM)* (March 2020 – March 2025)
 * **Guest Editor**, *IEEE Communications Magazine* Feature Topic on "Serverless Mobile Computing: From Theory to Practice" (October 2023)
-* **Editorial Board Member**, *MDPI Electronics* - Networks section (July 2019 – February 2020)
 * **Associate Editor**, *IEEE Communications Letters* (September 2012 – January 2017)
 * **Guest Editor**, *Elsevier Computer Networks*: Special Issue on "Green Communications" (February 2015)
 

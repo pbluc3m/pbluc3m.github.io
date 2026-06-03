@@ -554,7 +554,16 @@
   
 # Selected Conferences
 
-# 26
+# 27
+
+
+- title: "Reducing Mobility Trace Identifiability via Stochastic Roaming in IEEE 802.11 Networks"
+  authors: "J.M. Montes-Lopez, I. Schweim, M. Gramaglia, P. Serrano"
+  publication: "2026 Mediterranean Artificial Intelligence and Networking Conference (MAIN 2026)"
+  year: 2026
+  type: "selected_conf"
+  categories: [Conference, WiFi, Measurements]
+  
 
 - title: "FARO: a scalable and reliable outage detection algorithm for IoT Mobile Virtual Network Aggregators"
   authors: "M. Milani, V. Vomhoff, D. Bega, M. Gramaglia, S. Geissler, C. Karsai, P. Serrano"
@@ -745,7 +754,16 @@
   
 # Other
 
-# 30
+# 31
+
+
+- title: "Spatiotemporal Characterization of Campus Wi-Fi Activity during the Iberian Peninsula Blackout"
+  authors: "R. Rodriguez, J. M. Montes-Lopez, P. Serrano, M. Gramaglia, A. P. Bianzino"
+  publication: "7th International Conference on Communications, Signal Processing, and their Applications (ICCSPA 2026)"
+  year: 2026
+  type: "other_conf"
+  categories: [Conference, WiFi, Measurements]
+
 
 - title: "DE-RCM: Desanonimización Explicable de MACs Aleatorias en 802.11 WLANs"
   authors: "J. M. Montes-Lopez, P. Serrano, M. Gramaglia, A. P. Bianzino"
