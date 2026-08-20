@@ -754,7 +754,14 @@
   
 # Other
 
-# 31
+# 32
+
+- title: "An AI-Enhanced Framework for Secure and Trustworthy 6G Services: The PAISES-6G Approach"
+  authors: "J. M. Montes-Lopez, C. Arellano, M. Bargis, L. Bianchi, L. Cabanillas, I. Dragus, G. Ferranti, M. Fiore, J. Fuster, P. Giardina, R. Gonzalez, F. Gringoli, V. Lefebvre, T. Michalidis, M. Guglielmo, R. Odarchenko, H.  Osman, P. Patras, A. Rahman, P. Serrano"
+  publication: "IEEE CSCN 2026 - SS1: Special Session 1 - AI-Native and Intent-Driven 6G Networks"
+  year: 2026
+  type: "other_conf"
+  categories: [Conference, 5G/6G, Machine Learning]
 
 
 - title: "Spatiotemporal Characterization of Campus Wi-Fi Activity during the Iberian Peninsula Blackout"

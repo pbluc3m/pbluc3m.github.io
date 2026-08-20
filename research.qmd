@@ -46,6 +46,7 @@ Using ML to identify vulnerabilities in current protocols, Applying Explainable 
 ### Current proyects
 | Project | Role | Duration | Focus |
 |:--- |:--- |:--- |:--- |
+| [**PAISES-6G (EU)**](https://paises-6g.eu) | Coordinator | 06/26 + 36 m | AI-enhanced Secure Services  |
 | [**AMAZING-6G (EU)**](https://amazing6g.eu) | Principal Investigator | 01/25 + 30 m | AI-native architectures for 6G |
 | [**iTrust6G (EU)**](https://www.sns-itrust6g.com) | Principal Investigator | 01/24 + 30 m | Network Intelligence for 6G |
 | [**TUCAN6-CM (Reg.)**](https://tucan6-cm.networks.imdea.org/en/) | Principal Investigator | 01/24 + 30 m | Network Intelligence for 6G |
