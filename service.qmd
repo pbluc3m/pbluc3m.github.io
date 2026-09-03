@@ -8,6 +8,10 @@ title: "Service"
 
 ## Institutional Leadership
 
+* **Deputy Director** | [IMDEA Networks Institute](https://networks.imdea.org) | July 2026 – Present
+
+Supporting the Institute's leadership on strategy and institutional development, working to reinforce IMDEA Networks' standing both nationally and internationally.
+
 * **Deputy Director of Infrastructure, Digitization, and Sustainability** |  Polytechnic School (Escuela Politécnica Superior) | Jan 2025 – Present
 
 Leading the strategic digital transformation and sustainability roadmap for the school's infrastructure and facilities.
@@ -33,10 +37,7 @@ Served as the primary liaison and mentor for international exchange students, ov
 
 ## Editorial Board Memberships
 
-### Current Positions
-* **Associate Editor**, *Elsevier Computer Communications* (February 2024 – Present)
-
-### Past Positions
+* **Associate Editor**, *Elsevier Computer Communications* (February 2024 – July 2026)
 * **Associate Editor**, *IEEE Transactions on Mobile Computing* (February 2025 – May 2026)
 * **Editor**, *Oxford Academic's The Computer Journal* (January 2024 – February 2026)
 * **Associate Editor**, *IEEE Open Journal of the Communications Society (IEEE OJ-COM)* (March 2020 – March 2025)
@@ -48,10 +49,7 @@ Served as the primary liaison and mentor for international exchange students, ov
 
 ## Organizing Committee Roles
 
-### Recent Appointments
 * **Co-Chair**, [2nd Winter School on AI for 6G Communications](https://eventos.uc3m.es/138645/detail/2nd-winter-school-on-ai-for-6g-communications.html), Las Palmas de Gran Canaria, Spain (January 2026)
-
-### Past Roles
 * **Track Co-Chair**, *IEEE WCNC 2025* - Track 2: Medium Access Control and Networking, Milano, Italy (March 2025)
 * **Co-Chair**, [1st Winter School on AI for 6G Communications](https://eventos.uc3m.es/123255/detail/ieee-sps-1st-winter-school-on-ai-for-6g-communications.html), Las Palmas de Gran Canaria, Spain (February 2025)
 * **Steering Committee Member**, *LESS '25*: Workshop on Serverless computing for pervasive cloud-edge-device systems and services (co-located with IEEE PerCom 2025)
